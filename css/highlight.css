@@ -1,0 +1,51 @@
+.rumorhighlight {
+	background: yellow;
+}
+
+.rumorhighlight[data-yuusendo="1"] {
+	background: red;
+}
+.rumorinfomationtext {
+	position: relative;
+}
+
+.rumorinfomationteisei {
+	position: relative;
+	margin-top : 22px
+}
+
+
+.rumortext {
+	position: absolute;
+	top: 10px;
+	width: 430px;
+	left:120px;
+	font-size: 18px;
+	color:#111111;
+	font-weight: bold;
+}
+.rumorteisei {
+	position: absolute;
+	top: 60px;
+	width: 430px;
+	left:120px;
+	font-size: 15px;
+	color:#111111;
+}
+
+a.rumorcloud:link {
+text-decoration : underline; 
+color : red; 
+}
+a.rumorcloud:visited {
+text-decoration : underline; 
+color : red; 
+}
+a.rumorcloud:active {
+text-decoration : underline; 
+color : red; 
+}
+a.rumorcloud:hover {
+text-decoration : underline; 
+color : red; 
+}

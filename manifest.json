@@ -1,0 +1,53 @@
+{
+	"manifest_version": 2,
+	"name": "RumorChecker",
+	"version": "2.0",
+	"description": "流言情報を含むかチェックし，情報を提示するアドオンです．",
+	
+	"browser_action": {
+		"default_popup": "html/popup.html",
+		"default_icon": "img/19px.png",
+		"default_title": "RumorChecker"
+	},
+	
+	"options_page": "html/options.html",
+	
+	"content_scripts": [{
+		"matches": [
+			"http://*/*",
+			"https://*/*"
+		],
+		"js":[
+			"js/jquery-3.0.0.min.js",
+			"js/jquery.highlight-5.js",
+			"js/jquery.balloon.js",
+			"js/myscript.js",
+			"js/fukidashi.js",
+			"js/highlight.js",
+			"js/custom.js",
+			"js/hyouka.js"
+		],
+		"css": [
+			"css/highlight.css"
+		]
+	}],
+	
+	
+	"background": {
+		"scripts": [
+			"js/jquery-3.0.0.min.js",
+			"js/jquery.xdomainajax.js",
+			"js/background.js"
+		],
+		"persistent":false
+	},
+	
+	"web_accessible_resources": ["img/*","html/fukidashi.html"] ,
+	
+	"permissions": [
+		"tabs",
+		"contextMenus",
+		"http://mednlp.jp/~miyabe/rumorCloud/",
+		"http://ikakun.net/~kakimoto/rumor/outb.txt"
+	]
+}
