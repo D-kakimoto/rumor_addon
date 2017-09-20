@@ -4,9 +4,14 @@
 	"version": "2.0",
 	"description": "流言情報を含むかチェックし，情報を提示するアドオンです．",
 	
+	"icons": {
+    "16": "img/icon16.png",
+    "48": "img/icon48.png",
+    "128": "img/icon128.png"
+	},
+
 	"browser_action": {
 		"default_popup": "html/popup.html",
-		"default_icon": "img/19px.png",
 		"default_title": "RumorChecker"
 	},
 	
