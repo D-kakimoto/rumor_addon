@@ -1,11 +1,10 @@
 $(function(){
-
   $("#save").click(function () {
     localStorage["twitterID"] = $("#twitterID").val();
     localStorage["twitterpasswd"] = $("#twitterpasswd").val();
     localStorage["fuki"] = $("#fuki").val();
 	$.ajax({
-  		type: 
+  		type:
   			'POST',
   		scriptCharset:
 			'utf-8',

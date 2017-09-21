@@ -1,5 +1,5 @@
 /*****変数定義*****/
-var rumorlist;//グローバルなやつに流言リストを格納．
+var rumorlist;//グローバル変数に流言リストを格納．
 var array = new Array();
 var flag = 0;//0=更新受付中，1=画面書き換え中，2=画面書き換え直後．
 var tyouhuku = 0;
@@ -7,6 +7,7 @@ var followee = new Array();
 var twitterID;
 var twitterpasswd;
 var fukidashiover = 0;
+var rumorchecklist;
 var URL = location.href;
 /******************/
 
