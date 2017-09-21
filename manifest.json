@@ -3,7 +3,7 @@
 	"name": "RumorChecker",
 	"version": "2.0",
 	"description": "流言情報を含むかチェックし，情報を提示するアドオンです．",
-	
+
 	"icons": {
     "16": "img/icon16.png",
     "48": "img/icon48.png",
@@ -14,9 +14,9 @@
 		"default_popup": "html/popup.html",
 		"default_title": "RumorChecker"
 	},
-	
+
 	"options_page": "html/options.html",
-	
+
 	"content_scripts": [{
 		"matches": [
 			"http://*/*",
@@ -36,8 +36,8 @@
 			"css/highlight.css"
 		]
 	}],
-	
-	
+
+
 	"background": {
 		"scripts": [
 			"js/jquery-3.0.0.min.js",
@@ -46,13 +46,13 @@
 		],
 		"persistent":false
 	},
-	
+
 	"web_accessible_resources": ["img/*","html/fukidashi.html"] ,
-	
+
 	"permissions": [
 		"tabs",
 		"contextMenus",
 		"http://mednlp.jp/~miyabe/rumorCloud/",
-		"http://ikakun.net/~kakimoto/rumor/outb.txt"
+		"http://ikakun.net/~kakimoto/get_rumors/rumors.txt"
 	]
 }

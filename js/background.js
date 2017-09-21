@@ -37,17 +37,17 @@ chrome.runtime.onMessage.addListener(
 function rumorget(name){
 	//console.log('3.流言情報取得を開始');
 		$.ajax({
-		
+
 		scriptCharset:
 			"utf-8",
 		url:
-			server+'rumor/outout.txt',
+			server+'get_rumors/rumors.txt',
 		success:
 			function(result){
 				rumorlist = result;
 				console.log(rumorlist);
 			}
-	});	
+	});
 };
 
 /*右クリック時の処理
@@ -56,7 +56,7 @@ chrome.contextMenus.create({
     title: "流言情報の詳細を見る"
 });
 chrome.contextMenus.onClicked.addListener(function(info, tab) {
-    if (info.menuItemId == "rumorsyousai") { 
+    if (info.menuItemId == "rumorsyousai") {
     	chrome.tabs.create({url: 'http://mednlp.jp/~miyabe/rumorCloud/detail_dema.cgi?m=all&r=' + rumorid + '&n='+ teiseinum});
     }
 });
@@ -75,7 +75,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 //timelog関数
 function timelog(timeid,URL,name,rumortext){
 	$.ajax({
-  		type: 
+  		type:
   			'POST',
   		scriptCharset:
 			'utf-8',

@@ -21,7 +21,7 @@ function search(text,words) {
 	var text = text.split("\n");//改行で区切る
 	for(var k = 0;k<text.length;k++){
 		var judgetext = removeTag(text[k],"a");
-		for(var i =0;i<words.length;i++){
+		for(var i =0;i<words.length-1;i++){
 			var yuusendo = 0;
 			var rumor = words[i].split("\t");
 			var keitaiso = rumor[1].split("/");
