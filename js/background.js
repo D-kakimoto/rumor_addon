@@ -70,9 +70,22 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
       sendResponse({});
 });
 
-//chrome.browserAction.setBadgeText({ text: "3" });
+
+
+
+
+chrome.runtime.onMessage.addListener(
+	function (request, sender, sendResponse) {
+		if(request.type == "rumorchecked"){
+			var rumorcount = request.count;
+			console.log(rumorcount);
+			chrome.browserAction.setBadgeText({text:String(rumorcount)});
+		}
+	}
+);
 
 //timelog関数
+/*****
 function timelog(timeid,URL,name,rumortext){
 	$.ajax({
   		type:
@@ -87,3 +100,4 @@ function timelog(timeid,URL,name,rumortext){
   			function(data){console.log(data);}
 	});
 }
+*****/
