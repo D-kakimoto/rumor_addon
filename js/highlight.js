@@ -41,6 +41,7 @@ function search(text,words) {
 					}
 					if(findflag == 1){break;}
 					else{
+            console.log("検出した流言："+rumor[4]);
 						findtext.push(judgetext);
 						//console.log("判定箇所："+k+"番目の"+texts[k]);
 						//if(texts[k-6] && texts[k-10].match(/kakimoto/)){
@@ -56,5 +57,9 @@ function search(text,words) {
 			}
 		}
 	}
-	console.log(findtext.length+"個の流言検出");
+	console.log("流言検出："+findtext.length+"箇所");
+  chrome.runtime.sendMessage(
+    {type: "rumorchecked",count:findtext.length},
+    function(res){}
+  );
 };
