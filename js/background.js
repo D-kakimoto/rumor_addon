@@ -73,13 +73,13 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
 
 
-
+//highlight.jsから受け取った検出流言数の情報を受け取り，バッジとして表示する
 chrome.runtime.onMessage.addListener(
 	function (request, sender, sendResponse) {
 		if(request.type == "rumorchecked"){
 			var rumorcount = request.count;
-			console.log(rumorcount);
-			chrome.browserAction.setBadgeText({text:String(rumorcount)});
+			if(rumorcount == "0")chrome.browserAction.setBadgeText({text:""});
+			else chrome.browserAction.setBadgeText({text:String(rumorcount)});
 		}
 	}
 );
