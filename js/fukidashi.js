@@ -1,7 +1,7 @@
 function fukidashi(){
 	//ハイライト部分の上にカーソルが乗った
 	$('.rumorhighlight').on(
-		"mouseenter", 
+		"mouseenter",
 		function () {
 			var icon1 = chrome.extension.getURL('img/rumorinfo.jpg');
 			var icon2 = chrome.extension.getURL('img/teiseiinfo.jpg');
@@ -11,18 +11,18 @@ function fukidashi(){
 			var num = $(this).attr("data-rumornum");
 			var tnum = $(this).attr("data-teiseinum");
 			var correction = $(this).attr("data-correction");
-			var syousailink = "http://mednlp.jp/~miyabe/rumorCloud/detail_dema.cgi?m=all&r="+num+"&n="+tnum+">"
+			var syousailink = "http://mednlp.jp/~miyabe/rumorCloud/detail_dema.cgi?m=&r="+num+"&n="+tnum+">"
 			syousai(num,tnum);
 			$(this).showBalloon({
 				contents:
 				'<div class ="fukidashicontents">'
 				+	'<div class ="rumorinformationtext">'
-				+		img1 
+				+		img1
 				+		'<div class ="rumortext">'
 				+ 			rumortext
-				+ 		'</div>' 
+				+ 		'</div>'
 				+	'</div>'
-				
+
 				+'<div class ="rumorinformationteisei">'
 				+		img2
 				+		'<div class ="rumorteisei">'
@@ -32,7 +32,7 @@ function fukidashi(){
 				+	'</div>'
 				+'</div>'
 				,
-				
+
 				position: 'top right'
 			});
 			var timeflag = 0;
@@ -40,10 +40,10 @@ function fukidashi(){
 				{type: "timelog",name:"highlighton",URL:URL,rumortext:rumortext},
 				function (response){}
 			);
-			
+
 			//吹き出し上にカーソルがある
 			$('.fukidashicontents').on(
-				"mouseenter", 
+				"mouseenter",
 				function(){
 					fukidashiover = 1;
 					chrome.runtime.sendMessage(
@@ -54,7 +54,7 @@ function fukidashi(){
 			);
 			//吹き出し上からカーソルが外れた
 			$('.fukidashicontents').on(
-				"mouseleave", 
+				"mouseleave",
 				function(){
 					flag = 2;
 					$('.rumorhighlight').hideBalloon();
@@ -68,7 +68,7 @@ function fukidashi(){
 			);
 			//ハイライト部分からカーソルが外れた
 			$('.rumorhighlight').on(
-				"mouseleave", 
+				"mouseleave",
 				function(){
 					setTimeout(
 						function(){
