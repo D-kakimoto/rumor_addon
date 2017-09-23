@@ -28,7 +28,8 @@ chrome.runtime.onMessage.addListener(
 			if(!(name == "pagestart" || name == "pageend")){
 				var rumortext = request.rumortext;
 			}
-			timelog(timeid,URL,name,rumortext);
+			//開発中はoffに．(2017-09-23)
+			//timelog(timeid,URL,name,rumortext);
 		}
 	}
 );
