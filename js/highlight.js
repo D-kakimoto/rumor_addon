@@ -18,10 +18,10 @@ function removeTag(str, arrowTag) {
 function search(text,words) {
 	var checked;
 	var findtext = new Array();
+  var findrumor = new Array();
 	var text = text.split("\n");//改行で区切る
 	for(var k = 0;k<text.length;k++){
 		var judgetext = removeTag(text[k],"a");
-    console.log(judgetext);
 		for(var i =0;i<words.length-1;i++){
 			var yuusendo = 0;
 			var rumor = words[i].split("\t");
@@ -42,7 +42,7 @@ function search(text,words) {
 					}
 					if(findflag == 1){break;}
 					else{
-            console.log("検出した流言："+rumor[4]);
+            findrumor.push(rumor[4]);
 						findtext.push(judgetext);
 						//console.log("判定箇所："+k+"番目の"+texts[k]);
 						//if(texts[k-6] && texts[k-10].match(/kakimoto/)){
@@ -58,7 +58,16 @@ function search(text,words) {
 			}
 		}
 	}
-  toast_on(findtext.length);
+  if(findtext.length != 0){
+    var toast_string = "";
+    findrumor = findrumor.filter(function (x, i, self) {
+            return self.indexOf(x) === i;
+    });
+    for(var i=0; i<findrumor.length; i++){
+      toast_string += i+1+"："+findrumor[i];
+    }
+    toast_on(i,toast_string);
+  }
 	//console.log("流言検出："+findtext.length+"箇所");
   chrome.runtime.sendMessage(
     {type: "rumorchecked",count:findtext.length},
@@ -67,7 +76,7 @@ function search(text,words) {
 };
 
 //ページ読み込み時流言検出数をトーストで表示
-function toast_on(count){
+function toast_on(count,string){
   $(document).ready(function() {
     toastr.options = {
       "closeButton": true,
@@ -85,7 +94,7 @@ function toast_on(count){
       "showMethod": "fadeIn",
       "hideMethod": "fadeOut"
     }
-    Command:toastr["success"](count+"件の流言を検出しました", "このページで流言を検出")
+    Command:toastr["success"](string, count+"件の流言を検出")
     $('#linkButton').click(function() {
       toastr.success('click');
     });
