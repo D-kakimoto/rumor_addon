@@ -30,10 +30,12 @@
 			"js/fukidashi.js",
 			"js/highlight.js",
 			"js/custom.js",
-			"js/hyouka.js"
+			"js/hyouka.js",
+			"js/toastr.min.js"
 		],
 		"css": [
-			"css/highlight.css"
+			"css/highlight.css",
+			"css/toastr.min.css"
 		]
 	}],
 
