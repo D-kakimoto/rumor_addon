@@ -21,6 +21,7 @@ function search(text,words) {
 	var text = text.split("\n");//改行で区切る
 	for(var k = 0;k<text.length;k++){
 		var judgetext = removeTag(text[k],"a");
+    console.log(judgetext);
 		for(var i =0;i<words.length-1;i++){
 			var yuusendo = 0;
 			var rumor = words[i].split("\t");
@@ -57,9 +58,28 @@ function search(text,words) {
 			}
 		}
 	}
-	console.log("流言検出："+findtext.length+"箇所");
+  list_on(findtext.length);
+	//console.log("流言検出："+findtext.length+"箇所");
   chrome.runtime.sendMessage(
     {type: "rumorchecked",count:findtext.length},
     function(res){}
   );
 };
+
+//ページ読み込み時のリスト表示
+function list_on(list_on_count){
+  $(function(){
+    $("body").append('<div id="alert" class="grad">'+list_on_count+'件の流言を検出</div>');
+    var $ah = $("#alert").height();
+    var $aw = $("#alert").width();
+    var $top = $(window).height()/2-$ah/2;
+    var $left = $(window).width()/2-$aw/2;
+    $("#alert").css({"top":$top,"left":$left,"opacity":0}).animate({"opacity":1},500);
+    setTimeout(function(){
+      $("#alert").delay(1000).animate({"opacity":0},1500,function(){
+      $(this).remove();
+      $("body").css("overflow","auto");
+      });
+    },1000);
+  })
+}
