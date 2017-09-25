@@ -58,7 +58,7 @@ function search(text,words) {
 			}
 		}
 	}
-  list_on(findtext.length);
+  toast_on(findtext.length);
 	//console.log("流言検出："+findtext.length+"箇所");
   chrome.runtime.sendMessage(
     {type: "rumorchecked",count:findtext.length},
@@ -66,20 +66,28 @@ function search(text,words) {
   );
 };
 
-//ページ読み込み時のリスト表示
-function list_on(list_on_count){
-  $(function(){
-    $("body").append('<div id="alert" class="grad">'+list_on_count+'件の流言を検出</div>');
-    var $ah = $("#alert").height();
-    var $aw = $("#alert").width();
-    var $top = $(window).height()/2-$ah/2;
-    var $left = $(window).width()/2-$aw/2;
-    $("#alert").css({"top":$top,"left":$left,"opacity":0}).animate({"opacity":1},500);
-    setTimeout(function(){
-      $("#alert").delay(1000).animate({"opacity":0},1500,function(){
-      $(this).remove();
-      $("body").css("overflow","auto");
-      });
-    },1000);
-  })
+//ページ読み込み時流言検出数をトーストで表示
+function toast_on(count){
+  $(document).ready(function() {
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+    Command:toastr["success"](count+"件の流言を検出しました", "このページで流言を検出")
+    $('#linkButton').click(function() {
+      toastr.success('click');
+    });
+  });
 }
