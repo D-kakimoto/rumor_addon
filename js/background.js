@@ -38,7 +38,6 @@ chrome.runtime.onMessage.addListener(
 function rumorget(name){
 	//console.log('3.流言情報取得を開始');
 		$.ajax({
-
 		scriptCharset:
 			"utf-8",
 		url:
@@ -75,6 +74,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 
 
 //highlight.jsから受け取った検出流言数の情報を受け取り，バッジとして表示する
+
 chrome.runtime.onMessage.addListener(
 	function (request, sender, sendResponse) {
 		if(request.type == "rumorchecked"){
@@ -84,6 +84,7 @@ chrome.runtime.onMessage.addListener(
 		}
 	}
 );
+
 
 //timelog関数
 /*****

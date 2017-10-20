@@ -49,3 +49,28 @@ a.rumorcloud:hover {
 text-decoration : underline;
 color : red;
 }
+
+
+
+/* ツールチップ本体共通（初期非表示） */
+.tooltip-component {
+  position: absolute;
+  z-index: 100;
+  display: none;
+}
+/* ツールチップ表示時 */
+.tooltip-show {
+  display: block;
+}
+/* ツールチップデザイン */
+.basic-tooltip {
+  color: black;
+  font-size: 12px;
+  background-repeat: no-repeat;
+  background-image: url('http://ikakun.net/~kakimoto/get_rumors/img/test.jpg');
+  background-position: left top;
+  padding: 10px 120px;
+	height: 118px;
+  width: 350px;
+  word-break: break-all;
+}

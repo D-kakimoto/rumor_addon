@@ -14,6 +14,63 @@ function removeTag(str, arrowTag) {
     return str.replace(pattern,'');
 }
 
+//レーベンシュタイン距離で計算
+function search_old(text,words){
+  var checked;
+  var findtext = new Array();
+  var findrumor = new Array();
+  var text = text.split("\n");//改行で区切る
+  for(var k = 0;k<text.length;k++){
+    var judgetext = removeTag(text[k],"a");
+    for(var i =0;i<words.length-1;i++){
+      var rumor = words[i].split("\t");
+      var distance = levenshteinDistance(judgetext,rumor[4]);
+      if(distance == 0){
+        findrumor.push(rumor[4]);
+        findtext.push(judgetext);
+        $("body").highlight(judgetext,rumor[4],rumor[0],rumor[3],rumor[5],0);
+        $('<div id='+rumor[0]+' class="tooltip-component basic-tooltip">'+rumor[4]+'<br><br>'+rumor[5]+'</div>').appendTo('body');
+        checked++;
+      }
+    }
+  }
+  if(findtext.length != 0){
+    var toast_string = "";
+    findrumor = findrumor.filter(function (x, i, self) {
+            return self.indexOf(x) === i;
+    });
+    for(var i=0; i<findrumor.length; i++){
+      toast_string += "・"+findrumor[i];
+    }
+    toast_on(i,toast_string);
+  }
+  //console.log("流言検出："+findtext.length+"箇所");
+  chrome.runtime.sendMessage(
+    {type: "rumorchecked",count:findtext.length},
+    function(res){}
+  );
+}
+
+function levenshteinDistance( str1, str2 ) {
+    var x = str1.length;
+    var y = str2.length;
+    var d = [];
+    for( var i = 0; i <= x; i++ ) {
+        d[i] = [];
+        d[i][0] = i;
+    }
+    for( var i = 0; i <= y; i++ ) {
+        d[0][i] = i;
+    }
+    var cost = 0;
+    for( var i = 1; i <= x; i++ ) {
+        for( var j = 1; j <= y; j++ ) {
+            cost = str1[i - 1] == str2[j - 1] ? 0 : 1;
+            d[i][j] = Math.min( d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + cost );
+        }
+    }
+    return d[x][y];
+}
 
 function search(text,words) {
 	var checked;
@@ -53,6 +110,7 @@ function search(text,words) {
 						//}
 						$("body").highlight(judgetext,rumor[4],rumor[0],rumor[3],rumor[5],yuusendo);
 						checked++;
+            $('<div id='+rumor[0]+' class="tooltip-component basic-tooltip">'+rumor[4]+'<br><br>'+rumor[5]+'</div>').appendTo('body');
 					}
 				}
 			}
@@ -64,7 +122,7 @@ function search(text,words) {
             return self.indexOf(x) === i;
     });
     for(var i=0; i<findrumor.length; i++){
-      toast_string += i+1+"："+findrumor[i];
+      toast_string += "・"+findrumor[i];
     }
     toast_on(i,toast_string);
   }
