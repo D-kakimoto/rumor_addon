@@ -89,7 +89,7 @@ function fukidashi(){
 	);
 }
 
-function fukidashi_old(){
+function fukidashi_custom(){
 	var windowWidth;
 	var windowHeight;
 	var origTooltipWidth;

@@ -49,7 +49,7 @@
 		"persistent":false
 	},
 
-	"web_accessible_resources": ["img/*","html/fukidashi.html"] ,
+	"web_accessible_resources": ["img/*"] ,
 
 	"permissions": [
 		"tabs",
