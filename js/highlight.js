@@ -15,7 +15,7 @@ function removeTag(str, arrowTag) {
 }
 
 //レーベンシュタイン距離で計算
-function search_old(text,words){
+function search_custom(text,words){
   var checked;
   var findtext = new Array();
   var findrumor = new Array();
@@ -51,6 +51,7 @@ function search_old(text,words){
   );
 }
 
+//ここはコピペ．呼び出すだけ
 function levenshteinDistance( str1, str2 ) {
     var x = str1.length;
     var y = str2.length;
@@ -72,6 +73,7 @@ function levenshteinDistance( str1, str2 ) {
     return d[x][y];
 }
 
+//search関数
 function search(text,words) {
 	var checked;
 	var findtext = new Array();
