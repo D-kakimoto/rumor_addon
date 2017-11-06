@@ -141,11 +141,12 @@ function fukidashi_old(){
   	},
 
   // ツールチップ対象をマウスアウト時
-  function() {
-    var tooltip_id = '#' + $(this).attr('data-rumornum');
-    // ツールチップ非表示
-    $(tooltip_id).removeClass('tooltip-show');
-    // ツールチップの元の幅に戻す
-    $(tooltip_id).outerWidth(origTooltipWidth);
-  }
-);
+  	function() {
+    	var tooltip_id = '#' + $(this).attr('data-rumornum');
+    	// ツールチップ非表示
+    	$(tooltip_id).removeClass('tooltip-show');
+    	// ツールチップの元の幅に戻す
+    	$(tooltip_id).outerWidth(origTooltipWidth);
+  	}
+	);
+}
