@@ -5,6 +5,7 @@ function syousai(num,tnum){
 	);
 }
 
+//吹き出し関数
 function fukidashi(){
 	//ハイライト部分の上にカーソルが乗った
 	$('.rumorhighlight').on(
@@ -96,6 +97,7 @@ function fukidashi(){
 	);
 }
 
+//吹き出しサイズを動的に変更(テスト版)
 function fukidashi_custom(){
 	var windowWidth;
 	var windowHeight;
