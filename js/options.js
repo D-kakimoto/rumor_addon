@@ -96,13 +96,3 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "status"}, function(
   }
 });
 */
-
-
-/*
-//右クリック時のため
-function syousai(num,tnum){
-	chrome.runtime.sendMessage(
-		{type: "syousaisend", text:num, text2:tnum}
-	);
-}
-*/
