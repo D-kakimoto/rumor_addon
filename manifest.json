@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
 	"name": "RumorChecker",
-	"version": "2.0",
-	"description": "流言情報を含むかチェックし，情報を提示するアドオンです．",
+	"version": "1.0",
+	"description": "Webページに含まれる流言(デマ)情報をチェックする",
 
 	"icons": {
     "16": "img/icon16.png",
@@ -31,6 +31,7 @@
 			"js/highlight.js",
 			"js/custom.js",
 			"js/hyouka.js",
+			"js/options.js",
 			"js/toastr.min.js"
 		],
 		"css": [

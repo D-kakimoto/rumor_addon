@@ -40,7 +40,6 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "status"}, function(
   }
 });
 
-
 //表示オプション情報格納
 //chrome.runtime.sendMessage({method: "getLocalStorage", key: "status"}, function(response) {
 //  var fuki = response.fuki;
