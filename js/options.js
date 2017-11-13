@@ -1,19 +1,24 @@
+//Twitterアカウント情報が入力されているかどうかのチェック
+if(localStorage["twitterID"] != undefined　&& localStorage["twitterID"] != ""){
+  console.log(localStorage["twitterID"]);
+}else{
+  console.log("TwitterIDが入力されていません");
+}
+
+//optionページで登録ボタンが押された場合の処理
 $(function(){
   $("#save").click(function () {
     localStorage["twitterID"] = $("#twitterID").val();
     localStorage["twitterpasswd"] = $("#twitterpasswd").val();
     localStorage["fuki"] = $("#fuki").val();
 	$.ajax({
-  		type:
-  			'POST',
-  		scriptCharset:
-			'utf-8',
-  		url:
-  			'http://ikakun.net/~kakimoto/TweetTest/tweettest.php',
+  		type:'POST',
+  		scriptCharset:'utf-8',
+  		url:'http://ikakun.net/~kakimoto/TweetTest/tweettest.php',
   		data:
   			{twitterID: $("#twitterID").val(), twitterpasswd: $("#twitterpasswd").val()},
   		success:
-  			function(data){
+  		  function(data){
   				localStorage["followees"] = data;
   			}
 	 });
