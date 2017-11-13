@@ -1,16 +1,29 @@
-//Twitterアカウント情報が入力されているかどうかのチェック
-if(localStorage["twitterID"] != undefined　&& localStorage["twitterID"] != ""){
-  console.log(localStorage["twitterID"]);
-}else{
-  console.log("TwitterIDが入力されていません");
+function twiacc_check(){
+  //Twitterアカウント情報が入力されているかどうかのチェック
+  if(localStorage["twitterID"] != undefined　&& localStorage["twitterID"] != ""){
+    return localStorage["followees"];
+  }else{
+    return "TwitterIDが入力されていません";
+  }
 }
 
 $(function(){
+  console.log(twiacc_check());
   //Twitterアカウント情報入力済みの処理
   if (localStorage["twitterID"] && localStorage["twitterpasswd"]) {
-    $(".twitterID").text('TwitterID :' + localStorage["twitterID"]);
-    $(".twitterpasswd").text('Twitterパスワード :' + localStorage["twitterpasswd"]);
-    $(".setbutton").html('<input id="clear" type="button" value="解除">');
+    $(".twitterID").text(
+      'TwitterID :' + localStorage["twitterID"]
+    );
+    $(".twitterpasswd").text(
+      'Twitterパスワード :' + localStorage["twitterpasswd"]
+    );
+    $(".fuki").html(
+      '<input id="fuki" type="radio" name="hyouji" value="はい"> 吹き出し表示'
+      +'<input id="fuki" type="radio" name="hyouji" value="いいえ"> バッジのみの表示'
+    );
+    $(".setbutton").html(
+      '<input id="clear" type="button" value="解除">'
+    );
   }
   //Twitterアカウント情報未入力時の処理
   else{
@@ -73,7 +86,7 @@ function start(){
 ***/
 /****************************************/
 
-
+/*
 //twitterアカウント情報をbackgroundに要求→ID,passとfolloweeを取得
 chrome.runtime.sendMessage({method: "getLocalStorage", key: "status"}, function(response) {
   twitterID = response.twitterID;
@@ -82,15 +95,14 @@ chrome.runtime.sendMessage({method: "getLocalStorage", key: "status"}, function(
   	followee = response.followees.split(",");
   }
 });
+*/
 
-//表示オプション情報格納
-//chrome.runtime.sendMessage({method: "getLocalStorage", key: "status"}, function(response) {
-//  var fuki = response.fuki;
-//});
 
+/*
 //右クリック時のため
 function syousai(num,tnum){
 	chrome.runtime.sendMessage(
 		{type: "syousaisend", text:num, text2:tnum}
 	);
 }
+*/
