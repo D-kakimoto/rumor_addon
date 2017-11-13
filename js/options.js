@@ -27,9 +27,19 @@ $(function(){
   }
   //Twitterアカウント情報未入力時の処理
   else{
-    $(".twitterID").html('<input id="twitterID" type="text">');
-    $(".twitterpasswd").html('<input id="twitterpasswd" type="text">');
-    $(".setbutton").html('<input id="save" type="button" value="登録">');
+    $(".twitterID").html(
+      '<input id="twitterID" type="text">'
+    );
+    $(".twitterpasswd").html(
+      '<input id="twitterpasswd" type="text">'
+    );
+    $(".fuki").html(
+      '<input id="fuki" type="radio" name="hyouji" value="はい"> 吹き出し表示'
+      +'<input id="fuki" type="radio" name="hyouji" value="いいえ"> バッジのみの表示'
+    );
+    $(".setbutton").html(
+      '<input id="save" type="button" value="登録">'
+    );
   }
   //登録ボタンが押されたとき
   $("#save").click(function(){
