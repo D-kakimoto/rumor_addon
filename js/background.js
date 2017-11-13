@@ -50,18 +50,6 @@ function rumorget(name){
 	});
 };
 
-/*右クリック時の処理
-chrome.contextMenus.create({
-	id:"rumorsyousai",
-    title: "流言情報の詳細を見る"
-});
-chrome.contextMenus.onClicked.addListener(function(info, tab) {
-    if (info.menuItemId == "rumorsyousai") {
-    	chrome.tabs.create({url: 'http://mednlp.jp/~miyabe/rumorCloud/detail_dema.cgi?m=all&r=' + rumorid + '&n='+ teiseinum});
-    }
-});
-*/
-
 //オプション情報取得待ちうけとcontentscriptへの送信
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.method == "getLocalStorage")
@@ -69,9 +57,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     else
       sendResponse({});
 });
-
-
-
 
 //highlight.jsから受け取った検出流言数の情報を受け取り，バッジとして表示する
 chrome.runtime.onMessage.addListener(
@@ -101,3 +86,16 @@ function timelog(timeid,URL,name,rumortext){
 	});
 }
 *****/
+
+/*
+//右クリック時の処理
+chrome.contextMenus.create({
+	id:"rumorsyousai",
+    title: "流言情報の詳細を見る"
+});
+chrome.contextMenus.onClicked.addListener(function(info, tab) {
+    if (info.menuItemId == "rumorsyousai") {
+    	chrome.tabs.create({url: 'http://mednlp.jp/~miyabe/rumorCloud/detail_dema.cgi?m=all&r=' + rumorid + '&n='+ teiseinum});
+    }
+});
+*/

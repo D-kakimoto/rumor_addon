@@ -1,3 +1,10 @@
+//詳細の取得
+function syousai(num,tnum){
+	chrome.runtime.sendMessage(
+		{type: "syousaisend", text:num, text2:tnum}
+	);
+}
+
 function fukidashi(){
 	//ハイライト部分の上にカーソルが乗った
 	$('.rumorhighlight').on(
