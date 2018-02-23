@@ -40,7 +40,9 @@ function initGetRumor(){
 		for(var m=0; m<followee.length-1;m++){
 			console.log(followee[m]);
 		}
+		console.time('timer1');
 		search(text,lines);
+		console.timeEnd('timer1');
 		fukidashi();
 	//rumorlistが無い場合，もう一度確かめる
 	}else{

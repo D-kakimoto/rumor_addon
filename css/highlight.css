@@ -14,7 +14,6 @@
 	margin-top : 22px
 }
 
-
 .rumortext {
 	position: absolute;
 	top: 10px;
@@ -49,8 +48,6 @@ a.rumorcloud:hover {
 text-decoration : underline;
 color : red;
 }
-
-
 
 /* ツールチップ本体共通（初期非表示） */
 .tooltip-component {
