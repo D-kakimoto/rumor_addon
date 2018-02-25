@@ -257,7 +257,7 @@
 	$.balloon = {
 		defaults: {
 			contents: null, url: null, ajaxComplete: null, classname: null,
-			position: "top", offsetX: 0, offsetY: 0, tipSize: 12,
+			position: "bottom right", offsetX: 0, offsetY: 0, tipSize: 12,
 			delay: 0, minLifetime: null,
 			showDuration: 100, showAnimation: null,
 			hideDuration:  80, hideAnimation: function(d) { this.fadeOut(d); },

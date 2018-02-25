@@ -5,32 +5,6 @@
 .rumorhighlight[data-yuusendo="1"] {
 	background: red;
 }
-.rumorinfomationtext {
-	position: relative;
-}
-
-.rumorinfomationteisei {
-	position: relative;
-	margin-top : 22px
-}
-
-.rumortext {
-	position: absolute;
-	top: 10px;
-	width: 430px;
-	left:120px;
-	font-size: 18px;
-	color:#111111;
-	font-weight: bold;
-}
-.rumorteisei {
-	position: absolute;
-	top: 60px;
-	width: 430px;
-	left:120px;
-	font-size: 15px;
-	color:#111111;
-}
 
 a.rumorcloud:link {
 text-decoration : underline;
@@ -70,3 +44,44 @@ color : red;
   width: 350px;
   word-break: break-all;
 }
+
+/***プルダウン(訂正情報の表示)***/
+
+.fukidashicontents {
+		width: 300px;
+		overflow: auto;
+}
+
+.rumortext {
+	top: 15px;
+	width: auto;
+	font-size: 12px;
+	color:#111111;
+	font-weight: bold;
+}
+
+.rumorteisei {
+	width: auto;
+	font-size: 12px;
+	color:#111111;
+	display: none;
+	font-weight: normal;
+}
+
+.rumortext:hover .rumorteisei{
+	width: auto;
+	font-size: 12px;
+	color:#111111;
+	display: block;
+	font-weight: normal;
+}
+
+.dropmenu:before, .dropmenu:after{
+  content: "";
+}
+.dropmenu:after{
+  clear: both;
+}
+
+
+/***プルダウン(訂正情報の表示)***/

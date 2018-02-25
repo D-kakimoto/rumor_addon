@@ -23,25 +23,17 @@ function fukidashi(){
 			syousai(num,tnum);
 			$(this).showBalloon({
 				contents:
-				'<div class ="fukidashicontents">'
-				+	'<div class ="rumorinformationtext">'
-				+		img1
-				+		'<div class ="rumortext">'
-				+ 			rumortext
-				+ 		'</div>'
-				+	'</div>'
-
-				+'<div class ="rumorinformationteisei">'
-				+		img2
+				'<div id="normal" class ="fukidashicontents dropmenu">'
+				+	'<div class ="rumortext">'
+				+		'<a href="#">'+rumortext+'</a>'
 				+		'<div class ="rumorteisei">'
-				+ 			correction
-				+			'<a class = "rumorcloud" href='+syousailink+' 詳細</a>'
+				+ 		correction
+				+			'<a class="rumorcloud" href="'+syousailink+'">詳細</a>'
 				+		'</div>'
-				+	'</div>'
+				+ '</div>'
 				+'</div>'
 				,
-
-				position: 'null'
+				position: 'bottom right'
 			});
 			var timeflag = 0;
 			chrome.runtime.sendMessage(
