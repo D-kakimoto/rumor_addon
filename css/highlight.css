@@ -6,21 +6,12 @@
 	background: red;
 }
 
-a.rumorcloud:link {
-text-decoration : underline;
-color : red;
+a.rumorcloud {
+	animation: blinkAnime 1s infinite alternate;
 }
-a.rumorcloud:visited {
-text-decoration : underline;
-color : red;
-}
-a.rumorcloud:active {
-text-decoration : underline;
-color : red;
-}
-a.rumorcloud:hover {
-text-decoration : underline;
-color : red;
+@keyframes blinkAnime{
+	0% { color: #111111 }
+	100% { color: #b22222}
 }
 
 /* ツールチップ本体共通（初期非表示） */
@@ -50,6 +41,8 @@ color : red;
 .fukidashicontents {
 		width: 300px;
 		overflow: auto;
+		margin-left: 10px;
+		margin-right: 10px;
 }
 
 .rumortext {
@@ -66,6 +59,7 @@ color : red;
 	color:#111111;
 	display: none;
 	font-weight: normal;
+	margin-top: 5px;
 }
 
 .rumortext:hover .rumorteisei{

@@ -25,10 +25,10 @@ function fukidashi(){
 				contents:
 				'<div id="normal" class ="fukidashicontents dropmenu">'
 				+	'<div class ="rumortext">'
-				+		'<a href="#">'+rumortext+'</a>'
+				+		rumortext
+				+		'<a class="rumorcloud" href="'+syousailink+'">'+'▼</a>'
 				+		'<div class ="rumorteisei">'
 				+ 		correction
-				+			'<a class="rumorcloud" href="'+syousailink+'">詳細</a>'
 				+		'</div>'
 				+ '</div>'
 				+'</div>'

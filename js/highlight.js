@@ -103,7 +103,7 @@ function search(text,words) {
 					else{
             findrumor.push(rumor[4]);
 						findtext.push(judgetext);
-						//console.log("判定箇所："+k+"番目の"+texts[k]);
+						//console.log("判定箇所："+k+"番目の"+text[k]);
 						//if(texts[k-6] && texts[k-10].match(/kakimoto/)){
 						//	yuusendo = 1;
 						//	console.log("優先度設定");
