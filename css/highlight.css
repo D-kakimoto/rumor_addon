@@ -45,29 +45,34 @@ a.rumorcloud {
 		margin-right: 10px;
 }
 
+.rumor_parent{
+	margin-bottom: 5px;
+	display: flex;
+}
+
 .rumortext {
 	top: 15px;
 	width: auto;
 	font-size: 12px;
 	color:#111111;
 	font-weight: bold;
+	margin-left: 5px;
+}
+
+.teisei_parent{
+	display: none;
 }
 
 .rumorteisei {
 	width: auto;
 	font-size: 12px;
 	color:#111111;
-	display: none;
 	font-weight: normal;
-	margin-top: 5px;
+	margin-left: 5px;
 }
 
-.rumortext:hover .rumorteisei{
-	width: auto;
-	font-size: 12px;
-	color:#111111;
-	display: block;
-	font-weight: normal;
+.rumor_parent:hover + .teisei_parent{
+	display: flex;
 }
 
 .dropmenu:before, .dropmenu:after{
@@ -76,6 +81,5 @@ a.rumorcloud {
 .dropmenu:after{
   clear: both;
 }
-
 
 /***プルダウン(訂正情報の表示)***/
