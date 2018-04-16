@@ -11,30 +11,65 @@ function fukidashi(){
 	$('.rumorhighlight').on(
 		"mouseenter",
 		function () {
-			var icon1 = chrome.extension.getURL('img/rumorinfo.jpg');
-			var icon2 = chrome.extension.getURL('img/teiseiinfo.jpg');
-			var img1 = '<img src="' + icon1 +'" width="550" height="50">';
-			var img2 = '<img src="' + icon2 +'" width="550" height="120">';
+			//ウインドウサイズの取得
+			var window_width = $(window).width();
+			var window_height = $(window).height();
+			//ハイライト箇所の位置情報
+			var mark_pos = $(this).offset();
+			var mark_width = $(this).width();
+			var mark_height = $(this).height();
+			//ハイライト箇所の要素のウインドウ内位置(四隅)
+			var mark_pos_left = mark_pos.left - $(window).scrollLeft();
+			var mark_pos_top =  mark_pos.top - $(window).scrollTop();
+			var mark_pos_right = mark_pos_left + mark_width;
+			var mark_pos_bottom = mark_pos_top + mark_height;
+			//吹き出しのウインドウ内位置(四隅)
+			var fuki_pos_left = mark_pos_right;
+			var fuki_pos_right = fuki_pos_left + 550;
+			var fuki_pos_top = mark_pos_bottom;
+			var fuki_pos_bottom = fuki_pos_top + 170;
+			//console.log(mark_pos_right);
+			//console.log(window_width);
+
+			//右側で吹き出しがはみ出した時の処理
+			if(mark_pos_right + 550 > window_width){
+				console.log("はみ出し");
+			}
+
+			var icon1 = chrome.extension.getURL('../img/image_test.png');
+			var icon2 = chrome.extension.getURL('../img/image_test.png');
+			var img1 = '<img class="icon1" src="' + icon1 + '" width="20" height="20">';
+			var img2 = '<img class="icon2" src="' + icon2 + '" width="20" height="20">';
 			var rumortext = $(this).attr("data-rumortext");
 			var num = $(this).attr("data-rumornum");
 			var tnum = $(this).attr("data-teiseinum");
 			var correction = $(this).attr("data-correction");
-			var syousailink = "http://mednlp.jp/~miyabe/rumorCloud/detail_dema.cgi?m=&r="+num+"&n="+tnum+">"
+			var syousailink = "http://mednlp.jp/~miyabe/rumorCloud/detail_dema.cgi?m=&r="+num+"&n="+tnum+">";
 			syousai(num,tnum);
+
+			//吹き出し表示
 			$(this).showBalloon({
 				contents:
-				'<div id="normal" class ="fukidashicontents dropmenu">'
-				+	'<div class ="rumortext">'
-				+		rumortext
-				+		'<a class="rumorcloud" href="'+syousailink+'">'+'▼</a>'
+				'<div id="fukidashicontents_id" class ="fukidashicontents dropmenu">'
+				+	'<div class ="rumor_parent">'
+				+		img1
+				+		'<div class ="rumortext">'
+				+			rumortext
+				+			'<a class="rumorcloud" href="'+syousailink+'">'+'▼</a>'
+				+ 	'</div>'
+				+	'</div>'
+				+	'<div class="teisei_parent">'
+				+		img2
 				+		'<div class ="rumorteisei">'
 				+ 		correction
 				+		'</div>'
-				+ '</div>'
+				+	'<div>'
 				+'</div>'
 				,
-				position: 'bottom right'
+				offsetX: 0,
+				offsetY: 0,
 			});
+
 			var timeflag = 0;
 			chrome.runtime.sendMessage(
 				{type: "timelog",name:"highlighton",URL:URL,rumortext:rumortext},
@@ -66,6 +101,7 @@ function fukidashi(){
 					);
 				}
 			);
+			
 			//ハイライト部分からカーソルが外れた
 			$('.rumorhighlight').on(
 				"mouseleave",
@@ -141,7 +177,7 @@ function fukidashi_custom(){
 			console.log("表示");
   	},
 
-  // ツールチップ対象をマウスアウト時
+  //ツールチップ対象をマウスアウト時
   	function() {
     	var tooltip_id = '#' + $(this).attr('data-rumornum');
     	// ツールチップ非表示
