@@ -71,7 +71,7 @@ a.rumorcloud {
 	margin-left: 5px;
 }
 
-.rumor_parent:hover + .teisei_parent{
+.fukidashicontents:hover > .teisei_parent{
 	display: flex;
 }
 
