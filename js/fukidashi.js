@@ -55,7 +55,6 @@ function fukidashi(){
 				+		img1
 				+		'<div class ="rumortext">'
 				+			rumortext
-				+			'<a class="rumorcloud" href="'+syousailink+'">'+'▼</a>'
 				+ 	'</div>'
 				+	'</div>'
 				+	'<div class="teisei_parent">'
@@ -63,7 +62,19 @@ function fukidashi(){
 				+		'<div class ="rumorteisei">'
 				+ 		correction
 				+		'</div>'
-				+	'<div>'
+				+	'</div>'
+				+	'<div class="detail_parent">'
+				+		'<div class ="teisei_count">'
+				+ 		'訂正数'
+				+		'</div>'
+				+		'<div class ="web_search">'
+				+ 		'web検索'
+				+		'</div>'
+				+		'<div class ="detail_link">'
+				+ 		'詳細リンク'
+				+			'<a class="rumorcloud" href="'+syousailink+'">'+'▼</a>'
+				+		'</div>'
+				+	'</div>'
 				+'</div>'
 				,
 				offsetX: 0,
@@ -87,7 +98,7 @@ function fukidashi(){
 					);
 				}
 			);
-			
+
 			//吹き出し上からカーソルが外れた
 			$('.fukidashicontents').on(
 				"mouseleave",
