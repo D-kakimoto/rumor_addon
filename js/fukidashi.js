@@ -87,6 +87,7 @@ function fukidashi(){
 					);
 				}
 			);
+			
 			//吹き出し上からカーソルが外れた
 			$('.fukidashicontents').on(
 				"mouseleave",
@@ -101,7 +102,7 @@ function fukidashi(){
 					);
 				}
 			);
-			
+
 			//ハイライト部分からカーソルが外れた
 			$('.rumorhighlight').on(
 				"mouseleave",
