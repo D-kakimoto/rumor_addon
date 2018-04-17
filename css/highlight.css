@@ -6,12 +6,14 @@
 	background: red;
 }
 
-a.rumorcloud {
-	animation: blinkAnime 1s infinite alternate;
-}
 @keyframes blinkAnime{
 	0% { color: #111111 }
 	100% { color: #b22222}
+}
+
+@keyframes fukidashi_show{
+	from {	opacity: 0	}
+	to {	opacity: 1	}
 }
 
 /* ツールチップ本体共通（初期非表示） */
@@ -46,7 +48,6 @@ a.rumorcloud {
 }
 
 .rumor_parent{
-	margin-bottom: 0px;
 	display: flex;
 }
 
@@ -68,25 +69,62 @@ a.rumorcloud {
 
 .teisei_parent{
 	display: none;
-	border-top: 1px solid black;
-}
-
-.icon2{
-	margin-top: 14px;
+	margin-top: 5px;
+	border-top: 1px solid #808080;
+	padding-top: 5px;
 }
 
 .rumorteisei {
-	padding-top: 5px;
 	width: auto;
 	font-size: 12px;
 	color:#111111;
 	font-weight: normal;
 	margin-left: 5px;
+}
+
+.detail_parent{
+	display: none;
 	margin-top: 5px;
+	border-top: 1px solid #808080;
+	padding-top: 5px;
+}
+
+.teisei_count{
+	width: 33%;
+	font-size: 12px;
+	color:#111111;
+	font-weight: normal;
+	text-align: center;
+}
+
+.web_search{
+	width: 33%;
+	font-size: 12px;
+	color:#111111;
+	font-weight: normal;
+	text-align: center;
+}
+
+.detail_link{
+	width: 33%;
+	font-size: 12px;
+	color:#111111;
+	font-weight: normal;
+	text-align: center;
+}
+
+a.rumorcloud {
+	animation: blinkAnime 1s infinite alternate;
 }
 
 .fukidashicontents:hover > .teisei_parent{
 	display: flex;
+	animation: fukidashi_show .5s linear 0s;
+}
+
+.fukidashicontents:hover > .detail_parent{
+	display: flex;
+	animation: fukidashi_show .5s linear 0s;
 }
 
 .dropmenu:before, .dropmenu:after{
