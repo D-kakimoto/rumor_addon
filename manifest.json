@@ -1,8 +1,8 @@
 {
 	"manifest_version": 2,
-	"name": "RumorChecker",
+	"name": "RumorFinder",
 	"version": "1.0",
-	"description": "Webページに含まれる流言(デマ)情報をチェックする",
+	"description": "Webページに含まれる流言(デマ)情報をみつける",
 
 	"icons": {
     "16": "img/icon16.png",
@@ -12,7 +12,7 @@
 
 	"browser_action": {
 		"default_popup": "html/popup.html",
-		"default_title": "RumorChecker"
+		"default_title": "RumorFinder"
 	},
 
 	"options_page": "html/options.html",
