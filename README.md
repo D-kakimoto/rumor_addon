@@ -9,7 +9,7 @@ Google Chromeのアドオンとして開発しています．
 ## 提供される情報
 (1)流言情報
 (2)訂正情報
-(3)詳細リンク
+(3)その他(訂正数，Web検索結果，詳細リンク)
 
 ## 流言提供元(参考)
 [流言情報クラウド](http://mednlp.jp/~miyabe/rumorCloud/rumorlist.cgi)
