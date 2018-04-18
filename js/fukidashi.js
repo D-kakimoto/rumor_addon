@@ -25,15 +25,33 @@ function fukidashi(){
 			var mark_pos_bottom = mark_pos_top + mark_height;
 			//吹き出しのウインドウ内位置(四隅)
 			var fuki_pos_left = mark_pos_right;
-			var fuki_pos_right = fuki_pos_left + 550;
+			var fuki_pos_right = fuki_pos_left + 315;
 			var fuki_pos_top = mark_pos_bottom;
-			var fuki_pos_bottom = fuki_pos_top + 170;
-			//console.log(mark_pos_right);
-			//console.log(window_width);
+			var fuki_pos_bottom = fuki_pos_top + 300;
+
+			//はみ出し他時用の補正変数
+			var fuki_over_x = 0;
+			var fuki_over_y = 0;
+			var fuki_position = "bottom right";
+
+
+			//下側で吹き出しがはみ出した場合の処理
+			if(fuki_pos_bottom > window_height){
+				var bottom_over = fuki_pos_bottom - window_height;
+				var fuki_position = "top right";
+				//console.log("下側はみ出し分" + bottom_over);
+			}
 
 			//右側で吹き出しがはみ出した時の処理
-			if(mark_pos_right + 550 > window_width){
-				console.log("はみ出し");
+			if(fuki_pos_right > window_width){
+				var right_over = fuki_pos_right - window_width;
+				var fuki_over_x = -(right_over + 20);
+				if(fuki_position == "bottom right"){
+					fuki_over_y = -3;
+				}else{
+					fuki_over_y = 3;
+				}
+				//console.log("右側はみ出し分:" + fuki_over_x);
 			}
 
 			var icon1 = chrome.extension.getURL('../img/image_test.png');
@@ -77,8 +95,9 @@ function fukidashi(){
 				+	'</div>'
 				+'</div>'
 				,
-				offsetX: 0,
-				offsetY: 0,
+				position: fuki_position,
+				offsetX: fuki_over_x,
+				offsetY: fuki_over_y,
 			});
 
 			var timeflag = 0;
