@@ -30,7 +30,6 @@
 			"js/fukidashi.js",
 			"js/highlight.js",
 			"js/hyouka.js",
-			"js/options.js",
 			"js/toastr.min.js"
 		],
 		"css": [
