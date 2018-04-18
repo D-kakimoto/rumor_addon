@@ -160,7 +160,7 @@ function fukidashi(){
 								timeflag = 1;
 							}
 						}
-					,300
+					,500
 					)
 				}
 			);
