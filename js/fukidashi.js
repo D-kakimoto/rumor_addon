@@ -5,6 +5,16 @@ function syousai(num,tnum){
 	);
 }
 
+//Google検索クエリの生成
+function query_build(text){
+	var query = ["田中","佐藤","鈴木"];
+	var url = "https://www.google.co.jp/search?q=";
+	for(var i=0;i<query.length;i++){
+		var url = url + "+" + query[i];
+	}
+	return url;
+}
+
 //吹き出し関数
 function fukidashi(){
 	//ハイライト部分の上にカーソルが乗った
@@ -41,7 +51,6 @@ function fukidashi(){
 				var fuki_position = "top right";
 				//console.log("下側はみ出し分" + bottom_over);
 			}
-
 			//右側で吹き出しがはみ出した時の処理
 			if(fuki_pos_right > window_width){
 				var right_over = fuki_pos_right - window_width;
@@ -62,6 +71,7 @@ function fukidashi(){
 			var num = $(this).attr("data-rumornum");
 			var tnum = $(this).attr("data-teiseinum");
 			var correction = $(this).attr("data-correction");
+			var web_search_link = query_build(rumortext);
 			var syousailink = "http://mednlp.jp/~miyabe/rumorCloud/detail_dema.cgi?m=&r="+num+"&n="+tnum+">";
 			syousai(num,tnum);
 
@@ -84,13 +94,15 @@ function fukidashi(){
 				+	'<div class="detail_parent">'
 				+		'<div class ="teisei_count">'
 				+ 		'訂正数'
+				+ 		tnum
 				+		'</div>'
 				+		'<div class ="web_search">'
 				+ 		'web検索'
+				+			'<a class="web_search" href="'+web_search_link+'" target="_blank" >'+'▼</a>'
 				+		'</div>'
 				+		'<div class ="detail_link">'
 				+ 		'詳細リンク'
-				+			'<a class="rumorcloud" href="'+syousailink+'">'+'▼</a>'
+				+			'<a class="rumorcloud" href="'+syousailink+'" target="_blank" >'+'▼</a>'
 				+		'</div>'
 				+	'</div>'
 				+'</div>'
