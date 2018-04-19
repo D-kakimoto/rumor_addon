@@ -4,11 +4,34 @@
      <title>RumorFinder Option</title>
 	   <meta charset="utf-8">
      <link rel="stylesheet" type="text/css" href="../css/popup.css">
+     <script src="../js/popup.js"></script>
   </head>
 
   <body>
     <div class="main">
-      <p>これはポップアップのページです</p>
+      <div class="title">RumorFinder</div>
+      <div class="setting-parent">
+        <form name="hl-op" class=ttl>
+          <span class=ttlHd>ハイライト機能：</span>
+          <span class=ttlDc>
+            <input type="radio" name="highlight-onoff" value="on" ID=highlight-on>
+            ON&nbsp;
+            <input type="radio" name="highlight-onoff" value="off" ID=highlight-off>
+            OFF
+          </span>
+        </form>
+        <form name="tst-op" class=ttl>
+          <span class=ttlHd>トースト通知機能：</span>
+          <span class=ttlDc>
+            <input type="radio" name="toast-onoff" value="on" ID=toast-on>
+            ON&nbsp;
+            <input type="radio" name="toast-onoff" value="off" ID=toast-off>
+            OFF
+          </span>
+        </form>
+        <div class="detail-option">
+        </div>
+      </div>
   </div>
   </body>
 </html>

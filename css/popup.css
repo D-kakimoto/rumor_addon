@@ -1,5 +1,31 @@
-.main{
+body{
 	width: 300px;
 	height: 200px;
-	background-color: red;
+	background-color: #f5fffa;
+}
+
+.title{
+	font-size: 15px;
+}
+
+.setting-parent{
+  margin: 8px auto;
+	height: 150px;
+  padding: 8px;
+  background-color: #f5f5f5;
+  border: 1px solid #bcbcbc;
+  border-radius: 8px;
+}
+
+.ttl{
+	border: #00ced1 solid;
+	border-width: 0 0 0 5px;
+	font-weight: bold;
+	margin: 11px 0 3px 0;
+	padding: 0 0 0 5px;
+}
+
+.ttl .ttlDc {
+    font-size: 12px;
+    font-weight: normal;
 }
