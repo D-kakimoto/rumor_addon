@@ -29,3 +29,124 @@ body{
     font-size: 12px;
     font-weight: normal;
 }
+
+.color-op{
+	margin-left: 50px;
+	margin-top: 10px;
+}
+
+.hl-red-input{
+  display: none;
+}
+.hl-red-input + label{
+  padding-left: 20px;
+  position:relative;
+  margin-right: 20px;
+	margin-top: 3px;
+}
+.hl-red-input + label::before{
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #dc143c;
+  border-radius: 50%;
+	margin-top: 3px;
+}
+.hl-red-input:checked + label{
+  color: #ff0000;
+	margin-top: 3px;
+}
+.hl-red-input:checked + label::after{
+  content: "";
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 11px;
+  height: 11px;
+  background: #ff0000;
+  border-radius: 50%;
+	margin-top: 3px;
+}
+
+
+.hl-yellow-input{
+  display: none;
+}
+.hl-yellow-input + label{
+  padding-left: 20px;
+  position:relative;
+  margin-right: 20px;
+	margin-top: 3px;
+}
+.hl-yellow-input + label::before{
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #ffd700;
+  border-radius: 50%;
+	margin-top: 3px;
+}
+.hl-yellow-input:checked + label{
+  color: #ffff00;
+	margin-top: 3px;
+}
+.hl-yellow-input:checked + label::after{
+  content: "";
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 11px;
+  height: 11px;
+  background: #ffff00;
+  border-radius: 50%;
+	margin-top: 3px;
+}
+
+
+.hl-blue-input{
+  display: none;
+}
+.hl-blue-input + label{
+  padding-left: 20px;
+  position:relative;
+  margin-right: 20px;
+	margin-top: 3px;
+}
+.hl-blue-input + label::before{
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  border: 1px solid #1e90ff;
+  border-radius: 50%;
+	margin-top: 3px;
+}
+.hl-blue-input:checked + label{
+  color: #0000ff;
+	margin-top: 3px;
+}
+.hl-blue-input:checked + label::after{
+  content: "";
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 11px;
+  height: 11px;
+  background: #0000ff;
+  border-radius: 50%;
+	margin-top: 3px;
+}
