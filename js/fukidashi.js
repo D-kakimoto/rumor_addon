@@ -6,8 +6,8 @@ function syousai(num,tnum){
 }
 
 //Google検索クエリの生成
-function query_build(text){
-	var query = ["田中","佐藤","鈴木"];
+function query_build(queries){
+	var query = queries.split("/");
 	var url = "https://www.google.co.jp/search?q=";
 	for(var i=0;i<query.length;i++){
 		var url = url + "+" + query[i];
@@ -71,7 +71,8 @@ function fukidashi(){
 			var num = $(this).attr("data-rumornum");
 			var tnum = $(this).attr("data-teiseinum");
 			var correction = $(this).attr("data-correction");
-			var web_search_link = query_build(rumortext);
+			var search_query = $(this).attr("data-query");
+			var web_search_link = query_build(search_query);
 			var syousailink = "http://mednlp.jp/~miyabe/rumorCloud/detail_dema.cgi?m=&r="+num+"&n="+tnum+">";
 			syousai(num,tnum);
 
