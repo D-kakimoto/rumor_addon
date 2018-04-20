@@ -110,9 +110,9 @@ function search(text,words) {
 						//}else{
 						//	console.log("優先度なし");
 						//}
-						$("body").highlight(judgetext,rumor[4],rumor[0],rumor[3],rumor[5],yuusendo,rumor[1]);
+						$("html").highlight(judgetext,rumor[4],rumor[0],rumor[3],rumor[5],yuusendo,rumor[1]);
 						checked++;
-            $('<div id='+rumor[0]+' class="tooltip-component basic-tooltip">'+rumor[4]+'<br><br>'+rumor[5]+'</div>').appendTo('body');
+            $('<div id='+rumor[0]+' class="tooltip-component basic-tooltip">'+rumor[4]+'<br><br>'+rumor[5]+'</div>').appendTo('html');
 					}
 				}
 			}
