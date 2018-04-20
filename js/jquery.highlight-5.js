@@ -1,4 +1,4 @@
-jQuery.fn.highlight = function(pat,rumortext,rumornum,teiseinum,correction,yuusendo) {
+jQuery.fn.highlight = function(pat,rumortext,rumornum,teiseinum,correction,yuusendo,search_query) {
 	function innerHighlight(node, pat) {
 		var skip = 0;
 		if(node.nodeType == 3) {
@@ -12,6 +12,7 @@ jQuery.fn.highlight = function(pat,rumortext,rumornum,teiseinum,correction,yuuse
 			spannode.setAttribute('data-rumornum', rumornum);
 			spannode.setAttribute('data-correction', correction);
 			spannode.setAttribute('data-yuusendo', yuusendo);
+			spannode.setAttribute('data-query', search_query);
 			var middlebit = node.splitText(pos);
 			var endbit = middlebit.splitText(pat.length);
 			var middleclone = middlebit.cloneNode(true);
