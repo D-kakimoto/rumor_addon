@@ -5,7 +5,7 @@ body{
 }
 
 .title{
-	font-size: 15px;
+	font-size: 20px;
 }
 
 .setting-parent{
@@ -30,9 +30,8 @@ body{
     font-weight: normal;
 }
 
-.color-op{
-	margin-left: 50px;
-	margin-top: 10px;
+.color-select{
+
 }
 
 .hl-red-input{
@@ -41,8 +40,7 @@ body{
 .hl-red-input + label{
   padding-left: 20px;
   position:relative;
-  margin-right: 20px;
-	margin-top: 3px;
+  margin-right: 10px;
 }
 .hl-red-input + label::before{
   content: "";
@@ -54,11 +52,9 @@ body{
   height: 15px;
   border: 1px solid #dc143c;
   border-radius: 50%;
-	margin-top: 3px;
 }
 .hl-red-input:checked + label{
   color: #ff0000;
-	margin-top: 3px;
 }
 .hl-red-input:checked + label::after{
   content: "";
@@ -70,7 +66,6 @@ body{
   height: 11px;
   background: #ff0000;
   border-radius: 50%;
-	margin-top: 3px;
 }
 
 
@@ -80,8 +75,7 @@ body{
 .hl-yellow-input + label{
   padding-left: 20px;
   position:relative;
-  margin-right: 20px;
-	margin-top: 3px;
+  margin-right: 10px;
 }
 .hl-yellow-input + label::before{
   content: "";
@@ -93,11 +87,9 @@ body{
   height: 15px;
   border: 1px solid #ffd700;
   border-radius: 50%;
-	margin-top: 3px;
 }
 .hl-yellow-input:checked + label{
   color: #ffff00;
-	margin-top: 3px;
 }
 .hl-yellow-input:checked + label::after{
   content: "";
@@ -109,7 +101,6 @@ body{
   height: 11px;
   background: #ffff00;
   border-radius: 50%;
-	margin-top: 3px;
 }
 
 
@@ -119,8 +110,7 @@ body{
 .hl-blue-input + label{
   padding-left: 20px;
   position:relative;
-  margin-right: 20px;
-	margin-top: 3px;
+  margin-right: 10px;
 }
 .hl-blue-input + label::before{
   content: "";
@@ -132,11 +122,9 @@ body{
   height: 15px;
   border: 1px solid #1e90ff;
   border-radius: 50%;
-	margin-top: 3px;
 }
 .hl-blue-input:checked + label{
   color: #0000ff;
-	margin-top: 3px;
 }
 .hl-blue-input:checked + label::after{
   content: "";
@@ -148,5 +136,17 @@ body{
   height: 11px;
   background: #0000ff;
   border-radius: 50%;
-	margin-top: 3px;
+}
+
+.smt-button{
+margin:10px 0 5px 0;
+padding-left:30px;
+}
+
+.smt-buttonL input{font-size:12px;}
+
+.smt-buttonR{
+font-size:13px;
+font-weight:bold;
+padding-left:20px;
 }
