@@ -8,7 +8,7 @@
 
 @keyframes blinkAnime{
 	0% { color: #111111 }
-	100% { color: #b22222}
+	100% { color: #111111}
 }
 
 @keyframes fukidashi_show{
@@ -54,6 +54,13 @@
 .icon1{
 	display:flex;
 	align-items: center;
+	width: 20px;
+	height: 20px;
+}
+
+.icon2{
+	width: 20px;
+	height: 20px;
 }
 
 .rumortext {
