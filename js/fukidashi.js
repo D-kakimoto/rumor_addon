@@ -63,8 +63,8 @@ function fukidashi(){
 				//console.log("右側はみ出し分:" + fuki_over_x);
 			}
 
-			var icon1 = chrome.extension.getURL('../img/image_test.png');
-			var icon2 = chrome.extension.getURL('../img/image_test.png');
+			var icon1 = chrome.extension.getURL('../img/rumortext_icon.png');
+			var icon2 = chrome.extension.getURL('../img/rumorteisei_icon.png');
 			var img1 = '<img class="icon1" src="' + icon1 + '" width="20" height="20">';
 			var img2 = '<img class="icon2" src="' + icon2 + '" width="20" height="20">';
 			var rumortext = $(this).attr("data-rumortext");
