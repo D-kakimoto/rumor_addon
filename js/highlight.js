@@ -124,7 +124,7 @@ function search(text,words) {
             return self.indexOf(x) === i;
     });
     for(var i=0; i<findrumor.length; i++){
-      toast_string += "・"+findrumor[i];
+      toast_string += "・"+findrumor[i]+"<br>";
     }
     toast_on(i,toast_string);
   }
