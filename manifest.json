@@ -29,7 +29,7 @@
 			"js/myscript.js",
 			"js/fukidashi.js",
 			"js/highlight.js",
-			"js/hyouka.js",
+			"js/eval.js",
 			"js/toastr.min.js"
 		],
 		"css": [
