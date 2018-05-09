@@ -114,20 +114,14 @@ function fukidashi(){
 			});
 
 			var timeflag = 0;
-			chrome.runtime.sendMessage(
-				{type: "timelog",name:"highlighton",URL:URL,rumortext:rumortext},
-				function (response){}
-			);
+			eval_post("hl_on",URL,rumortext);
 
 			//吹き出し上にカーソルがある
 			$('.fukidashicontents').on(
 				"mouseenter",
 				function(){
 					fukidashiover = 1;
-					chrome.runtime.sendMessage(
-					{type: "timelog",name:"fukidashion",URL:URL,rumortext:rumortext},
-					function (response){}
-					);
+					eval_post("fuki_on",URL,rumortext);
 				}
 			);
 
@@ -139,10 +133,7 @@ function fukidashi(){
 					$('.rumorhighlight').hideBalloon();
 					fukidashiover = 0;
 					timeflag = 1;
-					chrome.runtime.sendMessage(
-					{type: "timelog",name:"fukidashiout",URL:URL,rumortext:rumortext},
-					function (response){}
-					);
+					eval_post("fuki_out",URL,rumortext);
 				}
 			);
 
@@ -154,10 +145,7 @@ function fukidashi(){
 						function(){
 							if(fukidashiover == 0 && timeflag == 0){
 								$('.rumorhighlight').hideBalloon();
-								chrome.runtime.sendMessage(
-								{type: "timelog",name:"highlightout",URL:URL,rumortext:rumortext},
-								function (response){}
-								);
+								eval_post("hl_out",URL,rumortext);
 								timeflag = 1;
 							}
 						}
