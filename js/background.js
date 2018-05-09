@@ -21,6 +21,9 @@ chrome.runtime.onMessage.addListener(
 			rumorid = request.text;
 			teiseinum = request.text2;
 		}if(request.type == "log"){
+			//idを取得
+			var user_id = chrome.runtime.id;
+			console.log(user_id);
 			//現在時刻を取得
 			var time = (new Date()).getTime();
 			//URLを取得
@@ -39,7 +42,7 @@ chrome.runtime.onMessage.addListener(
 					url:
 						server+'addon_eval/dbconnect.php',
 					data:
-						{time:time,URL:URL,type:type,text:text},
+						{id:id,time:time,URL:URL,type:type,text:text},
 					success:
 						function(data){
 							console.log(data);
