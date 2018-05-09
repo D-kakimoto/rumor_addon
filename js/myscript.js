@@ -62,7 +62,7 @@ function initGetRumor(){
 			search(text,lines);
 		}
 		//console.timeEnd('timer1');
-		if(op_fuki != "off"){
+		if(op_hl != "off" || op_fuki != "off"){
 			fukidashi();
 		}
 	//rumorlistが無い場合，もう一度確かめる

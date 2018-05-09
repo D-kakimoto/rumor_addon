@@ -126,7 +126,9 @@ function search(text,words) {
     for(var i=0; i<findrumor.length; i++){
       toast_string += "・"+findrumor[i]+"<br>";
     }
-    toast_on(i,toast_string);
+    if(op_tst != "off"){
+      toast_on(i,toast_string);
+    }
   }
 	//console.log("流言検出："+findtext.length+"箇所");
   chrome.runtime.sendMessage(
