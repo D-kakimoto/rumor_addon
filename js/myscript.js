@@ -8,15 +8,23 @@ var twitterID;
 var twitterpasswd;
 var fukidashiover = 0;
 var rumorchecklist;
+var op_hl = "defaults";
+var op_tst = "defaults";
+var op_fuki = "defaults";
 /******************/
 
+//オプション(ユーザ設定)情報の取得
 chrome.storage.local.get(
 	["hlop", "tstop", "fukiop"],
 	function(value){
-		var value_data_1 = value.hlop;
-		var value_data_2 = value.tstop;
-		var value_data_3 = value.fukiop;
-		console.log(value_data_1+value_data_2+value_data_3);
+		if(value.hlop){
+			op_hl = value.hlop;
+			op_tst = value.tstop;
+			op_fuki = value.fukiop;
+		}
+		console.log("op_hl："+op_hl);
+		console.log("op_tst："+op_tst);
+		console.log("op_fuki："+op_fuki);
 });
 
 /*****ページ更新時処理******/
@@ -50,9 +58,13 @@ function initGetRumor(){
 		}
 		//timer1はハイライト処理にかかる時間を計測している
 		//console.time('timer1');
-		search(text,lines);
+		if(op_hl != "off"){
+			search(text,lines);
+		}
 		//console.timeEnd('timer1');
-		fukidashi();
+		if(op_fuki != "off"){
+			fukidashi();
+		}
 	//rumorlistが無い場合，もう一度確かめる
 	}else{
 		window.setTimeout(initGetRumor,30);
