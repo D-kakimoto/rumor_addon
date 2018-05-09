@@ -53,6 +53,7 @@
 	"permissions": [
 		"tabs",
 		"contextMenus",
+		"storage",
 		"http://mednlp.jp/~miyabe/rumorCloud/",
 		"http://ikakun.net/~kakimoto/get_rumors/rumors.txt"
 	]

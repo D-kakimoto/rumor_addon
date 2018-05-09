@@ -11,6 +11,15 @@ var rumorchecklist;
 var URL = location.href;
 /******************/
 
+chrome.storage.local.get(
+	["hlop", "tstop", "fukiop"],
+	function(value){
+		var value_data_1 = value.hlop;
+		var value_data_2 = value.tstop;
+		var value_data_3 = value.fukiop;
+		console.log(value_data_1+value_data_2+value_data_3);
+});
+
 /*****ページ更新時処理******/
 
 //取得命令のみ(レスポンスなし)

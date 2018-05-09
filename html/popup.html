@@ -11,50 +11,50 @@
     <div class="main">
       <div class="title">RumorFinder</div>
       <div class="setting-parent">
-        <form name="hl-op" class=ttl>
+        <form id="hl-op" class=ttl>
           <span class=ttlHd>ハイライト機能：&nbsp;&nbsp;&nbsp;&nbsp;</span>
           <span class=ttlDc>
-            <input type="radio" name="highlight-onoff" value="on" ID=highlight-on checked="checked">
+            <input type="radio" name="highlightonoff" value="on" ID=highlight-on checked="checked">
             ON&nbsp;
-            <input type="radio" name="highlight-onoff" value="off" ID=highlight-off>
+            <input type="radio" name="highlightonoff" value="off" ID=highlight-off>
             OFF
           </span>
         </form>
-        <form name="tst-op" class=ttl>
+        <form id="tst-op" class=ttl>
           <span class=ttlHd>トースト通知機能：</span>
           <span class=ttlDc>
-            <input type="radio" name="toast-onoff" value="on" ID=toast-on checked="checked">
+            <input type="radio" name="toastonoff" value="on" ID=toast-on checked="checked">
             ON&nbsp;
-            <input type="radio" name="toast-onoff" value="off" ID=toast-off>
+            <input type="radio" name="toastonoff" value="off" ID=toast-off>
             OFF
           </span>
         </form>
-        <form name="fuki-op" class=ttl>
+        <form id="fuki-op" class=ttl>
           <span class=ttlHd>吹き出し表示機能：</span>
           <span class=ttlDc>
-            <input type="radio" name="fuki-onoff" value="on" ID=fuki-on checked="checked">
+            <input type="radio" name="fukionoff" value="on" ID=fuki-on checked="checked">
             ON&nbsp;
-            <input type="radio" name="fuki-onoff" value="off" ID=fuki-off>
+            <input type="radio" name="fukionoff" value="off" ID=fuki-off>
             OFF
           </span>
         </form>
-        <form name="color-op" class=ttl>
+        <form id="color-op" class=ttl>
           <span class=ttlHd>ハイライトカラー：</span>
           <span class=ttlDc>
             <span class="color-select">
-              <input type="radio" name="hl-color" class="hl-red-input" id="hl-red">
+              <input type="radio" name="hlcolor" class="hl-red-input" id="hl-red">
               <label for="hl-red"></label>
-              <input type="radio" name="hl-color" class="hl-yellow-input" id="hl-yellow" checked="checked">
+              <input type="radio" name="hlcolor" class="hl-yellow-input" id="hl-yellow" checked="checked">
               <label for="hl-yellow"></label>
-              <input type="radio" name="hl-color" class="hl-blue-input" id="hl-blue">
+              <input type="radio" name="hlcolor" class="hl-blue-input" id="hl-blue">
               <label for="hl-blue"></label>
             </span>
           </span>
         </form>
         <form name="op-smt" class=smt-button>
-          <span class=smt-buttonL><input type="button" value="保存する" ID=pUpStatus>
-            &nbsp;&nbsp;
-            <input type="button" value="キャンセル" ID=pClStatus>
+          <span class=smt-buttonL>
+            <input type="button" value="保存する" ID="pUpStatus">&nbsp;&nbsp;
+            <input type="button" value="キャンセル" ID="pClStatus">
           </span>
           <span class=smt-buttonR>
             <a href="#" title="詳細設定" ID="pUpOpts">詳細設定</a>
