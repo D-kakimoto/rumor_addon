@@ -8,7 +8,6 @@ var twitterID;
 var twitterpasswd;
 var fukidashiover = 0;
 var rumorchecklist;
-var URL = location.href;
 /******************/
 
 chrome.storage.local.get(

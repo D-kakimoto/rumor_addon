@@ -2,10 +2,32 @@
 var rumorlist;
 var rumorid;
 var teiseinum;
+var userid;
 //評価用
 var URL;
 //情報取得用サーバ
 var server = "http://www2.yoslab.net/~kakimoto/rumor_background/";
+
+//(初回起動時)ランダムトークンを生成
+function getRandomToken() {
+    var randomPool = new Uint8Array(32);
+    crypto.getRandomValues(randomPool);
+    var hex = '';
+    for (var i = 0; i < randomPool.length; ++i) {
+        hex += randomPool[i].toString(16);
+    }
+    return hex;
+}
+
+//ユーザIDの取得
+chrome.storage.sync.get('userid', function(items){
+	userid = items.userid;
+	if(!userid){
+		userid = getRandomToken();
+		chrome.storage.sync.set({userid: userid}, function(){});
+	}
+	console.log(userid);
+});
 
 /******contentscriptからの受け取り用******/
 chrome.runtime.onMessage.addListener(
@@ -21,8 +43,6 @@ chrome.runtime.onMessage.addListener(
 			rumorid = request.text;
 			teiseinum = request.text2;
 		}if(request.type == "log"){
-			//idを取得
-			var id = chrome.runtime.id;
 			//現在時刻を取得
 			var time = (new Date()).getTime();
 			//URLを取得
@@ -41,7 +61,7 @@ chrome.runtime.onMessage.addListener(
 					url:
 						server+'addon_eval/dbconnect.php',
 					data:
-						{id:id,time:time,URL:URL,type:type,text:text},
+						{userid:userid,time:time,URL:URL,type:type,text:text},
 					success:
 						function(data){
 							console.log(data);

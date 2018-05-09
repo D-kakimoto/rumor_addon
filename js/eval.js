@@ -2,10 +2,12 @@
 var URL = location.href;
 
 //ページオープン時
-chrome.runtime.sendMessage(
-	{type: "log",name:"open",URL:URL,text:null},
-	function (response){}
-);
+window.onload = function(){
+	chrome.runtime.sendMessage(
+		{type: "log",name:"open",URL:URL,text:null},
+		function (response){}
+	);
+}
 
 //ページクローズ時
 window.addEventListener("beforeunload", function() {
