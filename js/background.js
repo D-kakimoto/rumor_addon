@@ -5,7 +5,7 @@ var teiseinum;
 //評価用
 var URL;
 //情報取得用サーバ
-var server = "http://ikakun.net/~kakimoto/";
+var server = "http://www2.yoslab.net/~kakimoto/rumor_background/";
 
 /******contentscriptからの受け取り用******/
 chrome.runtime.onMessage.addListener(
@@ -20,16 +20,31 @@ chrome.runtime.onMessage.addListener(
 		}if(request.type == "syousaisend"){//右クリック時のためのもの
 			rumorid = request.text;
 			teiseinum = request.text2;
-		}if(request.type == "timelog"){
-			var timeid = (new Date()).getTime();
+		}if(request.type == "log"){
+			//現在時刻を取得
+			var time = (new Date()).getTime();
+			//URLを取得
 			var URL = request.URL;
-			var name = request.name;
-			console.log(name);
-			if(!(name == "pagestart" || name == "pageend")){
-				var rumortext = request.rumortext;
-			}
-			//開発中はoffに．(2017-09-23)
-			//timelog(timeid,URL,name,rumortext);
+			//操作タイプを取得
+			var type = request.name;
+			//テキストを取得
+			var text = request.text;
+			//console.log("時間："+time+",タイプ:"+type+",URL："+URL+"テキスト："+text+"\n");
+			//サーバへ情報を送信
+			$.ajax({
+					type:
+						'POST',
+					scriptCharset:
+					'utf-8',
+					url:
+						server+'addon_eval/dbconnect.php',
+					data:
+						{time:time,URL:URL,type:type,text:text},
+					success:
+						function(data){
+							console.log(data);
+						}
+			});
 		}
 	}
 );
@@ -45,7 +60,7 @@ function rumorget(name){
 		success:
 			function(result){
 				rumorlist = result;
-				console.log(rumorlist);
+				//console.log(rumorlist);
 			}
 	});
 };
@@ -75,24 +90,6 @@ chrome.runtime.onMessage.addListener(
 		}
 	}
 );
-
-//timelog関数
-/*****
-function timelog(timeid,URL,name,rumortext){
-	$.ajax({
-  		type:
-  			'POST',
-  		scriptCharset:
-			'utf-8',
-  		url:
-  			server+'hyouka/hyoukasyori2.php',
-  		data:
-  			{type:0,timeid:timeid,URL:URL,name:name,rumortext:rumortext},
-  		success:
-  			function(data){console.log(data);}
-	});
-}
-*****/
 
 /*
 //右クリック時の処理
