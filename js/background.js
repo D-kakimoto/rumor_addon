@@ -53,7 +53,14 @@ function rumorget(name){
 //オプション情報取得待ちうけとcontentscriptへの送信
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     if (request.method == "getLocalStorage")
-      sendResponse({twitterID: localStorage["twitterID"],twitterpasswd: localStorage["twitterpasswd"],followees: localStorage["followees"],fuki: localStorage["fuki"]});
+      sendResponse(
+				{
+					twitterID: localStorage["twitterID"],
+					twitterpasswd: localStorage["twitterpasswd"],
+					followees: localStorage["followees"],
+					fuki: localStorage["fuki"]
+				}
+			);
     else
       sendResponse({});
 });
