@@ -22,7 +22,7 @@ chrome.runtime.onMessage.addListener(
 			teiseinum = request.text2;
 		}if(request.type == "log"){
 			//idを取得
-			var user_id = chrome.runtime.id;
+			var id = chrome.runtime.id;
 			console.log(user_id);
 			//現在時刻を取得
 			var time = (new Date()).getTime();
