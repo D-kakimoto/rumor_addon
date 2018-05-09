@@ -20,12 +20,12 @@ chrome.storage.local.get(
 });
 
 /*****ページ更新時処理******/
-
 //取得命令のみ(レスポンスなし)
 chrome.runtime.sendMessage(
 	{type: "rumorget"},
 	function (response){
-		console.log("1.background.jsに流言取得命令を送信完了");}
+		//console.log("1.background.jsに流言取得命令を送信完了");
+	}
 );
 
 //30msごとにrumorlistが取得できたかチェック
@@ -48,9 +48,10 @@ function initGetRumor(){
 		for(var m=0; m<followee.length-1;m++){
 			console.log(followee[m]);
 		}
-		console.time('timer1');
+		//timer1はハイライト処理にかかる時間を計測している
+		//console.time('timer1');
 		search(text,lines);
-		console.timeEnd('timer1');
+		//console.timeEnd('timer1');
 		fukidashi();
 	//rumorlistが無い場合，もう一度確かめる
 	}else{
