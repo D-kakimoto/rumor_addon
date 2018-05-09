@@ -23,7 +23,6 @@ chrome.runtime.onMessage.addListener(
 		}if(request.type == "log"){
 			//idを取得
 			var id = chrome.runtime.id;
-			console.log(user_id);
 			//現在時刻を取得
 			var time = (new Date()).getTime();
 			//URLを取得
