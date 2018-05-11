@@ -118,9 +118,17 @@ function search(text,words) {
 			}
 		}
 	}
-  //ハイライトカラーの設定
-  $(".rumorhighlight").css("backgroundColor", op_color);
   
+  //ハイライトカラーの設定
+  window.setTimeout(initColorset,30);
+  function initColorset(){
+    if(op_color){
+      $(".rumorhighlight").css("backgroundColor", op_color);
+    }else{
+      initColorset();
+    }
+  }
+
   //トースト通知を生成
   if(findtext.length != 0){
     var toast_string = "";

@@ -24,10 +24,6 @@ chrome.storage.local.get(
 			op_fuki = value.fukiop;
 			op_color = value.colorop;
 		}
-		//console.log("op_hl："+op_hl);
-		//console.log("op_tst："+op_tst);
-		//console.log("op_fuki："+op_fuki);
-		//console.log("op_fuki："+op_color);
 });
 
 /*****ページ更新時処理******/
