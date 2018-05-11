@@ -1,11 +1,11 @@
 //オプション(ユーザ設定)情報の取得
 chrome.storage.local.get(
-	["hlop", "tstop", "fukiop"],
-	function(value){
-		var value_data_1 = value.hlop;
-		var value_data_2 = value.tstop;
-		var value_data_3 = value.fukiop;
-		console.log(value_data_1+value_data_2+value_data_3);
+  ["hlop", "tstop", "fukiop"],
+  function(value){
+    var hlop = value.hlop;
+    var tstop = value.tstop;
+    var fukiop = value.fukiop;
+    set_radio_button(hlop,tstop,fukiop);
 });
 
 //ラジオボタンが押された時に実行
@@ -13,6 +13,34 @@ window.onload = function() {
   document.getElementById("pUpStatus").addEventListener("click",update_status,false);
   document.getElementById("pClStatus").addEventListener("click",cancel_status,false);
   document.getElementById("pUpOpts").addEventListener("click",move_options,false);
+}
+
+//オプション情報をもとにラジオボタンにチェックを入れる
+function set_radio_button(hlop,tstop,fukiop){
+  //hlopについて
+  var element_hl = document.getElementById("hl-op");
+  var elements_hl = element_hl.highlightonoff;
+  if(hlop != "off"){
+    elements_hl[0].checked = true;
+  }else{
+    elements_hl[1].checked = true;
+  }
+  //tstopについて
+  var element_tst = document.getElementById("tst-op");
+  var elements_tst = element_tst.toastonoff;
+  if(tstop != "off"){
+    elements_tst[0].checked = true;
+  }else{
+    elements_tst[1].checked = true;
+  }
+  //fukiopについて
+  var element_fuki = document.getElementById("fuki-op");
+  var elements_fuki = element_fuki.fukionoff;
+  if(fukiop != "off"){
+    elements_fuki[0].checked = true;
+  }else{
+    elements_fuki[1].checked = true;
+  }
 }
 
 //「設定する」が押された時
