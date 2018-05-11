@@ -1,11 +1,12 @@
 //オプション(ユーザ設定)情報の取得
 chrome.storage.local.get(
-  ["hlop", "tstop", "fukiop"],
+  ["hlop", "tstop", "fukiop","colorop"],
   function(value){
     var hlop = value.hlop;
     var tstop = value.tstop;
     var fukiop = value.fukiop;
-    set_radio_button(hlop,tstop,fukiop);
+    var colorop = value.colorop;
+    set_radio_button(hlop,tstop,fukiop,colorop);
 });
 
 //ラジオボタンが押された時に実行
@@ -16,7 +17,7 @@ window.onload = function() {
 }
 
 //オプション情報をもとにラジオボタンにチェックを入れる
-function set_radio_button(hlop,tstop,fukiop){
+function set_radio_button(hlop,tstop,fukiop,colorop){
   //hlopについて
   var element_hl = document.getElementById("hl-op");
   var elements_hl = element_hl.highlightonoff;
@@ -41,6 +42,16 @@ function set_radio_button(hlop,tstop,fukiop){
   }else{
     elements_fuki[1].checked = true;
   }
+  //hlcolorについて
+  var element_color = document.getElementById("color-op");
+  var elements_color = element_color.hlcolor;
+  if(colorop == "red"){
+    elements_color[0].checked = true;
+  }else if(colorop == "blue"){
+    elements_color[2].checked = true;
+  }else{
+    elements_color[1].checked = true;
+  }
 }
 
 //「設定する」が押された時
@@ -54,8 +65,11 @@ function update_status(){
   var element_3 = document.getElementById("fuki-op") ;
   var radioNodeList_3 = element_3.fukionoff;
   var value_3 = radioNodeList_3.value;
+  var element_4 = document.getElementById("color-op") ;
+  var radioNodeList_4 = element_4.hlcolor;
+  var value_4 = radioNodeList_4.value;
   chrome.storage.local.set(
-    {'hlop': value_1,'tstop': value_2,'fukiop': value_3,},
+    {'hlop': value_1,'tstop': value_2,'fukiop': value_3,'colorop':value_4},
     function (){
     console.log("設定内容を保存しました");
     }

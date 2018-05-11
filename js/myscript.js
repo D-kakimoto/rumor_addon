@@ -11,20 +11,23 @@ var rumorchecklist;
 var op_hl = "defaults";
 var op_tst = "defaults";
 var op_fuki = "defaults";
+var op_color = "yellow";
 /******************/
 
 //オプション(ユーザ設定)情報の取得
 chrome.storage.local.get(
-	["hlop", "tstop", "fukiop"],
+	["hlop", "tstop", "fukiop","colorop"],
 	function(value){
 		if(value.hlop){
 			op_hl = value.hlop;
 			op_tst = value.tstop;
 			op_fuki = value.fukiop;
+			op_color = value.colorop;
 		}
-		console.log("op_hl："+op_hl);
-		console.log("op_tst："+op_tst);
-		console.log("op_fuki："+op_fuki);
+		//console.log("op_hl："+op_hl);
+		//console.log("op_tst："+op_tst);
+		//console.log("op_fuki："+op_fuki);
+		//console.log("op_fuki："+op_color);
 });
 
 /*****ページ更新時処理******/

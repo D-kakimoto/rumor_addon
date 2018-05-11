@@ -118,6 +118,10 @@ function search(text,words) {
 			}
 		}
 	}
+  //ハイライトカラーの設定
+  $(".rumorhighlight").css("backgroundColor", op_color);
+  
+  //トースト通知を生成
   if(findtext.length != 0){
     var toast_string = "";
     findrumor = findrumor.filter(function (x, i, self) {
