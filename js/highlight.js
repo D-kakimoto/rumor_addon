@@ -118,13 +118,18 @@ function search(text,words) {
 			}
 		}
 	}
-  
+
   //ハイライトカラーの設定
   window.setTimeout(initColorset,30);
   function initColorset(){
     if(op_color){
-      $(".rumorhighlight").css("backgroundColor", op_color);
+      if(op_hl == "off"){
+        $(".rumorhighlight").css("backgroundColor", "null");
+      }else{
+        $(".rumorhighlight").css("backgroundColor", op_color);
+      }
     }else{
+      console.log("initColorset");
       initColorset();
     }
   }

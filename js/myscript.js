@@ -57,13 +57,9 @@ function initGetRumor(){
 		}
 		//timer1はハイライト処理にかかる時間を計測している
 		//console.time('timer1');
-		if(op_hl != "off"){
 			search(text,lines);
-		}
 		//console.timeEnd('timer1');
-		if(op_hl != "off" || op_fuki != "off"){
 			fukidashi();
-		}
 	//rumorlistが無い場合，もう一度確かめる
 	}else{
 		window.setTimeout(initGetRumor,30);

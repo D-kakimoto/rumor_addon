@@ -11,7 +11,7 @@ body{
 .setting-parent{
   margin: 8px auto;
 	height: 150px;
-  padding: 8px;
+  padding: 0px 8px 8px 8px;
   background-color: #f5f5f5;
   border: 1px solid #bcbcbc;
   border-radius: 8px;
@@ -149,4 +149,13 @@ padding-left:30px;
 font-size:13px;
 font-weight:bold;
 padding-left:20px;
+}
+
+.report-parent{
+  margin: 8px auto;
+	height: 150px;
+  padding: 0px 8px 8px 8px;
+  background-color: #f5f5f5;
+  border: 1px solid #bcbcbc;
+  border-radius: 8px;
 }

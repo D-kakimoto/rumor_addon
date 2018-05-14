@@ -3,6 +3,7 @@ var rumorlist;
 var rumorid;
 var teiseinum;
 var userid;
+var eval_post_check;
 //評価用
 var URL;
 //情報取得用サーバ
@@ -26,7 +27,17 @@ chrome.storage.sync.get('userid', function(items){
 		userid = getRandomToken();
 		chrome.storage.sync.set({userid: userid}, function(){});
 	}
-	console.log(userid);
+	//console.log(userid);
+});
+
+//ログ許可チェックの初期値設定
+chrome.storage.sync.get('eval_post_check', function(items){
+	if(!eval_post_check){
+		eval_post_check = "no";
+		chrome.storage.sync.set({eval_post_check: eval_post_check}, function(){});
+	}else{
+		eval_post_check = items.eval_post_check;
+	}
 });
 
 /******contentscriptからの受け取り用******/
@@ -42,7 +53,7 @@ chrome.runtime.onMessage.addListener(
 		}if(request.type == "syousaisend"){//右クリック時のためのもの
 			rumorid = request.text;
 			teiseinum = request.text2;
-		}if(request.type == "log"){
+		}if(request.type == "log" && eval_post_check != "no"){
 			//現在時刻を取得
 			var time = (new Date()).getTime();
 			//URLを取得
@@ -52,6 +63,7 @@ chrome.runtime.onMessage.addListener(
 			//テキストを取得
 			var text = request.text;
 			//console.log("時間："+time+",タイプ:"+type+",URL："+URL+"テキスト："+text+"\n");
+			console.log("実行");
 			//サーバへ情報を送信
 			$.ajax({
 					type:
