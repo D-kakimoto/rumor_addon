@@ -1,26 +1,172 @@
+/*popup全体*/
 body{
 	width: 300px;
-	height: 200px;
+	height: auto;
 	background-color: #f5fffa;
 }
 
+/*タイトル部分*/
 .title{
 	font-size: 20px;
 }
 
+/*****「設定」ボタン(クリックで広がる)*****/
 .setting-parent{
   margin: 8px auto;
-	height: 150px;
+	height: auto;
   padding: 0px 8px 8px 8px;
   background-color: #f5f5f5;
   border: 1px solid #bcbcbc;
   border-radius: 8px;
 }
+.subtitle-setting{
+	border: #1e90ff solid;
+	border-width: 0 0 0 5px;
+	font-weight: bold;
+	margin: 11px 0 3px 0;
+	padding: 0 0 0 5px;
+	display: block;
+}
+.setting-parent label {
+		width: 100%;
+    font-weight: bold;
+    cursor :pointer;
+}
+.setting-parent label .icon::after{
+	float: right;
+	margin-right: 10px;
+	font-weight: bold;
+	content: "＋";
+}
+.setting-parent #label-setting {
+    display: none;
+}
+.setting-parent .contents-setting {
+    height: 0;
+    overflow-y: hidden;
+    transition: 0.8s;/*ゆっくり表示させる*/
+    opacity: 0;
+}
+.setting-parent #label-setting:checked + label + div {
+    height: auto;
+    opacity: 1;
+}
+
+.setting-parent input:checked + label .icon::after {
+	content: "ー";
+}
+
+/*********************************************/
+
+/****「不具合を報告」ボタン(クリックで広がる)*****/
+.report-parent{
+  margin: 8px auto;
+	height: auto;
+  padding: 0px 8px 8px 8px;
+  background-color: #f5f5f5;
+  border: 1px solid #bcbcbc;
+  border-radius: 8px;
+}
+.subtitle-report{
+	border: #1e90ff solid;
+	border-width: 0 0 0 5px;
+	font-weight: bold;
+	margin: 11px 0 3px 0;
+	padding: 0 0 0 5px;
+	display: block;
+}
+.report-parent label {
+		width: 100%;
+    font-weight: bold;
+    cursor :pointer;
+}
+.report-parent label .icon::after{
+	float: right;
+	margin-right: 10px;
+	font-weight: bold;
+	content: "＋";
+}
+.report-parent #label-report {
+    display: none;
+}
+.report-parent .contents-report {
+    height: 0;
+    overflow-y: hidden;
+    transition: 0.8s;/*ゆっくり表示させる*/
+    opacity: 0;
+}
+.report-parent #label-report:checked + label + div {
+    height: auto;
+    opacity: 1;
+}
+.report-text{
+	width: 98%;
+	height: 80px;
+	resize: none;
+	margin: 8px 0 0px 0;
+}
+.report-parent input:checked + label .icon::after {
+	content: "ー";
+}
+/*********************************************/
+
+/****「システムについて」ボタン(クリックで広がる)*****/
+.detail-parent{
+  margin: 8px auto;
+	height: auto;
+  padding: 0px 8px 8px 8px;
+  background-color: #f5f5f5;
+  border: 1px solid #bcbcbc;
+  border-radius: 8px;
+}
+.subtitle-detail{
+	border: #a9a9a9 solid;
+	border-width: 0 0 0 5px;
+	font-weight: bold;
+	margin: 11px 0 3px 0;
+	padding: 0 0 0 5px;
+	display: block;
+}
+.detail-parent label {
+		width: 100%;
+    font-weight: bold;
+    cursor :pointer;
+}
+.detail-parent label .icon::after{
+	float: right;
+	margin-right: 10px;
+	font-weight: bold;
+	content: "ー";
+}
+.detail-parent #label-detail {
+    display: none;
+}
+
+.detail-parent #label-detail:checked + label + div {
+	height: 0;
+	overflow-y: hidden;
+	transition: 0.8s;/*ゆっくり表示させる*/
+	opacity: 0;
+}
+.detail-parent .contents-detail {
+	height: auto;
+	opacity: 1;
+}
+
+.contents-detail{
+	font-size: 7px;
+}
+.contents-detail p{
+	margin: 5px 0 0 0;
+}
+.detail-parent input:checked + label .icon::after {
+	content: "＋";
+}
+/*********************************************/
 
 .ttl{
 	border: #00ced1 solid;
 	border-width: 0 0 0 5px;
-	font-weight: bold;
 	margin: 11px 0 3px 0;
 	padding: 0 0 0 5px;
 }
@@ -34,6 +180,7 @@ body{
 
 }
 
+/***********赤チェック***********/
 .hl-red-input{
   display: none;
 }
@@ -67,8 +214,9 @@ body{
   background: #ff0000;
   border-radius: 50%;
 }
+/********************************/
 
-
+/***********黄チェック***********/
 .hl-yellow-input{
   display: none;
 }
@@ -102,8 +250,9 @@ body{
   background: #ffff00;
   border-radius: 50%;
 }
+/********************************/
 
-
+/***********青チェック***********/
 .hl-blue-input{
   display: none;
 }
@@ -137,25 +286,21 @@ body{
   background: #0000ff;
   border-radius: 50%;
 }
+/********************************/
 
 .smt-button{
-margin:10px 0 5px 0;
-padding-left:30px;
+margin:11px 0 3px 0;
+text-align: center;
 }
-
 .smt-buttonL input{font-size:12px;}
-
 .smt-buttonR{
 font-size:13px;
 font-weight:bold;
 padding-left:20px;
 }
 
-.report-parent{
-  margin: 8px auto;
-	height: 150px;
-  padding: 0px 8px 8px 8px;
-  background-color: #f5f5f5;
-  border: 1px solid #bcbcbc;
-  border-radius: 8px;
+.smt-button-2{
+margin:7px 0 3px 0;
+text-align: center;
 }
+.smt-buttonL-2 input{font-size:12px;}

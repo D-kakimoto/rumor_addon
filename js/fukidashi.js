@@ -17,6 +17,7 @@ function query_build(queries){
 
 //吹き出し関数
 function fukidashi(){
+	if(op_fuki == "off")return;
 	//ハイライト部分の上にカーソルが乗った
 	$('.rumorhighlight').on(
 		"mouseenter",

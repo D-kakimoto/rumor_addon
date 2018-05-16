@@ -12,17 +12,19 @@ var op_hl = "defaults";
 var op_tst = "defaults";
 var op_fuki = "defaults";
 var op_color = "yellow";
+var op_eval = "defaults"
 /******************/
 
 //オプション(ユーザ設定)情報の取得
 chrome.storage.local.get(
-	["hlop", "tstop", "fukiop","colorop"],
+	["hlop", "tstop", "fukiop","colorop","evalop"],
 	function(value){
 		if(value.hlop){
 			op_hl = value.hlop;
 			op_tst = value.tstop;
 			op_fuki = value.fukiop;
 			op_color = value.colorop;
+			op_eval = value.evalop;
 		}
 });
 

@@ -11,59 +11,103 @@
     <div class="main">
       <div class="title">RumorFinder</div>
       <div class="setting-parent">
-        <form id="hl-op" class=ttl>
-          <span class=ttlHd>ハイライト機能：&nbsp;&nbsp;&nbsp;&nbsp;</span>
-          <span class=ttlDc>
-            <input type="radio" name="highlightonoff" value="on" ID=highlight-on>
-            ON&nbsp;
-            <input type="radio" name="highlightonoff" value="off" ID=highlight-off>
-            OFF
-          </span>
-        </form>
-        <form id="tst-op" class=ttl>
-          <span class=ttlHd>トースト通知機能：</span>
-          <span class=ttlDc>
-            <input type="radio" name="toastonoff" value="on" ID=toast-on>
-            ON&nbsp;
-            <input type="radio" name="toastonoff" value="off" ID=toast-off>
-            OFF
-          </span>
-        </form>
-        <form id="fuki-op" class=ttl>
-          <span class=ttlHd>吹き出し表示機能：</span>
-          <span class=ttlDc>
-            <input type="radio" name="fukionoff" value="on" ID=fuki-on>
-            ON&nbsp;
-            <input type="radio" name="fukionoff" value="off" ID=fuki-off>
-            OFF
-          </span>
-        </form>
-        <form id="color-op" class=ttl>
-          <span class=ttlHd>ハイライトカラー：</span>
-          <span class=ttlDc>
-            <span class="color-select">
-              <input type="radio" name="hlcolor" value="red" class="hl-red-input" id="hl-red">
-              <label for="hl-red"></label>
-              <input type="radio" name="hlcolor" value="yellow" class="hl-yellow-input" id="hl-yellow">
-              <label for="hl-yellow"></label>
-              <input type="radio" name="hlcolor" value="blue" class="hl-blue-input" id="hl-blue">
-              <label for="hl-blue"></label>
+        <input type="checkbox" id="label-setting" />
+        <label for="label-setting" class="subtitle-setting">
+          <span class="icon"></span>
+          設定
+        </label>
+        <div class="contents-setting">
+          <form id="eval-op" class=ttl>
+            <span class=ttlHd>ログを送信　　　：</span>
+            <span class=ttlDc>
+              <input type="radio" name="evalonoff" value="on" ID=eval-on>
+              ON&nbsp;
+              <input type="radio" name="evalonoff" value="off" ID=eval-off>
+              OFF
             </span>
-          </span>
-        </form>
-        <form name="op-smt" class=smt-button>
-          <span class=smt-buttonL>
-            <input type="button" value="保存する" ID="pUpStatus">&nbsp;&nbsp;
-            <input type="button" value="キャンセル" ID="pClStatus">
-          </span>
-          <span class=smt-buttonR>
-            <a href="#" title="詳細設定" ID="pUpOpts">詳細設定</a>
-          </span>
-        </form>
+          </form>
+          <form id="hl-op" class=ttl>
+            <span class=ttlHd>ハイライト機能　：</span>
+            <span class=ttlDc>
+              <input type="radio" name="highlightonoff" value="on" ID=highlight-on>
+              ON&nbsp;
+              <input type="radio" name="highlightonoff" value="off" ID=highlight-off>
+              OFF
+            </span>
+          </form>
+          <form id="tst-op" class=ttl>
+            <span class=ttlHd>トースト通知機能：</span>
+            <span class=ttlDc>
+              <input type="radio" name="toastonoff" value="on" ID=toast-on>
+              ON&nbsp;
+              <input type="radio" name="toastonoff" value="off" ID=toast-off>
+              OFF
+            </span>
+          </form>
+          <form id="fuki-op" class=ttl>
+            <span class=ttlHd>吹き出し表示機能：</span>
+            <span class=ttlDc>
+              <input type="radio" name="fukionoff" value="on" ID=fuki-on>
+              ON&nbsp;
+              <input type="radio" name="fukionoff" value="off" ID=fuki-off>
+              OFF
+            </span>
+          </form>
+          <form id="color-op" class=ttl>
+            <span class=ttlHd>ハイライトカラー：</span>
+            <span class=ttlDc>
+              <span class="color-select">
+                <input type="radio" name="hlcolor" value="red" class="hl-red-input" id="hl-red">
+                <label for="hl-red"></label>
+                <input type="radio" name="hlcolor" value="yellow" class="hl-yellow-input" id="hl-yellow">
+                <label for="hl-yellow"></label>
+                <input type="radio" name="hlcolor" value="blue" class="hl-blue-input" id="hl-blue">
+                <label for="hl-blue"></label>
+              </span>
+            </span>
+          </form>
+          <form name="op-smt" class=smt-button>
+            <span class=smt-buttonL>
+              <input type="button" value="保存する" ID="pUpStatus">&nbsp;&nbsp;
+              <input type="button" value="キャンセル" ID="pClStatus">
+            </span>
+            <!--
+            <span class=smt-buttonR>
+              <a href="#" title="詳細設定" ID="pUpOpts">詳細設定</a>
+            </span>
+            -->
+          </form>
+        </div>
       </div>
       <div class="report-parent">
-        <p>サンプル</p>
-      <div>
+        <input type="checkbox" id="label-report" />
+        <label for="label-report" class="subtitle-report">
+          不具合の報告
+          <span class="icon"></span>
+        </label>
+        <div class="contents-report">
+          <div class="ttl">報告内容：</div>
+          <textarea rows="10" cols="20" class="report-text" id="report-text-contents"></textarea>
+          <form name="op-smt-2" class=smt-button-2>
+            <span class=smt-buttonL-2>
+              <input type="button" value="送信する" ID="reportstatus">&nbsp;&nbsp;
+              <input type="button" value="キャンセル" ID="reportclstatus">
+            </span>
+          </form>
+        </div>
+      </div>
+      <div class="detail-parent">
+        <input type="checkbox" id="label-detail" />
+        <label for="label-detail" class="subtitle-detail">
+          システムについて
+          <span class="icon"></span>
+        </label>
+        <div class="contents-detail">
+          <p>・この拡張機能は，”流言情報クラウド”により収集された情報を利用しています．</p>
+          <p>・「ログを送信」をONにした場合，「URL」「判定された流言情報」などの，あなたのWebページ閲覧情報が開発者へ送られます．</p>
+          <p>・開発者が個人を特定することはできず，これらの情報は研究および開発目的にのみ利用されます．</p>
+        </div>
+      </div>
     </div>
   </body>
 </html>

@@ -1,23 +1,27 @@
+/****************「設定」項目****************/
 //オプション(ユーザ設定)情報の取得
 chrome.storage.local.get(
-  ["hlop", "tstop", "fukiop","colorop"],
+  ["hlop", "tstop", "fukiop","colorop","evalop"],
   function(value){
     var hlop = value.hlop;
     var tstop = value.tstop;
     var fukiop = value.fukiop;
     var colorop = value.colorop;
-    set_radio_button(hlop,tstop,fukiop,colorop);
+    var evalop = value.evalop;
+    set_radio_button(hlop,tstop,fukiop,colorop,evalop);
 });
 
 //ラジオボタンが押された時に実行
 window.onload = function() {
-  document.getElementById("pUpStatus").addEventListener("click",update_status,false);
-  document.getElementById("pClStatus").addEventListener("click",cancel_status,false);
-  document.getElementById("pUpOpts").addEventListener("click",move_options,false);
+  document.getElementById("pUpStatus").addEventListener("click",setting_update_status,false);
+  document.getElementById("pClStatus").addEventListener("click",setting_cancel_status,false);
+  //document.getElementById("pUpOpts").addEventListener("click",move_options,false);
+  document.getElementById("reportstatus").addEventListener("click",report_post_status,false);
+  document.getElementById("reportclstatus").addEventListener("click",report_cancel_status,false);
 }
 
 //オプション情報をもとにラジオボタンにチェックを入れる
-function set_radio_button(hlop,tstop,fukiop,colorop){
+function set_radio_button(hlop,tstop,fukiop,colorop,evalop){
   //hlopについて
   var element_hl = document.getElementById("hl-op");
   var elements_hl = element_hl.highlightonoff;
@@ -52,10 +56,18 @@ function set_radio_button(hlop,tstop,fukiop,colorop){
   }else{
     elements_color[1].checked = true;
   }
+  //evalopについて
+  var element_eval = document.getElementById("eval-op");
+  var elements_eval = element_eval.evalonoff;
+  if(evalop == "on"){
+    elements_eval[0].checked = true;
+  }else{
+    elements_eval[1].checked = true;
+  }
 }
 
 //「設定する」が押された時
-function update_status(){
+function setting_update_status(){
   var element_1 = document.getElementById("hl-op") ;
   var radioNodeList_1 = element_1.highlightonoff;
   var value_1 = radioNodeList_1.value;
@@ -68,16 +80,19 @@ function update_status(){
   var element_4 = document.getElementById("color-op") ;
   var radioNodeList_4 = element_4.hlcolor;
   var value_4 = radioNodeList_4.value;
+  var element_5 = document.getElementById("eval-op") ;
+  var radioNodeList_5 = element_5.evalonoff;
+  var value_5 = radioNodeList_5.value;
   chrome.storage.local.set(
-    {'hlop': value_1,'tstop': value_2,'fukiop': value_3,'colorop':value_4},
+    {'hlop': value_1,'tstop': value_2,'fukiop': value_3,'colorop':value_4,'evalop':value_5},
     function (){
-    console.log("設定内容を保存しました");
+      console.log("設定を保存しました");
     }
   );
   window.close();
 }
 //「キャンセル」が押された時
-function cancel_status(){
+function setting_cancel_status(){
   window.close();
 }
 //「詳細設定」が押された時
@@ -86,12 +101,28 @@ function move_options(){
     chrome.extension.getURL("../html/options.html")
   );
 }
-//設定の保存
-/*
-chrome.storage.local.set(
-  {'key1': value},
-  function (){
-  console.log("設定内容を保存しました");
-  }
-);
-*/
+
+/******************************************/
+/****************「報告」項目****************/
+var URL;
+//現在のタブのURLを取得
+chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+    URL = tabs[0].url;
+});
+
+//「設定する」が押された時
+function report_post_status(){
+  var report_text = document.getElementById("report-text-contents").value;
+  chrome.runtime.sendMessage(
+    {type: "report",name:"report",URL:URL,text:report_text},
+    function (response){}
+  );
+  window.close();
+}
+
+//「キャンセル」が押された時
+function report_cancel_status(){
+  window.close();
+}
+
+/****************「報告」項目****************/
