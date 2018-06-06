@@ -248,28 +248,46 @@ function search_custom3(text,rumorlist) {
     }
   }
 }
+
+
+
+
+
 function search(text,rumorlist){
   var rumors = rumorlist.split("\n\n");
   for(var i=0;i<rumors.length-1;i++){
-    var rumorinfo = rumors[i].split('\t');
-    var search_query = rumorinfo[1];
-    var mps = search_query.split('/');
-    node_search("body",mps);
+    node_search("body",rumors[i]);
+  }
+  window.setTimeout(initColorset,30);
+  function initColorset(){
+    if(op_color){
+      if(op_hl == "off"){
+        $(".rumorhighlight").css("backgroundColor", "null");
+      }else{
+        $(".rumorhighlight").css("backgroundColor", op_color);
+      }
+    }else{
+      initColorset();
+    }
   }
 }
 
-function node_search(tag,rumor_mps){
-  //console.log(rumor_mps);
-  //console.log("実行");
+function node_search(tag,rumorline){
   var node = $(tag).children();
+  var rumorinfo = rumorline.split('\t');
+  var rumortext = rumorinfo[4];
+  var correction = rumorinfo[5];
+  var correction_cnt = rumorinfo[3];
+  var rumornum = rumorinfo[0];
+  var search_query = rumorinfo[1];
+  var rumor_mps = search_query.split('/');
+
   if(node.length==0){
-    console.log("これ以上子はない");
     return 0;
   }
   var flag = 0;
   for(var i=0;i<node.length;i++){
     text = node.eq(i).text();
-    console.log("text:"+text);
     for(var l=0;l<rumor_mps.length-1;l++){
       var RegularExp = new RegExp(rumor_mps[l],"g");
       var res = text.match(RegularExp);
@@ -277,81 +295,21 @@ function node_search(tag,rumor_mps){
     }
     if(res){
       flag++;
-      console.log(rumor_mps);
-      //console.log("あった:"+i+"つ目");
-      //console.log(node.eq(i));
       $(node.eq(i)).addClass("rumorhighlight");
-      var result = node_search(node.eq(i),rumor_mps);
+      $(node.eq(i)).attr('data-rumortext', rumortext);
+      $(node.eq(i)).attr('data-rumornum', rumornum);
+      $(node.eq(i)).attr('data-teiseinum', correction_cnt);
+      $(node.eq(i)).attr('data-correction', correction);
+      $(node.eq(i)).attr('data-query', search_query);
+      var result = node_search(node.eq(i),rumorline);
       if(result == 1){
-        console.log("消す");
-        console.log(node.eq(i));
         $(node.eq(i)).removeClass("rumorhighlight");
       }
     }
   }
-  console.log(flag);
   if(flag == 0){
     return 0;
   }else{
     return 1;
   }
 }
-
-    /*
-    if(res){
-      console.log("あった:"+i+"つ目,深さ:"+depth);
-      var result = node_search(node.eq(i));
-      //var parent = node.parent();
-      //console.log(parent);
-    }else if(!res && depth > 1){
-      console.log("なかった:"+i+"つ目,深さ:"+depth);
-      var parent = node.parent();
-      var parent_parent = parent.parent();
-      console.log(parent);
-      console.log(parent_parent);
-      $(parent).addClass("rumorhighlight");
-      $(parent_parent).removeClass("rumorhighlight");
-      console.log("上がる");
-      if(i==node.length-1)depth--;
-    }else{
-      console.log("無かった:"+i+"つ目,深さ:"+depth);
-    }
-    console.log(depth+"層目の走査おわり");
-  }
-}
-*/
-/*
-function test(){
-  function innerHighlight(node, pat){
-    var skip = 0;
-    if(node.nodeType == 3) {
-      var pos = node.data.toUpperCase().indexOf(pat);
-      pos -= (node.data.substr(0, pos).toUpperCase().length - node.data.substr(0, pos).length);
-      if (pos >= 0) {
-        var spannode = document.createElement('rumorinfo');
-        spannode.className = 'rumorhighlight';
-        spannode.setAttribute('data-teiseinum', teiseinum);
-        spannode.setAttribute('data-rumortext', rumortext);
-        spannode.setAttribute('data-rumornum', rumornum);
-        spannode.setAttribute('data-correction', correction);
-        spannode.setAttribute('data-yuusendo', yuusendo);
-        spannode.setAttribute('data-query', search_query);
-        var middlebit = node.splitText(pos);
-        var endbit = middlebit.splitText(pat.length);
-        var middleclone = middlebit.cloneNode(true);
-        spannode.appendChild(middleclone);
-        middlebit.parentNode.replaceChild(spannode, middlebit);
-        skip = 1;
-      }
-    }else if(node.nodeType == 1 && node.childNodes && !/(script|style)/i.test(node.tagName)){
-      for(var i=0; i<node.childNodes.length;++i){
-        i += innerHighlight(node.childNodes[i],pat);
-      }
-    }
-    return skip;
-  }
-  return this.length && pat && pat.length ? this.each(function(){
-    innerHighlight(this, pat.toUpperCase());
-  }) : this;
-}
-*/
