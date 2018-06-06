@@ -47,21 +47,20 @@ function initGetRumor(){
 	);
 	//rumorlistがある場合ハイライト処理
 	if(rumorlist != undefined)  {
-		var lines = rumorlist.split("\n");
+		var lines = rumorlist.split("\n\n");
 		var len = lines.length;//lenは配列の個数
 		for(var n = 0; n < len; n++){
 			array.push(lines[n]);
 		}
-		var htmlString = document.documentElement.outerHTML || document.documentElement.innerHTML;
-		var text = htmlString;
-		for(var m=0; m<followee.length-1;m++){
+		var text = $('body').html();
+		/*for(var m=0; m<followee.length-1;m++){
 			console.log(followee[m]);
-		}
+		}*/
 		//timer1はハイライト処理にかかる時間を計測している
 		//console.time('timer1');
-			search(text,lines);
+		search(text,rumorlist);
 		//console.timeEnd('timer1');
-			fukidashi();
+		fukidashi();
 	//rumorlistが無い場合，もう一度確かめる
 	}else{
 		window.setTimeout(initGetRumor,30);

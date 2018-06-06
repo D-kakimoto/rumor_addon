@@ -16,6 +16,26 @@ function removeTag(str, arrowTag) {
 
 //search関数(レーベンシュタイン距離)
 function search_custom(text,words){
+  var rumors = [];
+  var texts = text.split('\n');
+  for(var i=0;i<words.length-1;i++){
+      var rumorinfo = words[i].split('\t');
+      rumors.push(rumorinfo[4]);
+  }
+  for(var i=0;i<texts.length;i++){
+    var text_notag = removeTag(texts[i]);
+      //console.log(i+":"+text_notag);
+    for(var j=0;j<rumors.length;j++){
+      var rumortext = rumors[j];
+      var result = levenshteinDistance(text_notag,rumortext);
+      if(result<0.7){
+        console.log(text_notag);
+        console.log(rumortext);
+        console.log("距離："+result);
+      }
+    }
+  }
+  /*
   var checked;
   var findtext = new Array();
   var findrumor = new Array();
@@ -49,12 +69,13 @@ function search_custom(text,words){
     {type: "rumorchecked",count:findtext.length},
     function(res){}
   );
+  */
 }
 
 //レーベンシュタイン距離
 function levenshteinDistance(str1,str2){
-    var x=str1.length;
-    var y=str2.length;
+    var x = str1.length;
+    var y = str2.length;
     var d=[];
     for(var i=0; i<=x; i++){
         d[i] = [];
@@ -70,11 +91,15 @@ function levenshteinDistance(str1,str2){
             d[i][j] = Math.min(d[i-1][j]+1, d[i][j-1]+1, d[i-1][j-1] + cost);
         }
     }
-    return d[x][y];
+    if(x>=y){
+      return d[x][y]/x;
+    }else{
+      return d[x][y]/y;
+    }
 }
 
 //search関数
-function search(text,words) {
+function search_custom2(text,words) {
 	var checked;
 	var findtext = new Array();
   var findrumor = new Array();
@@ -110,10 +135,10 @@ function search(text,words) {
 						//}else{
 						//	console.log("優先度なし");
 						//}
-            checked++;
 						$("html").highlight(judgetext,rumor[4],rumor[0],rumor[3],rumor[5],yuusendo,rumor[1]);
+						checked++;
             $('<div id='+rumor[0]+' class="tooltip-component basic-tooltip">'+rumor[4]+'<br><br>'+rumor[5]+'</div>').appendTo('html');
-          }
+					}
 				}
 			}
 		}
@@ -129,7 +154,6 @@ function search(text,words) {
         $(".rumorhighlight").css("backgroundColor", op_color);
       }
     }else{
-      console.log("initColorset");
       initColorset();
     }
   }
@@ -147,9 +171,187 @@ function search(text,words) {
       toast_on(i,toast_string);
     }
   }
+
 	//console.log("流言検出："+findtext.length+"箇所");
   chrome.runtime.sendMessage(
     {type: "rumorchecked",count:findtext.length},
     function(res){}
   );
 };
+
+//search関数
+function search_custom3(text,rumorlist) {
+  //textを改行コード単位で分割
+	var text_lines = text.split("\n");
+  var rumors = rumorlist.split("\n\n");
+  //console.log(rumors);
+  //マッチ判別処理
+	for(var k=0;k<text_lines.length;k++){
+		var text_line = removeTag(text_lines[k]);
+    for(var i=0;i<rumors.length-1;i++){
+      var match_flag = 0;
+      var rumorinfo = rumors[i].split('\t');
+      var rumortext = rumorinfo[4];
+      var correction = rumorinfo[5];
+      var correction_cnt = rumorinfo[3];
+      var rumornum = rumorinfo[0];
+      var search_query = rumorinfo[1];
+      var mps = search_query.split('/');
+      for(var l=0;l<mps.length;l++){
+        var RegularExp = new RegExp(mps[l],"g");
+        var res = text_line.match(RegularExp);
+        //形態素が全て含まれていればマッチ(順不同)
+        if(!res || mps == ""){break;}
+        else{if(l+1==mps.length){match_flag = 1;}}
+      }
+      if(match_flag==1){
+        //console.log("マッチしました");
+        //console.log(text_line);
+        //console.log(rumortext);
+        var replaced_line =
+        '<rumorinfo '+
+        'class="rumorhighlight" data-teiseinum="'+
+        correction_cnt+
+        '"data-rumortext="'+
+        rumortext+
+        '"data-correction="'+
+        correction+
+        '"data-rumornum="'+
+        rumornum+
+        '"data-query="'+
+        search_query+
+        '">'+
+        text_lines[k]+
+        '</rumorinfo>';
+        text_lines[k] = replaced_line;
+      }
+    }
+  }
+  var replaced_html = "";
+  for(var i=0;i<text_lines.length;i++){
+    replaced_html += text_lines[i];
+    replaced_html += "\n";
+  }
+  //$('body').html(replaced_html);
+
+  //ハイライトカラーの設定
+  window.setTimeout(initColorset,30);
+  function initColorset(){
+    if(op_color){
+      if(op_hl == "off"){
+        $(".rumorhighlight").css("backgroundColor", "null");
+      }else{
+        $(".rumorhighlight").css("backgroundColor", op_color);
+      }
+    }else{
+      initColorset();
+    }
+  }
+}
+function search(text,rumorlist){
+  var rumors = rumorlist.split("\n\n");
+  for(var i=0;i<rumors.length-1;i++){
+    var rumorinfo = rumors[i].split('\t');
+    var search_query = rumorinfo[1];
+    var mps = search_query.split('/');
+    node_search("body",mps);
+  }
+}
+
+function node_search(tag,rumor_mps){
+  //console.log(rumor_mps);
+  //console.log("実行");
+  var node = $(tag).children();
+  if(node.length==0){
+    console.log("これ以上子はない");
+    return 0;
+  }
+  var flag = 0;
+  for(var i=0;i<node.length;i++){
+    text = node.eq(i).text();
+    console.log("text:"+text);
+    for(var l=0;l<rumor_mps.length-1;l++){
+      var RegularExp = new RegExp(rumor_mps[l],"g");
+      var res = text.match(RegularExp);
+      if(!res){break;}
+    }
+    if(res){
+      flag++;
+      console.log(rumor_mps);
+      //console.log("あった:"+i+"つ目");
+      //console.log(node.eq(i));
+      $(node.eq(i)).addClass("rumorhighlight");
+      var result = node_search(node.eq(i),rumor_mps);
+      if(result == 1){
+        console.log("消す");
+        console.log(node.eq(i));
+        $(node.eq(i)).removeClass("rumorhighlight");
+      }
+    }
+  }
+  console.log(flag);
+  if(flag == 0){
+    return 0;
+  }else{
+    return 1;
+  }
+}
+
+    /*
+    if(res){
+      console.log("あった:"+i+"つ目,深さ:"+depth);
+      var result = node_search(node.eq(i));
+      //var parent = node.parent();
+      //console.log(parent);
+    }else if(!res && depth > 1){
+      console.log("なかった:"+i+"つ目,深さ:"+depth);
+      var parent = node.parent();
+      var parent_parent = parent.parent();
+      console.log(parent);
+      console.log(parent_parent);
+      $(parent).addClass("rumorhighlight");
+      $(parent_parent).removeClass("rumorhighlight");
+      console.log("上がる");
+      if(i==node.length-1)depth--;
+    }else{
+      console.log("無かった:"+i+"つ目,深さ:"+depth);
+    }
+    console.log(depth+"層目の走査おわり");
+  }
+}
+*/
+/*
+function test(){
+  function innerHighlight(node, pat){
+    var skip = 0;
+    if(node.nodeType == 3) {
+      var pos = node.data.toUpperCase().indexOf(pat);
+      pos -= (node.data.substr(0, pos).toUpperCase().length - node.data.substr(0, pos).length);
+      if (pos >= 0) {
+        var spannode = document.createElement('rumorinfo');
+        spannode.className = 'rumorhighlight';
+        spannode.setAttribute('data-teiseinum', teiseinum);
+        spannode.setAttribute('data-rumortext', rumortext);
+        spannode.setAttribute('data-rumornum', rumornum);
+        spannode.setAttribute('data-correction', correction);
+        spannode.setAttribute('data-yuusendo', yuusendo);
+        spannode.setAttribute('data-query', search_query);
+        var middlebit = node.splitText(pos);
+        var endbit = middlebit.splitText(pat.length);
+        var middleclone = middlebit.cloneNode(true);
+        spannode.appendChild(middleclone);
+        middlebit.parentNode.replaceChild(spannode, middlebit);
+        skip = 1;
+      }
+    }else if(node.nodeType == 1 && node.childNodes && !/(script|style)/i.test(node.tagName)){
+      for(var i=0; i<node.childNodes.length;++i){
+        i += innerHighlight(node.childNodes[i],pat);
+      }
+    }
+    return skip;
+  }
+  return this.length && pat && pat.length ? this.each(function(){
+    innerHighlight(this, pat.toUpperCase());
+  }) : this;
+}
+*/
