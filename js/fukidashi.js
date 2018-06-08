@@ -20,6 +20,7 @@ function query_build(queries){
 //吹き出し関数
 function fukidashi(){
 	if(op_fuki == "off")return;
+	var fuki_on_flag = 0;
 	//ハイライト部分の上にカーソルが乗った
 	$('.rumorhighlight').on(
 		"mouseenter",
@@ -78,7 +79,6 @@ function fukidashi(){
 			var web_search_link = query_build(search_query);
 			var syousailink = "http://mednlp.jp/~miyabe/rumorCloud/detail_dema.cgi?m=&r="+num+"&n="+tnum;
 			syousai(num,tnum);
-
 			//吹き出し表示
 			$(this).showBalloon({
 				contents:
@@ -115,47 +115,44 @@ function fukidashi(){
 				offsetX: fuki_over_x,
 				offsetY: fuki_over_y,
 			});
-
-			var timeflag = 0;
 			eval_post("hl_on",URL,rumortext);
 
 			//吹き出し上にカーソルがある
 			$('.fukidashicontents').on(
 				"mouseenter",
 				function(){
-					fukidashiover = 1;
+					fuki_on_flag = 1;
 					eval_post("fuki_on",URL,rumortext);
 				}
 			);
-
 			//吹き出し上からカーソルが外れた
 			$('.fukidashicontents').on(
 				"mouseleave",
 				function(){
-					flag = 2;
-					$('.rumorhighlight').hideBalloon();
-					fukidashiover = 0;
-					timeflag = 1;
-					eval_post("fuki_out",URL,rumortext);
-				}
-			);
-
-			//ハイライト部分からカーソルが外れた
-			$('.rumorhighlight').on(
-				"mouseleave",
-				function(){
 					setTimeout(
 						function(){
-							if(fukidashiover == 0 && timeflag == 0){
-								$('.rumorhighlight').hideBalloon();
-								eval_post("hl_out",URL,rumortext);
-								timeflag = 1;
-							}
-						}
-					,500
+							$('.rumorhighlight').hideBalloon();
+							eval_post("fuki_out",URL,rumortext);
+							fuki_on_flag = 0;
+						},1000
 					)
 				}
 			);
+		}
+	);
+	//ハイライト部分からカーソルが外れた
+	$('.rumorhighlight').on(
+		"mouseleave",
+		function(){
+			var rumortext = $(this).data('rumortext');
+			setTimeout(
+				function(){
+					if(fuki_on_flag == 0){
+						$('.rumorhighlight').hideBalloon();
+						eval_post("hl_out",URL,rumortext);
+					}
+				},1000
+			)
 		}
 	);
 }
