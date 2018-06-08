@@ -14,7 +14,7 @@ function removeTag(str, arrowTag) {
     return str.replace(pattern,'');
 }
 
-//search関数(レーベンシュタイン距離)
+//レーベンシュタイン距離を使ったマッチング
 function search_custom(text,words){
   var rumors = [];
   var texts = text.split('\n');
@@ -35,44 +35,9 @@ function search_custom(text,words){
       }
     }
   }
-  /*
-  var checked;
-  var findtext = new Array();
-  var findrumor = new Array();
-  var text = text.split("\n");//改行で区切る
-  for(var k = 0;k<text.length;k++){
-    var judgetext = removeTag(text[k],"a");
-    for(var i =0;i<words.length-1;i++){
-      var rumor = words[i].split("\t");
-      var distance = levenshteinDistance(judgetext,rumor[4]);
-      if(distance == 0){
-        findrumor.push(rumor[4]);
-        findtext.push(judgetext);
-        $("body").highlight(judgetext,rumor[4],rumor[0],rumor[3],rumor[5],0);
-        $('<div id='+rumor[0]+' class="tooltip-component basic-tooltip">'+rumor[4]+'<br><br>'+rumor[5]+'</div>').appendTo('body');
-        checked++;
-      }
-    }
-  }
-  if(findtext.length != 0){
-    var toast_string = "";
-    findrumor = findrumor.filter(function (x, i, self) {
-            return self.indexOf(x) === i;
-    });
-    for(var i=0; i<findrumor.length; i++){
-      toast_string += "・"+findrumor[i];
-    }
-    toast_on(i,toast_string);
-  }
-  //console.log("流言検出："+findtext.length+"箇所");
-  chrome.runtime.sendMessage(
-    {type: "rumorchecked",count:findtext.length},
-    function(res){}
-  );
-  */
 }
 
-//レーベンシュタイン距離
+//レーベンシュタイン距離測定アルゴリズム
 function levenshteinDistance(str1,str2){
     var x = str1.length;
     var y = str2.length;
@@ -179,61 +144,15 @@ function search_custom2(text,words) {
   );
 };
 
-//search関数
-function search_custom3(text,rumorlist) {
-  //textを改行コード単位で分割
-	var text_lines = text.split("\n");
+//search関数を通す
+function search(text,rumorlist){
   var rumors = rumorlist.split("\n\n");
-  //console.log(rumors);
-  //マッチ判別処理
-	for(var k=0;k<text_lines.length;k++){
-		var text_line = removeTag(text_lines[k]);
-    for(var i=0;i<rumors.length-1;i++){
-      var match_flag = 0;
-      var rumorinfo = rumors[i].split('\t');
-      var rumortext = rumorinfo[4];
-      var correction = rumorinfo[5];
-      var correction_cnt = rumorinfo[3];
-      var rumornum = rumorinfo[0];
-      var search_query = rumorinfo[1];
-      var mps = search_query.split('/');
-      for(var l=0;l<mps.length;l++){
-        var RegularExp = new RegExp(mps[l],"g");
-        var res = text_line.match(RegularExp);
-        //形態素が全て含まれていればマッチ(順不同)
-        if(!res || mps == ""){break;}
-        else{if(l+1==mps.length){match_flag = 1;}}
-      }
-      if(match_flag==1){
-        //console.log("マッチしました");
-        //console.log(text_line);
-        //console.log(rumortext);
-        var replaced_line =
-        '<rumorinfo '+
-        'class="rumorhighlight" data-teiseinum="'+
-        correction_cnt+
-        '"data-rumortext="'+
-        rumortext+
-        '"data-correction="'+
-        correction+
-        '"data-rumornum="'+
-        rumornum+
-        '"data-query="'+
-        search_query+
-        '">'+
-        text_lines[k]+
-        '</rumorinfo>';
-        text_lines[k] = replaced_line;
-      }
+  for(var i=0;i<rumors.length-1;i++){
+    var result = node_search("body",rumors[i]);
+    if(result == 1){
+      //console.log(rumors[i]);
     }
   }
-  var replaced_html = "";
-  for(var i=0;i<text_lines.length;i++){
-    replaced_html += text_lines[i];
-    replaced_html += "\n";
-  }
-  //$('body').html(replaced_html);
-
   //ハイライトカラーの設定
   window.setTimeout(initColorset,30);
   function initColorset(){
@@ -249,29 +168,7 @@ function search_custom3(text,rumorlist) {
   }
 }
 
-
-
-
-
-function search(text,rumorlist){
-  var rumors = rumorlist.split("\n\n");
-  for(var i=0;i<rumors.length-1;i++){
-    node_search("body",rumors[i]);
-  }
-  window.setTimeout(initColorset,30);
-  function initColorset(){
-    if(op_color){
-      if(op_hl == "off"){
-        $(".rumorhighlight").css("backgroundColor", "null");
-      }else{
-        $(".rumorhighlight").css("backgroundColor", op_color);
-      }
-    }else{
-      initColorset();
-    }
-  }
-}
-
+//木構造でなぞりながら見ていく
 function node_search(tag,rumorline){
   var node = $(tag).children();
   var rumorinfo = rumorline.split('\t');
