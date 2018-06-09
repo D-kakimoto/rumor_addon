@@ -108,49 +108,19 @@ function search_custom2(text,words) {
 			}
 		}
 	}
-
-  //ハイライトカラーの設定
-  window.setTimeout(initColorset,30);
-  function initColorset(){
-    if(op_color){
-      if(op_hl == "off"){
-        $(".rumorhighlight").css("backgroundColor", "null");
-      }else{
-        $(".rumorhighlight").css("backgroundColor", op_color);
-      }
-    }else{
-      initColorset();
-    }
-  }
-
-  //トースト通知を生成
-  if(findtext.length != 0){
-    var toast_string = "";
-    findrumor = findrumor.filter(function (x, i, self) {
-            return self.indexOf(x) === i;
-    });
-    for(var i=0; i<findrumor.length; i++){
-      toast_string += "・"+findrumor[i]+"<br>";
-    }
-    if(op_tst != "off"){
-      toast_on(i,toast_string);
-    }
-  }
-
-	//console.log("流言検出："+findtext.length+"箇所");
-  chrome.runtime.sendMessage(
-    {type: "rumorchecked",count:findtext.length},
-    function(res){}
-  );
 };
 
 //search関数を通す
 function search(text,rumorlist){
   var rumors = rumorlist.split("\n\n");
+  var finded_rumors = [];
+  var count = 0;
   for(var i=0;i<rumors.length-1;i++){
     var result = node_search("body",rumors[i]);
     if(result == 1){
-      //console.log(rumors[i]);
+      var rumorinfo = rumors[i].split("\t");
+      finded_rumors.push(rumorinfo[4]);
+      count++;
     }
   }
   //ハイライトカラーの設定
@@ -165,6 +135,31 @@ function search(text,rumorlist){
     }else{
       initColorset();
     }
+  }
+  //出現流言の数をカウント→(トースト&バッジ)
+  if(count >= 1 && op_tst != "off"){
+    var str = "";
+    var rumors = finded_rumors.filter(
+      function (x, i, self){
+        return self.indexOf(x) === i;
+      }
+    );
+    for(var i=0; i<rumors.length; i++){
+      if(i<5){
+        str += "・"+rumors[i]+"<br>";
+      }else if(i==5){
+        str += "...など";
+      }
+    }
+    toast_on(i,str);
+    badge(i);
+  }
+  //バッジ生成のためのバックグラウンド送信
+  function badge(i){
+    chrome.runtime.sendMessage(
+      {type: "count_rumor",count:i},
+      function(res){}
+    );
   }
 }
 
@@ -209,4 +204,31 @@ function node_search(tag,rumorline){
   }else{
     return 1;
   }
+}
+
+
+//トーストの生成
+function toast_on(count,string){
+  $(document).ready(function() {
+    toastr.options = {
+      "closeButton": true,
+      "debug": false,
+      "newestOnTop": false,
+      "progressBar": false,
+      "positionClass": "toast-top-right",
+      "preventDuplicates": false,
+      "showDuration": "300",
+      "hideDuration": "1000",
+      "timeOut": "5000",
+      "extendedTimeOut": "1000",
+      "showEasing": "swing",
+      "hideEasing": "linear",
+      "showMethod": "fadeIn",
+      "hideMethod": "fadeOut"
+    }
+    Command:toastr["success"](string, count+"件の流言を検出")
+    $('#linkButton').click(function() {
+      toastr.success('click');
+    });
+  });
 }
