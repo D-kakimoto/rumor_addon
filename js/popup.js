@@ -15,7 +15,7 @@ chrome.storage.local.get(
 window.onload = function() {
   document.getElementById("pUpStatus").addEventListener("click",setting_update_status,false);
   document.getElementById("pClStatus").addEventListener("click",setting_cancel_status,false);
-  //document.getElementById("pUpOpts").addEventListener("click",move_options,false);
+  document.getElementById("pUpOpts").addEventListener("click",move_options,false);
   document.getElementById("reportstatus").addEventListener("click",report_post_status,false);
   document.getElementById("reportclstatus").addEventListener("click",report_cancel_status,false);
 }

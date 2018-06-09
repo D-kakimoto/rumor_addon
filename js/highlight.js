@@ -42,11 +42,6 @@ function search(text,rumorlist){
     toast_on(i,str);
   }
   badge(count);
-  //現在のタブのURLを取得
-  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-      var URL = tabs[0].url;
-      console.log(URL);
-  });
 }
 
 //木構造でなぞりながら見ていく
