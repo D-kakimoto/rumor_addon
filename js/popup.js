@@ -110,7 +110,7 @@ chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
     URL = tabs[0].url;
 });
 
-//「設定する」が押された時
+//「送信」が押された時
 function report_post_status(){
   var report_text = document.getElementById("report-text-contents").value;
   chrome.runtime.sendMessage(

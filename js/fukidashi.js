@@ -5,7 +5,6 @@ function syousai(num,tnum){
 	);
 }
 
-
 //Google検索クエリの生成
 function query_build(queries){
 	var query = queries.split("/");
@@ -15,7 +14,6 @@ function query_build(queries){
 	}
 	return url;
 }
-
 
 //吹き出し関数
 function fukidashi(){

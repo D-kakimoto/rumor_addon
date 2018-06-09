@@ -68,8 +68,15 @@ chrome.runtime.onMessage.addListener(
 							//console.log(data);
 						}
 			});
-		}
-	}
+		}if(request.type == "count_rumor"){
+      var count = request.count;
+    	if(count != "0"){
+        chrome.browserAction.setBadgeText({text:String(count)});
+      }else{
+        chrome.browserAction.setBadgeText({text:String("")});
+      }
+	   }
+   }
 );
 /****************************************/
 
@@ -79,7 +86,7 @@ function rumorget(name){
 		scriptCharset:
 			"utf-8",
 		url:
-			server+'get_rumors/rumors.txt',
+			server+'get_rumors/rumors_test.txt',
 		success:
 			function(result){
 				rumorlist = result;
@@ -102,17 +109,6 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     else
       sendResponse({});
 });
-
-//highlight.jsから受け取った検出流言数の情報を受け取り，バッジとして表示する
-chrome.runtime.onMessage.addListener(
-	function (request, sender, sendResponse) {
-		if(request.type == "rumorchecked"){
-			var rumorcount = request.count;
-			if(rumorcount == "0")chrome.browserAction.setBadgeText({text:""});
-			else chrome.browserAction.setBadgeText({text:String(rumorcount)});
-		}
-	}
-);
 
 /*
 //右クリック時の処理
