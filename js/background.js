@@ -44,6 +44,7 @@ chrome.runtime.onMessage.addListener(
 			rumorid = request.text;
 			teiseinum = request.text2;
 		}if(request.type == "log" || request.type == "report"){
+      console.log("mongoにアクセス");
 			//現在時刻を取得
 			var time = (new Date()).getTime();
 			//URLを取得
