@@ -71,6 +71,12 @@ chrome.runtime.onMessage.addListener(
 			});
 		}if(request.type == "count_rumor"){
       var count = request.count;
+      chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+        var set = localStorage.getItem(tabs[0].url);
+        if(!set){
+          localStorage.setItem(tabs[0].url, count);
+        }
+      });
     	if(count != "0"){
         chrome.browserAction.setBadgeText({text:String(count)});
       }else{
@@ -123,3 +129,16 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
     }
 });
 */
+
+// タブが切り替わった時にバッジを更新
+chrome.tabs.onActivated.addListener(function (tabId) {
+    chrome.tabs.query({"active": true}, function (tab) {
+      console.log(tab[0].url);
+      var count = localStorage.getItem(tab[0].url);
+      if(count && count != "0"){
+        chrome.browserAction.setBadgeText({text:String(count)});
+      }else{
+        chrome.browserAction.setBadgeText({text:String("")});
+      }
+    });
+});

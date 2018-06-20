@@ -1,3 +1,27 @@
+//onload処理
+window.onload = function() {
+  //→リスト項目
+  list_set();
+  //→設定項目
+  document.getElementById("pUpStatus").addEventListener("click",setting_update_status,false);
+  document.getElementById("pClStatus").addEventListener("click",setting_cancel_status,false);
+  //document.getElementById("pUpOpts").addEventListener("click",move_options,false);
+  document.getElementById("reportstatus").addEventListener("click",report_post_status,false);
+  document.getElementById("reportclstatus").addEventListener("click",report_cancel_status,false);
+}
+
+
+/****************リスト項目****************/
+function list_set(){
+  var rumorcount;
+  //現在のタブのURLから流言検出数を取得しリストを書き換え
+  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+    rumorcount = localStorage.getItem(tabs[0].url);
+    var div = document.getElementById("find_rumor_count");
+    div.innerHTML = "このページで"+rumorcount+"件の流言を検出";
+  });
+}
+
 /****************「設定」項目****************/
 //オプション(ユーザ設定)情報の取得
 chrome.storage.local.get(
@@ -10,15 +34,6 @@ chrome.storage.local.get(
     var evalop = value.evalop;
     set_radio_button(hlop,tstop,fukiop,colorop,evalop);
 });
-
-//ラジオボタンが押された時に実行
-window.onload = function() {
-  document.getElementById("pUpStatus").addEventListener("click",setting_update_status,false);
-  document.getElementById("pClStatus").addEventListener("click",setting_cancel_status,false);
-  document.getElementById("pUpOpts").addEventListener("click",move_options,false);
-  document.getElementById("reportstatus").addEventListener("click",report_post_status,false);
-  document.getElementById("reportclstatus").addEventListener("click",report_cancel_status,false);
-}
 
 //オプション情報をもとにラジオボタンにチェックを入れる
 function set_radio_button(hlop,tstop,fukiop,colorop,evalop){
