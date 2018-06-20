@@ -75,7 +75,7 @@ function fukidashi(){
 			var correction = $(this).attr("data-correction");
 			var search_query = $(this).attr("data-query");
 			var web_search_link = query_build(search_query);
-			var syousailink = "http://mednlp.jp/~miyabe/rumorCloud/detail_dema.cgi2?m=&r="+num+"&n="+tnum;
+			var syousailink = "http://mednlp.jp/~miyabe/rumorCloud/detail_dema2.cgi?m=&r="+num+"&n="+tnum;
 			syousai(num,tnum);
 			//吹き出し表示
 			$(this).showBalloon({
