@@ -10,6 +10,37 @@ body{
 	font-size: 20px;
 }
 
+/****検出流言リスト*****/
+.list-parent{
+  margin: 8px auto;
+	height: auto;
+  padding: 0px 8px 8px 8px;
+  background-color: #f5f5f5;
+  border: 1px solid #bcbcbc;
+  border-radius: 8px;
+}
+.subtitle-list{
+	border: #dc143c solid;
+	border-width: 0 0 0 5px;
+	font-weight: bold;
+	margin: 11px 0 3px 0;
+	padding: 0 0 0 5px;
+	display: block;
+	color: red;
+}
+.contents-list{
+	max-height: 100px;
+	overflow: scroll;
+}
+
+.list-parent .ttl{
+	border: #ff4500 solid;
+	border-width: 0 0 0 5px;
+	margin: 11px 0 3px 0;
+	padding: 0 0 0 5px;
+}
+/*********************************************/
+
 /*****「設定」ボタン(クリックで広がる)*****/
 .setting-parent{
   margin: 8px auto;
@@ -136,21 +167,21 @@ body{
 	float: right;
 	margin-right: 10px;
 	font-weight: bold;
-	content: "ー";
+	content: "＋";
 }
 .detail-parent #label-detail {
     display: none;
 }
 
 .detail-parent #label-detail:checked + label + div {
-	height: 0;
-	overflow-y: hidden;
-	transition: 0.8s;/*ゆっくり表示させる*/
-	opacity: 0;
-}
-.detail-parent .contents-detail {
 	height: auto;
 	opacity: 1;
+}
+.detail-parent .contents-detail {
+	height: 0;
+	opacity: 0;
+	overflow-y: hidden;
+	transition: 0.8s;/*ゆっくり表示させる*/
 }
 
 .contents-detail{
@@ -160,7 +191,7 @@ body{
 	margin: 5px 0 0 0;
 }
 .detail-parent input:checked + label .icon::after {
-	content: "＋";
+	content: "ー";
 }
 /*********************************************/
 
