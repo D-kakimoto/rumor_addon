@@ -128,11 +128,13 @@ chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
 //「送信」が押された時
 function report_post_status(){
   var report_text = document.getElementById("report-text-contents").value;
-  chrome.runtime.sendMessage(
-    {type: "report",name:"report",URL:URL,text:report_text},
-    function (response){}
-  );
-  window.close();
+  if(report_text){
+    chrome.runtime.sendMessage(
+      {type: "report",name:"report",URL:URL,text:report_text},
+      function (response){}
+    );
+    window.close();
+  }
 }
 
 //「キャンセル」が押された時
