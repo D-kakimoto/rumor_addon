@@ -20,6 +20,8 @@ window.addEventListener("beforeunload", function() {
 			function (response){}
 		);
 	}
+	//localstorage解放
+  window.localStorage.removeItem(URL);
 }, false);
 
 //各操作時
