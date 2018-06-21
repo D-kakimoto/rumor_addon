@@ -13,12 +13,28 @@ window.onload = function() {
 
 /****************リスト項目****************/
 function list_set(){
-  var rumorcount;
   //現在のタブのURLから流言検出数を取得しリストを書き換え
   chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-    rumorcount = localStorage.getItem(tabs[0].url);
-    var div = document.getElementById("find_rumor_count");
-    div.innerHTML = "このページで"+rumorcount+"件の流言を検出";
+    var data = JSON.parse(localStorage.getItem(tabs[0].url));
+    var rumorcount;
+    if(!data){
+      rumorcount = 0;
+    }else{
+      rumorcount = data.count;
+    }
+    var div_count = document.getElementById("find_rumor_count");
+    if(rumorcount > 0){
+      div_count.innerHTML = "このページで"+rumorcount+"件の流言を検出";
+      var div_list = document.getElementById("find_rumor_content");
+      for(var i=0;i<rumorcount;i++){
+        var insert_div = document.createElement('div');
+        insert_div.classList.add('ttl');
+        insert_div.textContent = data[i];
+        div_list.appendChild(insert_div);
+      }
+    }else{
+      div_count.innerHTML = "このページでは流言は検出されませんでした"
+    }
   });
 }
 

@@ -25,23 +25,29 @@ function search(text,rumorlist){
     }
   }
   //出現流言の数をカウント→トースト用
-  if(count >= 1 && op_tst != "off"){
+  if(count >= 1){
     var str = "";
+    var list_str = [];
     var rumors = finded_rumors.filter(
       function (x, i, self){
         return self.indexOf(x) === i;
       }
     );
     for(var i=0; i<rumors.length; i++){
+      list_str.push(rumors[i]);
       if(i<5){
         str += "・"+rumors[i]+"<br>";
       }else if(i==5){
         str += "...など";
       }
     }
-    toast_on(i,str);
+    if(op_tst != "off"){
+      toast_on(i,str);
+    }
+    badge(i,list_str);
+  }else{
+    badge(0);
   }
-  badge(count);
 }
 
 //木構造でなぞりながら見ていく
@@ -121,10 +127,10 @@ function toast_on(count,string){
   });
 }
 
-//バッジ生成のためのバックグラウンド送信
-function badge(i){
+//バッジ生成とポップアップリスト表示のためのバックグラウンド送信
+function badge(i,str){
   chrome.runtime.sendMessage(
-    {type: "count_rumor",count:i},
+    {type: "count_rumor", count:i, list:str},
     function(res){}
   );
 }

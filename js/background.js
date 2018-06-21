@@ -71,11 +71,17 @@ chrome.runtime.onMessage.addListener(
 			});
 		}if(request.type == "count_rumor"){
       var count = request.count;
-      chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-        var set = localStorage.getItem(tabs[0].url);
-        if(!set){
-          localStorage.setItem(tabs[0].url, count);
+      var datalist = {
+        count: count,
+      };
+      if(request.list){
+        var list = request.list;
+        for(var i=0;i<list.length;i++){
+          datalist[i] = list[i];
         }
+      }
+      chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+        localStorage.setItem(tabs[0].url, JSON.stringify(datalist));
       });
     	if(count != "0"){
         chrome.browserAction.setBadgeText({text:String(count)});
@@ -132,13 +138,17 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
 
 // タブが切り替わった時にバッジを更新
 chrome.tabs.onActivated.addListener(function (tabId) {
-    chrome.tabs.query({"active": true}, function (tab) {
-      console.log(tab[0].url);
-      var count = localStorage.getItem(tab[0].url);
-      if(count && count != "0"){
-        chrome.browserAction.setBadgeText({text:String(count)});
+  chrome.tabs.query({"active": true}, function (tab) {
+    var count;
+    var data = JSON.parse(localStorage.getItem(tab[0].url));
+    if(data){
+      if(data.count != "0"){
+        chrome.browserAction.setBadgeText({text:String(data.count)});
       }else{
         chrome.browserAction.setBadgeText({text:String("")});
       }
-    });
+    }else{
+      chrome.browserAction.setBadgeText({text:String("")});
+    }
+  });
 });
