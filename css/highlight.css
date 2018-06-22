@@ -2,7 +2,7 @@
 	background: red;
 }
 
-.blink {
+.blink-highlight {
   animation: blinkAnime 0.5s infinite alternate;
 }
 @keyframes blinkAnime{
@@ -117,10 +117,6 @@
 	color:#111111;
 	font-weight: normal;
 	text-align: center;
-}
-
-a.rumorcloud, a.web_search{
-	animation: blinkAnime 1s infinite alternate;
 }
 
 .fukidashicontents:hover > .teisei_parent{
