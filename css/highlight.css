@@ -2,9 +2,12 @@
 	background: red;
 }
 
+.blink {
+  animation: blinkAnime 0.5s infinite alternate;
+}
 @keyframes blinkAnime{
-	0% { color: #111111 }
-	100% { color: #111111}
+	0% { background-color: white }
+ 	100% {}
 }
 
 @keyframes fukidashi_show{

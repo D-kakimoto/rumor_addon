@@ -2,6 +2,7 @@
 window.onload = function() {
   //→リスト項目
   list_set();
+  document.getElementById("find_rumor_content").addEventListener("click",sendToContents,false);
   //→設定項目
   document.getElementById("pUpStatus").addEventListener("click",setting_update_status,false);
   document.getElementById("pClStatus").addEventListener("click",setting_cancel_status,false);
@@ -36,6 +37,40 @@ function list_set(){
       div_count.innerHTML = "このページでは流言は検出されませんでした"
     }
   });
+}
+
+//sendToContents("pop_click","学校教育では自虐史観を教わった");
+//参照したい流言情報をcontentscriptに送信
+function sendToContents(e){
+  var rumor = e.target.innerHTML;
+  var current_click = localStorage.getItem("current_click");
+  if(current_click && current_click == rumor){
+    var count = localStorage.getItem("current_click_count");
+    count++;
+    localStorage.setItem("current_click_count",count);
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.tabs.sendMessage(
+        tabs[0].id,
+        {type:"pop_click_same", rumor:rumor ,count:count},
+        function (response) {
+          console.log(response);
+          if(response == "break"){
+            localStorage.setItem("current_click_count",0);
+          }
+      });
+    });
+  }else{
+    var old_rumor = localStorage.getItem("current_click");
+    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+      chrome.tabs.sendMessage(
+        tabs[0].id,
+        {type:"pop_click_diff", rumor:rumor, old_rumor:old_rumor},
+        function (response) {
+      });
+    });
+    localStorage.setItem("current_click",rumor);
+    localStorage.setItem("current_click_count",0);
+  }
 }
 
 /****************「設定」項目****************/

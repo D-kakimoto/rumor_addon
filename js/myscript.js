@@ -69,3 +69,33 @@ function initGetRumor(){
 		window.setTimeout(initGetRumor,30);
 	}
 }
+
+//ポップアップ内流言検出リストがクリックされたらハイライト箇所まで飛ぶ
+chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
+		if(message.type == "pop_click_same"){
+			var elem_parent = $("[data-rumortext='"+message.rumor+"']");
+			var old_elem = elem_parent.eq(message.count-1);
+			old_elem.removeClass('blink');
+			if(message.count < elem_parent.length){
+				var elem = elem_parent.eq(message.count);
+				$("html,body").animate({scrollTop:elem.offset().top});
+				elem.addClass('blink');
+				sendResponse("continue");
+			}else{
+				var elem = elem_parent.eq(0);
+				$("html,body").animate({scrollTop:elem.offset().top});
+				elem.addClass('blink');
+				sendResponse("break");
+			}
+		}else if(message.type == "pop_click_diff"){
+			var old_rumor = message.old_rumor;
+			var old_elem_parent = $("[data-rumortext='"+old_rumor+"']");
+			old_elem_parent.removeClass('blink');
+			var elem_parent = $("[data-rumortext='"+message.rumor+"']");
+			var elem = elem_parent.eq(0);
+			$("html,body").animate({scrollTop:elem.offset().top});
+			elem.addClass('blink');
+		}else{
+			console.log("閉じます");
+		}
+});

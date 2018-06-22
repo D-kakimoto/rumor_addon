@@ -88,7 +88,7 @@ chrome.runtime.onMessage.addListener(
       }else{
         chrome.browserAction.setBadgeText({text:String("")});
       }
-	   }
+    }
    }
 );
 /****************************************/
@@ -141,6 +141,7 @@ chrome.tabs.onActivated.addListener(function (tabId) {
   chrome.tabs.query({"active": true}, function (tab) {
     var count;
     var data = JSON.parse(localStorage.getItem(tab[0].url));
+    console.log(data);
     if(data){
       if(data.count != "0"){
         chrome.browserAction.setBadgeText({text:String(data.count)});

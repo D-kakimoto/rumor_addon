@@ -28,23 +28,29 @@ function search(text,rumorlist){
   if(count >= 1){
     var str = "";
     var list_str = [];
+    var excount = 0;
     var rumors = finded_rumors.filter(
       function (x, i, self){
         return self.indexOf(x) === i;
       }
     );
     for(var i=0; i<rumors.length; i++){
-      list_str.push(rumors[i]);
-      if(i<5){
-        str += "・"+rumors[i]+"<br>";
-      }else if(i==5){
-        str += "...など";
+      //検出されたがハイライトされていないものは類似流言としてカウント．(ハイライトの重複削除)
+      var elem = $("[data-rumortext='"+rumors[i]+"']");
+      if(elem.length>0){
+        excount++;
+        list_str.push(rumors[i]);
+        if(i<5){
+          str += "・"+rumors[i]+"<br>";
+        }else if(i==5){
+          str += "...など";
+        }
       }
     }
     if(op_tst != "off"){
-      toast_on(i,str);
+      toast_on(excount,str);
     }
-    badge(i,list_str);
+    badge(excount,list_str);
   }else{
     badge(0);
   }
@@ -91,6 +97,7 @@ function node_search(tag,rumorline){
       var result = node_search(node.eq(i),rumorline);
       if(result == 1){
         $(node.eq(i)).removeClass("rumorhighlight");
+        $(node.eq(i)).attr('data-rumortext', "null");
       }
     }
   }
