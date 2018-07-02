@@ -51,8 +51,9 @@ function search(text,rumorlist){
       toast_on(excount,str);
     }
     badge(excount,list_str);
+  }else{
+    badge(0);
   }
-  badge(0);
 }
 
 //木構造でなぞりながら見ていく
