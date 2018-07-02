@@ -10,6 +10,34 @@ body{
 	font-size: 20px;
 }
 
+.title a{
+	position: relative;
+	display: inline-block;
+	transition: .3s;
+	text-decoration: none;
+	color: black;
+}
+
+.title a::after {
+	color: red;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  content: '';
+  width: 0;
+  height: 1px;
+  background-color: #00ced1;
+  transition: .3s;
+}
+
+.title a:hover::after {
+  width: 100%;
+}
+
+.title a:hover{
+	color: #00ced1;
+}
+
 /****検出流言リスト*****/
 .list-parent{
   margin: 8px auto;
