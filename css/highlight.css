@@ -136,4 +136,9 @@
   clear: both;
 }
 
+#fukidashicontents_id a{
+	color:black;
+	font-family: Verdana, Helvetica, sans-serif;
+}
+
 /***プルダウン(訂正情報の表示)***/
