@@ -40,14 +40,14 @@ function search(text,rumorlist){
       if(elem.length>0){
         excount++;
         list_str.push(rumors[i]);
-        if(i<5){
+        if(excount<5){
           str += "・"+rumors[i]+"<br>";
-        }else if(i==5){
+        }else if(excount==5){
           str += "...など";
         }
       }
     }
-    if(op_tst != "off"){
+    if(count>=1 && op_tst != "off"){
       toast_on(excount,str);
     }
     badge(excount,list_str);

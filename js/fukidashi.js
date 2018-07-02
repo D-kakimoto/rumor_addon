@@ -111,6 +111,7 @@ function fukidashi(){
 				offsetX: fuki_over_x,
 				offsetY: fuki_over_y,
 			});
+			$(this).removeClass('blink-highlight');
 			eval_post("hl_on",URL,rumortext);
 
 			//吹き出し上にカーソルがある
