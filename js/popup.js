@@ -1,5 +1,6 @@
 //onload処理
 window.onload = function() {
+  document.getElementById("addonIntro").addEventListener("click",move_intro,false);
   //→リスト項目
   list_set();
   document.getElementById("find_rumor_content").addEventListener("click",sendToContents,false);
@@ -9,6 +10,14 @@ window.onload = function() {
   //document.getElementById("pUpOpts").addEventListener("click",move_options,false);
   document.getElementById("reportstatus").addEventListener("click",report_post_status,false);
   document.getElementById("reportclstatus").addEventListener("click",report_cancel_status,false);
+}
+
+/****************アドオン紹介ページへのリンク****************/
+//「RumorFinder」が押された時
+function move_intro(){
+  window.open(
+    "http://www2.yoslab.net/~kakimoto/addon_intro/index.html"
+  );
 }
 
 
@@ -39,39 +48,47 @@ function list_set(){
   });
 }
 
-//sendToContents("pop_click","学校教育では自虐史観を教わった");
-//参照したい流言情報をcontentscriptに送信
+//検出流言の参照(→contentscript)
 function sendToContents(e){
   var rumor = e.target.innerHTML;
   var current_click = localStorage.getItem("current_click");
+  //同じ流言がクリックされた
   if(current_click && current_click == rumor){
     var count = localStorage.getItem("current_click_count");
     count++;
     localStorage.setItem("current_click_count",count);
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      chrome.tabs.sendMessage(
-        tabs[0].id,
-        {type:"pop_click_same", rumor:rumor ,count:count},
-        function (response) {
-          console.log(response);
-          if(response == "break"){
-            localStorage.setItem("current_click_count",0);
+    chrome.tabs.query({ active: true, currentWindow: true },
+      function (tabs) {
+        chrome.tabs.sendMessage(
+          tabs[0].id,
+          {type:"pop_click_same", rumor:rumor ,count:count},
+          function (response) {
+            console.log(response);
+            if(response == "break"){
+              localStorage.setItem("current_click_count",0);
+            }
           }
-      });
-    });
+        );
+      }
+    );
+  //別の流言がクリックされた
   }else{
     var old_rumor = localStorage.getItem("current_click");
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      chrome.tabs.sendMessage(
-        tabs[0].id,
-        {type:"pop_click_diff", rumor:rumor, old_rumor:old_rumor},
-        function (response) {
-      });
-    });
+    chrome.tabs.query({ active: true, currentWindow: true },
+      function (tabs) {
+        chrome.tabs.sendMessage(
+          tabs[0].id,
+          {type:"pop_click_diff", rumor:rumor, old_rumor:old_rumor},
+          function (response) {
+          }
+        );
+      }
+    );
     localStorage.setItem("current_click",rumor);
     localStorage.setItem("current_click_count",0);
   }
 }
+
 
 /****************「設定」項目****************/
 //オプション(ユーザ設定)情報の取得
