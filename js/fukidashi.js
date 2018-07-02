@@ -1,3 +1,6 @@
+//ちらつき防止用
+var delete_flag = 0;
+
 //詳細の取得
 function syousai(num,tnum){
 	chrome.runtime.sendMessage(
@@ -23,6 +26,7 @@ function fukidashi(){
 	$('.rumorhighlight').on(
 		"mouseenter",
 		function () {
+			delete_flag = 0;
 			//ウインドウサイズの取得
 			var window_width = $(window).width();
 			var window_height = $(window).height();
@@ -126,12 +130,12 @@ function fukidashi(){
 			$('.fukidashicontents').on(
 				"mouseleave",
 				function(){
+					fuki_on_flag = 0;
 					setTimeout(
 						function(){
 							$('.rumorhighlight').hideBalloon();
 							eval_post("fuki_out",URL,rumortext);
-							fuki_on_flag = 0;
-						},1000
+						},1500
 					)
 				}
 			);
@@ -142,13 +146,14 @@ function fukidashi(){
 		"mouseleave",
 		function(){
 			var rumortext = $(this).data('rumortext');
+			delete_flag = 1;
 			setTimeout(
 				function(){
-					if(fuki_on_flag == 0){
+					if(fuki_on_flag == 0 && delete_flag == 1){
 						$('.rumorhighlight').hideBalloon();
 						eval_post("hl_out",URL,rumortext);
 					}
-				},1000
+				},1500
 			)
 		}
 	);
