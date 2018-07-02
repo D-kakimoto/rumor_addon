@@ -47,6 +47,7 @@ body{
   border: 1px solid #bcbcbc;
   border-radius: 8px;
 }
+
 .subtitle-list{
 	border: #dc143c solid;
 	border-width: 0 0 0 5px;
@@ -54,7 +55,6 @@ body{
 	margin: 11px 0 3px 0;
 	padding: 0 0 0 5px;
 	display: block;
-	color: red;
 }
 .contents-list{
 	max-height: 100px;

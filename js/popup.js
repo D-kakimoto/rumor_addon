@@ -35,6 +35,7 @@ function list_set(){
     var div_count = document.getElementById("find_rumor_count");
     if(rumorcount > 0){
       div_count.innerHTML = "このページで"+rumorcount+"件の流言を検出";
+      $(div_count).css("color", "red");
       var div_list = document.getElementById("find_rumor_content");
       for(var i=0;i<rumorcount;i++){
         var insert_div = document.createElement('div');
