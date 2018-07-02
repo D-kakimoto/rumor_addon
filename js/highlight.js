@@ -29,7 +29,6 @@ function search(text,rumorlist){
     var str = "";
     var list_str = [];
     var excount = 0;
-    var break_flag = 0;
     var rumors = finded_rumors.filter(
       function (x, i, self){
         return self.indexOf(x) === i;
@@ -46,17 +45,12 @@ function search(text,rumorlist){
         }else if(excount==5){
           str += "...など";
         }
-      }else{
-        break_flag = 1;
-        break;
       }
     }
-    if(count>=1 && op_tst != "off" && break_flag==0){
+    if(count>=1 && op_tst != "off"){
       toast_on(excount,str);
     }
     badge(excount,list_str);
-  }else{
-    badge(0);
   }
 }
 
@@ -115,6 +109,7 @@ function node_search(tag,rumorline){
 
 //トーストの生成
 function toast_on(count,string){
+  if(count==0){return 0;}
   $(document).ready(function() {
     toastr.options = {
       "closeButton": true,
@@ -141,6 +136,7 @@ function toast_on(count,string){
 
 //バッジ生成とポップアップリスト表示のためのバックグラウンド送信
 function badge(i,str){
+  if(i==0){return 0;}
   chrome.runtime.sendMessage(
     {type: "count_rumor", count:i, list:str},
     function(res){}
