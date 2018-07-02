@@ -29,6 +29,7 @@ function search(text,rumorlist){
     var str = "";
     var list_str = [];
     var excount = 0;
+    var break_flag = 0;
     var rumors = finded_rumors.filter(
       function (x, i, self){
         return self.indexOf(x) === i;
@@ -45,9 +46,12 @@ function search(text,rumorlist){
         }else if(excount==5){
           str += "...など";
         }
+      }else{
+        break_flag = 1;
+        break;
       }
     }
-    if(count>=1 && op_tst != "off"){
+    if(count>=1 && op_tst != "off" && break_flag==0){
       toast_on(excount,str);
     }
     badge(excount,list_str);
@@ -82,18 +86,19 @@ function node_search(tag,rumorline){
     }
     if(res){
       flag++;
-      //var LDres = levenshteinDistance(text,rumortext);
-      //if(LDres <= 0.7){
+      var LDres = levenshteinDistance(text,rumortext);
       var exs_check = $(node).attr("data-rumortext");
+      var node_height = $(node).innerHeight();
       if(!exs_check){
-        $(node.eq(i)).addClass("rumorhighlight");
-        $(node.eq(i)).attr('data-rumortext', rumortext);
-        $(node.eq(i)).attr('data-rumornum', rumornum);
-        $(node.eq(i)).attr('data-teiseinum', correction_cnt);
-        $(node.eq(i)).attr('data-correction', correction);
-        $(node.eq(i)).attr('data-query', search_query);
+        if(LDres <= 0.92){
+          $(node.eq(i)).addClass("rumorhighlight");
+          $(node.eq(i)).attr('data-rumortext', rumortext);
+          $(node.eq(i)).attr('data-rumornum', rumornum);
+          $(node.eq(i)).attr('data-teiseinum', correction_cnt);
+          $(node.eq(i)).attr('data-correction', correction);
+          $(node.eq(i)).attr('data-query', search_query);
+        }
       }
-      //}
       var result = node_search(node.eq(i),rumorline);
       if(result == 1){
         $(node.eq(i)).removeClass("rumorhighlight");
