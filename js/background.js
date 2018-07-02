@@ -88,6 +88,8 @@ chrome.runtime.onMessage.addListener(
       }else{
         chrome.browserAction.setBadgeText({text:String("")});
       }
+    }if(request.type == "set_icon"){
+      set_icon();
     }
    }
 );
@@ -139,6 +141,7 @@ chrome.contextMenus.onClicked.addListener(function(info, tab) {
 // タブが切り替わった時にバッジを更新
 chrome.tabs.onActivated.addListener(function (tabId) {
   chrome.tabs.query({"active": true}, function (tab) {
+    set_icon();
     var count;
     var data = JSON.parse(localStorage.getItem(tab[0].url));
     if(data){
@@ -152,3 +155,16 @@ chrome.tabs.onActivated.addListener(function (tabId) {
     }
   });
 });
+
+
+//アイコンセット関数
+function set_icon(){
+  chrome.storage.local.get(
+    "evalop",function(value){
+      if(value.evalop == "on"){
+        chrome.browserAction.setIcon({path:"../img/icon_green.png"});
+      }else{
+        chrome.browserAction.setIcon({path:"../img/icon128.png"})
+      }
+  });
+}

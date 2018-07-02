@@ -29,6 +29,13 @@ chrome.storage.local.get(
 });
 
 /*****ページ更新時処理******/
+//アイコンセット命令
+chrome.runtime.sendMessage(
+	{type: "set_icon"},
+	function (response){
+	}
+);
+
 //取得命令のみ(レスポンスなし)
 chrome.runtime.sendMessage(
 	{type: "rumorget"},
