@@ -22,6 +22,10 @@
 			"http://*/*",
 			"https://*/*"
 		],
+		"exclude_matches": [
+			"http://www2.yoslab.net/~kakimoto/addon_intro/",
+			"http://www2.yoslab.net/~kakimoto/addon_intro/index.html"
+		],
 		"js":[
 			"js/jquery-3.0.0.min.js",
 			"js/jquery.balloon.js",
