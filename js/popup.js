@@ -173,6 +173,9 @@ function setting_update_status(){
       console.log("設定を保存しました");
     }
   );
+  if(value_5 == "on"){
+    alert("利用ログの送信にご協力いただきありがとうございます");
+  }
   window.close();
 }
 //「キャンセル」が押された時
