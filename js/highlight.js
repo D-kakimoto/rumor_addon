@@ -138,11 +138,13 @@ function toast_on(count,string){
 
 //バッジ生成とポップアップリスト表示のためのバックグラウンド送信
 function badge(i,str){
-  eval_post("find",URL,i);
   chrome.runtime.sendMessage(
     {type: "count_rumor", count:i, list:str},
     function(res){}
   );
+  if(i>0){
+    eval_post("find",URL,str);
+  }
 }
 
 //htmlタグの除去

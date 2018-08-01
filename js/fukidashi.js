@@ -124,6 +124,21 @@ function fukidashi(){
 				function(){
 					fuki_on_flag = 1;
 					eval_post("fuki_on",URL,rumortext);
+					//web検索が押された
+					$('a.web_search').on(
+						"click",
+						function(){
+							eval_post("search",URL,rumortext);
+						}
+					);
+					//詳細リンクが押された
+					$('a.rumorcloud').on(
+						"click",
+						function(){
+							console.log("test");
+							eval_post("dlink",URL,rumortext);
+						}
+					);
 				}
 			);
 			//吹き出し上からカーソルが外れた
