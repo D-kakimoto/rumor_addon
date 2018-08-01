@@ -4,10 +4,7 @@ window.onload = function() {
   //→リスト項目
   list_set();
   document.getElementById("find_rumor_content").addEventListener("click",sendToContents,false);
-  //→設定項目
-  document.getElementById("pUpStatus").addEventListener("click",setting_update_status,false);
-  document.getElementById("pClStatus").addEventListener("click",setting_cancel_status,false);
-  //document.getElementById("pUpOpts").addEventListener("click",move_options,false);
+  //→報告項目
   document.getElementById("reportstatus").addEventListener("click",report_post_status,false);
   document.getElementById("reportclstatus").addEventListener("click",report_cancel_status,false);
 }
@@ -44,7 +41,15 @@ function list_set(){
         div_list.appendChild(insert_div);
       }
     }else{
-      div_count.innerHTML = "このページでは流言は検出されませんでした"
+      div_count.innerHTML = "このページでは流言は検出されませんでした";
+      $(".subtitle-list").css({
+        "border": "#1e90ff solid",
+        "border-width": "0 0 0 5px",
+        "font-weight": "bold",
+        "margin": "11px 0 3px 0",
+        "padding": "0 0 0 5px",
+        "display": "block"
+      });
     }
   });
 }
@@ -148,44 +153,38 @@ function set_radio_button(hlop,tstop,fukiop,colorop,evalop){
   }else{
     elements_eval[1].checked = true;
   }
+  op_monitor();
 }
 
-//「設定する」が押された時
-function setting_update_status(){
-  var element_1 = document.getElementById("hl-op") ;
-  var radioNodeList_1 = element_1.highlightonoff;
-  var value_1 = radioNodeList_1.value;
-  var element_2 = document.getElementById("tst-op") ;
-  var radioNodeList_2 = element_2.toastonoff;
-  var value_2 = radioNodeList_2.value;
-  var element_3 = document.getElementById("fuki-op") ;
-  var radioNodeList_3 = element_3.fukionoff;
-  var value_3 = radioNodeList_3.value;
-  var element_4 = document.getElementById("color-op") ;
-  var radioNodeList_4 = element_4.hlcolor;
-  var value_4 = radioNodeList_4.value;
-  var element_5 = document.getElementById("eval-op") ;
-  var radioNodeList_5 = element_5.evalonoff;
-  var value_5 = radioNodeList_5.value;
+//オプションの変更を監視
+function op_monitor(){
+  $("form").change(function(e){
+    var target = $(e.target);
+    if(target.attr('name')=="evalonoff"){
+      set_op("evalop",target.val());
+      if(target.val()=="on"){
+        alert("ログ送信にご協力いただき，ありがとうございます．");
+      }
+    }else if(target.attr('name')=="highlightonoff"){
+      set_op("hlop",target.val());
+    }else if(target.attr('name')=="toastonoff"){
+      set_op("tstop",target.val());
+    }else if(target.attr('name')=="fukionoff"){
+      set_op("fukiop",target.val());
+    }else if(target.attr('name')=="hlcolor"){
+      set_op("colorop",target.val());
+    }
+  });
+}
+
+//ラジオボタンに変更があればchormestorageへ保存
+function set_op(key, value){
+  console.log(key, value);
   chrome.storage.local.set(
-    {'hlop': value_1,'tstop': value_2,'fukiop': value_3,'colorop':value_4,'evalop':value_5},
+    {[key]: value},
     function (){
       console.log("設定を保存しました");
     }
-  );
-  if(value_5 == "on"){
-    alert("利用ログの送信にご協力いただきありがとうございます");
-  }
-  window.close();
-}
-//「キャンセル」が押された時
-function setting_cancel_status(){
-  window.close();
-}
-//「詳細設定」が押された時
-function move_options(){
-  window.open(
-    chrome.extension.getURL("../html/options.html")
   );
 }
 
