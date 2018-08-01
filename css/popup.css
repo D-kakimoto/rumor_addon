@@ -86,6 +86,16 @@ body{
 	padding: 0 0 0 5px;
 	display: block;
 }
+.blink-log {
+	color: #fff;
+  background-color:red;
+	height: auto;
+  border-radius: 6px;
+	padding: 3px;
+	font-size: 10px;
+	margin-left: 10px;
+}
+
 .setting-parent label {
 		width: 100%;
     font-weight: bold;

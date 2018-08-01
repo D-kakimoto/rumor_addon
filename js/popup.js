@@ -152,6 +152,8 @@ function set_radio_button(hlop,tstop,fukiop,colorop,evalop){
     elements_eval[0].checked = true;
   }else{
     elements_eval[1].checked = true;
+    $('#log_please').text("ログの送信にご協力ください");
+    $('#log_please').addClass("blink-log");
   }
   op_monitor();
 }
@@ -164,7 +166,18 @@ function op_monitor(){
       set_op("evalop",target.val());
       if(target.val()=="on"){
         alert("ログ送信にご協力いただき，ありがとうございます．");
+        $('#log_please').text("");
+        $('#log_please').removeClass("blink-log");
+      }else{
+        $('#log_please').text("ログの送信にご協力ください");
+        $('#log_please').addClass("blink-log");
       }
+      //アイコンセット命令
+      chrome.runtime.sendMessage(
+      	{type: "set_icon"},
+      	function (response){
+      	}
+      );
     }else if(target.attr('name')=="highlightonoff"){
       set_op("hlop",target.val());
     }else if(target.attr('name')=="toastonoff"){
