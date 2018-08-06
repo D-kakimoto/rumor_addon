@@ -1,6 +1,7 @@
 //onload処理
 window.onload = function() {
   document.getElementById("addonIntro").addEventListener("click",move_intro,false);
+  questionnaire_set();
   //→リスト項目
   list_set();
   document.getElementById("find_rumor_content").addEventListener("click",sendToContents,false);
@@ -15,6 +16,36 @@ function move_intro(){
   window.open(
     "http://www2.yoslab.net/~kakimoto/addon_intro/index.html"
   );
+}
+
+/****************アンケートページへのリンクセット****************/
+function questionnaire_set(){
+  var q_url = "https://docs.google.com/forms/d/e/1FAIpQLSe-nGlaWkq4dI-BciweT9AazyB_hC04egn558gVj92cXLz9XA/viewform?entry.44401136=";
+  var q_user_id;
+  chrome.storage.sync.get('userid', function(items){
+  	q_user_id = items.userid;
+    if(q_url){
+      chrome.storage.local.get('questionnaire', function(items){
+        if(items.questionnaire == "undefined"){
+          document.getElementById("questionnaire").addEventListener("click",move_questionnaire,false);
+          $('#questionnaire').css({
+            "color":"red"
+          });
+        }else{
+          $('#questionnaire').css({
+            "color":"gray"
+          });
+        }
+      });
+    }
+  });
+  //ポップアップにリンクを生成
+  function move_questionnaire(){
+    window.open(
+      q_url + q_user_id
+    );
+    set_op("questionnaire","done");
+  }
 }
 
 

@@ -1,0 +1,3 @@
+input[aria-label="ユーザID"]{
+  pointer-events : none;
+}
