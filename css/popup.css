@@ -10,7 +10,7 @@ body{
 	font-size: 20px;
 }
 
-.title a{
+.title #addonIntro{
 	position: relative;
 	display: inline-block;
 	transition: .3s;
@@ -18,7 +18,7 @@ body{
 	color: black;
 }
 
-.title a::after {
+.title #addonIntro::after {
 	color: red;
   position: absolute;
   bottom: 0;
@@ -30,12 +30,16 @@ body{
   transition: .3s;
 }
 
-.title a:hover::after {
+.title #addonIntro:hover::after {
   width: 100%;
 }
 
-.title a:hover{
+.title #addonIntro:hover{
 	color: #00ced1;
+}
+
+.title #questionnaire{
+	float: right;
 }
 
 /****検出流言リスト*****/
