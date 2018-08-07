@@ -26,14 +26,15 @@ function questionnaire_set(){
   	q_user_id = items.userid;
     if(q_url){
       chrome.storage.local.get('questionnaire', function(items){
+        document.getElementById("questionnaire").addEventListener("click",move_questionnaire,false);
         if(items.questionnaire == "undefined"){
-          document.getElementById("questionnaire").addEventListener("click",move_questionnaire,false);
           $('#questionnaire').css({
-            "color":"red"
+            "color":"gray",
           });
         }else{
           $('#questionnaire').css({
-            "color":"gray"
+            "color":"gray",
+            "animation":"none"
           });
         }
       });

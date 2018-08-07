@@ -40,16 +40,24 @@ body{
 
 .title #questionnaire{
 	float: right;
+  animation: fluffy1 0.25s ease infinite;
+}
+
+@keyframes fluffy1 {
+  0% { transform:translateY(-3px) }
+	50% { transform:translateY(0px) }
+  100% { transform:translateY(-3px) }
 }
 
 /****検出流言リスト*****/
 .list-parent{
-  margin: 8px auto;
+  margin: 8px auto 0px;
 	height: auto;
   padding: 0px 8px 8px 8px;
-  background-color: #f5f5f5;
-  border: 1px solid #bcbcbc;
-  border-radius: 8px;
+  background-color: #fafafa;
+  border-top: 1px solid #bcbcbc;
+	border-left: 1px solid #bcbcbc;
+	border-right: 1px solid #bcbcbc;
 }
 
 .subtitle-list{
@@ -75,12 +83,13 @@ body{
 
 /*****「設定」ボタン(クリックで広がる)*****/
 .setting-parent{
-  margin: 8px auto;
+  margin: 0px auto;
 	height: auto;
   padding: 0px 8px 8px 8px;
-  background-color: #f5f5f5;
-  border: 1px solid #bcbcbc;
-  border-radius: 8px;
+  background-color: #fafafa;
+	border-top: 1px solid #bcbcbc;
+	border-left: 1px solid #bcbcbc;
+	border-right: 1px solid #bcbcbc;
 }
 .subtitle-setting{
 	border: #1e90ff solid;
@@ -133,12 +142,13 @@ body{
 
 /****「不具合を報告」ボタン(クリックで広がる)*****/
 .report-parent{
-  margin: 8px auto;
+  margin: 0px auto;
 	height: auto;
   padding: 0px 8px 8px 8px;
-  background-color: #f5f5f5;
-  border: 1px solid #bcbcbc;
-  border-radius: 8px;
+  background-color: #fafafa;
+	border-top: 1px solid #bcbcbc;
+	border-left: 1px solid #bcbcbc;
+	border-right: 1px solid #bcbcbc;
 }
 .subtitle-report{
 	border: #1e90ff solid;
@@ -185,12 +195,14 @@ body{
 
 /****「システムについて」ボタン(クリックで広がる)*****/
 .detail-parent{
-  margin: 8px auto;
+  margin: 0px auto;
 	height: auto;
   padding: 0px 8px 8px 8px;
-  background-color: #f5f5f5;
-  border: 1px solid #bcbcbc;
-  border-radius: 8px;
+  background-color: #fafafa;
+	border-top: 1px solid #bcbcbc;
+	border-left: 1px solid #bcbcbc;
+	border-right: 1px solid #bcbcbc;
+	border-bottom: 1px solid #bcbcbc;
 }
 .subtitle-detail{
 	border: #a9a9a9 solid;
