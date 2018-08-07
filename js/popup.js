@@ -82,6 +82,7 @@ function list_set(){
         "padding": "0 0 0 5px",
         "display": "block"
       });
+      $("#find_rumor_content").css({"display":"none"});
     }
   });
 }
