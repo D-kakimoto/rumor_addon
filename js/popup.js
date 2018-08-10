@@ -29,12 +29,11 @@ function questionnaire_set(){
         document.getElementById("questionnaire").addEventListener("click",move_questionnaire,false);
         if(items.questionnaire == "undefined"){
           $('#questionnaire').css({
-            "color":"gray",
           });
         }else{
           $('#questionnaire').css({
-            "color":"gray",
-            "animation":"none"
+            "animation":"none",
+            "opacity":"0.3"
           });
         }
       });
@@ -42,13 +41,13 @@ function questionnaire_set(){
   });
   //ポップアップにリンクを生成
   function move_questionnaire(){
-    window.open(
-      q_url + q_user_id
-    );
-    set_op("questionnaire","done");
+    //window.open(
+    //  q_url + q_user_id
+    //);
+    //set_op("questionnaire","done");
+
   }
 }
-
 
 /****************リスト項目****************/
 function list_set(){
@@ -62,9 +61,10 @@ function list_set(){
       rumorcount = data.count;
     }
     var div_count = document.getElementById("find_rumor_count");
+    var check_icon_true = '<i class="fas fa-exclamation-triangle"></i>';
+    var check_icon_false = '<i class="far fa-check-circle"></i>';
     if(rumorcount > 0){
-      div_count.innerHTML = "このページで"+rumorcount+"件の流言を検出";
-      $(div_count).css("color", "red");
+      div_count.innerHTML = check_icon_true + "このページで<span>"+rumorcount+"件</span>の流言を検出";
       var div_list = document.getElementById("find_rumor_content");
       for(var i=0;i<rumorcount;i++){
         var insert_div = document.createElement('div');
@@ -73,15 +73,7 @@ function list_set(){
         div_list.appendChild(insert_div);
       }
     }else{
-      div_count.innerHTML = "このページでは流言は検出されませんでした";
-      $(".subtitle-list").css({
-        "border": "#1e90ff solid",
-        "border-width": "0 0 0 5px",
-        "font-weight": "bold",
-        "margin": "11px 0 3px 0",
-        "padding": "0 0 0 5px",
-        "display": "block"
-      });
+      div_count.innerHTML = check_icon_false + "このページでは流言は検出されませんでした";
       $("#find_rumor_content").css({"display":"none"});
     }
   });
@@ -198,7 +190,7 @@ function op_monitor(){
     if(target.attr('name')=="evalonoff"){
       set_op("evalop",target.val());
       if(target.val()=="on"){
-        alert("ログ送信にご協力いただき，ありがとうございます．");
+        //alert("ログ送信にご協力いただき，ありがとうございます．");
         $('#log_please').text("");
         $('#log_please').removeClass("blink-log");
       }else{

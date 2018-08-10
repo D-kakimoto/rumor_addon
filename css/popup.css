@@ -2,82 +2,74 @@
 body{
 	width: 300px;
 	height: auto;
-	background-color: #f5fffa;
+	background-color: #00ced1;
+	margin: 0px;
 }
 
 /*タイトル部分*/
 .title{
-	font-size: 20px;
+	font-size: 25px;
+	margin: 8px;
+	text-align: center;
 }
 
-.title #addonIntro{
-	position: relative;
-	display: inline-block;
-	transition: .3s;
-	text-decoration: none;
-	color: black;
-}
-
-.title #addonIntro::after {
-	color: red;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  content: '';
-  width: 0;
-  height: 1px;
-  background-color: #00ced1;
-  transition: .3s;
-}
-
-.title #addonIntro:hover::after {
-  width: 100%;
-}
-
-.title #addonIntro:hover{
-	color: #00ced1;
-}
-
-.title #questionnaire{
-	float: right;
-  animation: fluffy1 0.25s ease infinite;
-}
-
-@keyframes fluffy1 {
-  0% { transform:translateY(-3px) }
-	50% { transform:translateY(0px) }
-  100% { transform:translateY(-3px) }
+.banner{
+	text-align: center;
+	width:90%;
+	height:auto;
+	vertical-align: middle;
 }
 
 /****検出流言リスト*****/
 .list-parent{
-  margin: 8px auto 0px;
+	margin: 0px auto;
 	height: auto;
   padding: 0px 8px 8px 8px;
-  background-color: #fafafa;
-  border-top: 1px solid #bcbcbc;
-	border-left: 1px solid #bcbcbc;
-	border-right: 1px solid #bcbcbc;
+  background-color: #ffffff;
+	border-top: 1px solid #ffffff;
 }
 
 .subtitle-list{
-	border: #dc143c solid;
+	text-align: center;
 	border-width: 0 0 0 5px;
 	font-weight: bold;
 	margin: 11px 0 3px 0;
-	padding: 0 0 0 5px;
 	display: block;
 }
+
+.subtitle-list span{
+	color: #DF0101;
+}
+
+.subtitle-list .fa-check-circle{
+	margin: 0px 2px 0px 0px;
+	font-size: 13px;
+	color:#82c91e;
+	font-weight: bold;
+}
+
+.subtitle-list .fa-exclamation-triangle{
+	margin: 0px 2px 0px 0px;
+	font-size: 13px;
+	color:#DF0101;
+	font-weight: bold;
+}
+
 .contents-list{
 	max-height: 100px;
 	overflow: scroll;
 }
 
 .list-parent .ttl{
-	border: #ff4500 solid;
+	border: #DF0101 solid;
 	border-width: 0 0 0 5px;
-	margin: 11px 0 3px 0;
+	margin: 7px 0 7px 0;
 	padding: 0 0 0 5px;
+}
+
+
+.list-parent .ttl:hover{
+	background-color: #F2F2F2;
 }
 /*********************************************/
 
@@ -86,15 +78,16 @@ body{
   margin: 0px auto;
 	height: auto;
   padding: 0px 8px 8px 8px;
-  background-color: #fafafa;
-	border-top: 1px solid #bcbcbc;
-	border-left: 1px solid #bcbcbc;
-	border-right: 1px solid #bcbcbc;
+  background-color: #F2F2F2;
+	border-top: 1px solid #F2F2F2;
 }
+
+.setting-parent:hover{
+	background-color: #E6E6E6;
+}
+
 .subtitle-setting{
-	border: #1e90ff solid;
 	border-width: 0 0 0 5px;
-	font-weight: bold;
 	margin: 11px 0 3px 0;
 	padding: 0 0 0 5px;
 	display: block;
@@ -103,7 +96,6 @@ body{
 	color: #fff;
   background-color:red;
 	height: auto;
-  border-radius: 6px;
 	padding: 3px;
 	font-size: 10px;
 	margin-left: 10px;
@@ -111,7 +103,7 @@ body{
 
 .setting-parent label {
 		width: 100%;
-    font-weight: bold;
+    font-weight: normal;
     cursor :pointer;
 }
 .setting-parent label .icon::after{
@@ -145,22 +137,23 @@ body{
   margin: 0px auto;
 	height: auto;
   padding: 0px 8px 8px 8px;
-  background-color: #fafafa;
-	border-top: 1px solid #bcbcbc;
-	border-left: 1px solid #bcbcbc;
-	border-right: 1px solid #bcbcbc;
+  background-color: #F2F2F2;
+	border-top: 1px solid #F2F2F2;
 }
+
+.report-parent:hover{
+	background-color: #E6E6E6;
+}
+
 .subtitle-report{
-	border: #1e90ff solid;
 	border-width: 0 0 0 5px;
-	font-weight: bold;
 	margin: 11px 0 3px 0;
 	padding: 0 0 0 5px;
 	display: block;
 }
 .report-parent label {
 		width: 100%;
-    font-weight: bold;
+    font-weight: normal;
     cursor :pointer;
 }
 .report-parent label .icon::after{
@@ -198,14 +191,15 @@ body{
   margin: 0px auto;
 	height: auto;
   padding: 0px 8px 8px 8px;
-  background-color: #fafafa;
-	border-top: 1px solid #bcbcbc;
-	border-left: 1px solid #bcbcbc;
-	border-right: 1px solid #bcbcbc;
-	border-bottom: 1px solid #bcbcbc;
+  background-color: #F2F2F2;
+	border-top: 1px solid #F2F2F2;
 }
+
+.detail-parent:hover{
+	background-color: #E6E6E6;
+}
+
 .subtitle-detail{
-	border: #a9a9a9 solid;
 	border-width: 0 0 0 5px;
 	font-weight: bold;
 	margin: 11px 0 3px 0;
@@ -214,7 +208,7 @@ body{
 }
 .detail-parent label {
 		width: 100%;
-    font-weight: bold;
+    font-weight: normal;
     cursor :pointer;
 }
 .detail-parent label .icon::after{
@@ -243,6 +237,8 @@ body{
 }
 .contents-detail p{
 	margin: 5px 0 0 0;
+	padding-left:1em;
+	text-indent:-1em;
 }
 .detail-parent input:checked + label .icon::after {
 	content: "ー";
@@ -250,7 +246,6 @@ body{
 /*********************************************/
 
 .ttl{
-	border: #00ced1 solid;
 	border-width: 0 0 0 5px;
 	margin: 11px 0 3px 0;
 	padding: 0 0 0 5px;
@@ -389,3 +384,21 @@ margin:7px 0 3px 0;
 text-align: center;
 }
 .smt-buttonL-2 input{font-size:12px;}
+
+/***********フッター************/
+.footer{
+}
+
+#questionnaire{
+	float: right;
+	font-size: 15px;
+	margin: 8px;
+	color: white;
+  animation: fluffy1 1s ease infinite;
+}
+
+@keyframes fluffy1 {
+  0% { transform:translateY(-3px) }
+	50% { transform:translateY(0px) }
+  100% { transform:translateY(-3px) }
+}
