@@ -162,7 +162,13 @@ function set_icon(){
   chrome.storage.local.get(
     "evalop",function(value){
       if(value.evalop == "on"){
-        chrome.browserAction.setIcon({path:"../img/icon_green.png"});
+        chrome.browserAction.setIcon({
+          path:{
+            "16": "../img/icon_green16.png",
+            "48": "../img/icon_green48.png",
+            "128": "../img/icon_green128.png",
+          }
+        });
       }else{
         chrome.browserAction.setIcon({path:"../img/icon128.png"})
       }
