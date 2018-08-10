@@ -58,6 +58,7 @@ body{
 .contents-list{
 	max-height: 100px;
 	overflow: scroll;
+	overflow-x: hidden;
 }
 
 .list-parent .ttl{
