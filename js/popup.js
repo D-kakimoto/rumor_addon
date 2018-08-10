@@ -6,6 +6,7 @@ window.onload = function() {
   list_set();
   document.getElementById("find_rumor_content").addEventListener("click",sendToContents,false);
   //→報告項目
+  set_report_URL();
   document.getElementById("reportstatus").addEventListener("click",report_post_status,false);
   document.getElementById("reportclstatus").addEventListener("click",report_cancel_status,false);
 }
@@ -226,13 +227,17 @@ function set_op(key, value){
   );
 }
 
-/******************************************/
 /****************「報告」項目****************/
+//URLを格納
 var URL;
-//現在のタブのURLを取得
-chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
-    URL = tabs[0].url;
-});
+
+//URLをセット
+function set_report_URL(){
+  //現在のタブのURLを取得
+  chrome.tabs.query({'active': true, 'lastFocusedWindow': true}, function (tabs) {
+      URL = tabs[0].url;
+  });
+}
 
 //「送信」が押された時
 function report_post_status(){
