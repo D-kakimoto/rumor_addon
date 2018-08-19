@@ -7,7 +7,7 @@ var userid;
 //評価用
 var URL;
 //情報取得用サーバ
-var server = "http://www2.yoslab.net/~kakimoto/rumor_background/";
+var server = "https://www2.yoslab.net/~kakimoto/rumor_background/";
 
 //(初回起動時)ランダムトークンを生成
 function getRandomToken() {
