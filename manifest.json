@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "RumorFinder",
-	"version": "1.1",
+	"version": "1.1.1",
 	"description": "Webページ中に流言(デマ)情報が含まれる可能性があれば強調表示を行い，マウスオーバーでその詳細を見ることができる機能を備えたエクステンションです．",
 
 	"icons": {
@@ -24,8 +24,9 @@
 				"https://*/*"
 			],
 			"exclude_matches": [
-				"http://www2.yoslab.net/~kakimoto/addon_intro/",
-				"http://www2.yoslab.net/~kakimoto/addon_intro/index.html"
+				"https://www2.yoslab.net/~kakimoto/addon_intro/",
+				"https://www2.yoslab.net/~kakimoto/addon_intro/index.html",
+				"http://mednlp.jp/~miyabe/rumorCloud/*"
 			],
 			"js":[
 				"js/jquery-3.0.0.min.js",
