@@ -15,7 +15,7 @@ window.onload = function() {
 //「RumorFinder」が押された時
 function move_intro(){
   window.open(
-    "http://www2.yoslab.net/~kakimoto/addon_intro/index.html"
+    "https://www2.yoslab.net/~kakimoto/addon_intro/index.html"
   );
 }
 

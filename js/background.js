@@ -101,11 +101,11 @@ function rumorget(name){
 		scriptCharset:
 			"utf-8",
 		url:
-			server+'get_rumors/rumors.txt',
+			server+'get_rumors/rumors_20180927.txt',
 		success:
 			function(result){
 				rumorlist = result;
-				//console.log(rumorlist);
+				console.log(rumorlist);
 			}
 	});
 };
