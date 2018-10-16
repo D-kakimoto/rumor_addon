@@ -100,12 +100,13 @@ function rumorget(name){
 		$.ajax({
 		scriptCharset:
 			"utf-8",
+    cache:false,
 		url:
-			server+'get_rumors/rumors_20180927.txt',
+			server+'get_rumors/rumors.txt',
 		success:
 			function(result){
 				rumorlist = result;
-				console.log(rumorlist);
+				//console.log(rumorlist);
 			}
 	});
 };
