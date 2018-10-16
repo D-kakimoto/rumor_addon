@@ -50,7 +50,10 @@ function initGetRumor(){
 	//rumorlistの取得
 	chrome.runtime.sendMessage(
 		{type: "rumorsend"},
-		function(res){rumorlist = res;}
+		function(res){
+			rumorlist = res;
+			//console.log(rumorlist);
+		}
 	);
 	//rumorlistがある場合ハイライト処理
 	if(rumorlist != undefined)  {
