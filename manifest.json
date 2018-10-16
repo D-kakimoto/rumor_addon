@@ -1,7 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "RumorFinder",
-	"version": "1.1.3",
+	"version": "1.2",
 	"description": "Webページ中に流言(デマ)情報が含まれる可能性があれば強調表示を行い，マウスオーバーでその詳細を見ることができる機能を備えたエクステンションです．",
 
 	"icons": {
