@@ -19,10 +19,10 @@ var op_eval = "defaults";
 chrome.storage.local.get(
 	["hlop", "tstop", "fukiop","colorop","evalop"],
 	function(value){
-		op_hl = value.hlop;
-		op_tst = value.tstop;
-		op_fuki = value.fukiop;
-		op_color = value.colorop;
+		//op_hl = value.hlop;
+		//op_tst = value.tstop;
+		//op_fuki = value.fukiop;
+		//op_color = value.colorop;
 		op_eval = value.evalop;
 });
 
