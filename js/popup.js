@@ -127,11 +127,27 @@ function sendToContents(e){
 chrome.storage.local.get(
   ["hlop", "tstop", "fukiop","colorop","evalop"],
   function(value){
-    var hlop = value.hlop;
-    var tstop = value.tstop;
-    var fukiop = value.fukiop;
-    var colorop = value.colorop;
-    var evalop = value.evalop;
+    if(value.hlop){
+      hlop = value.hlop;
+    }else{
+      hlop = "on";
+    }if(value.tstop){
+			tstop = value.tstop;
+		}else{
+			tstop = "off";
+		}if(value.fukiop){
+      fukiop = value.fukiop;
+    }else{
+      fukiop = "on";
+    }if(value.colorop){
+      colorop = value.colorop;
+    }else{
+      colorop = "yellow";
+    }if(value.evalop){
+      evalop = value.evalop;
+    }else{
+      evalop = "off";
+    }
     set_radio_button(hlop,tstop,fukiop,colorop,evalop);
 });
 

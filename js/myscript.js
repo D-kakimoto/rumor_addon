@@ -19,11 +19,27 @@ var op_eval = "defaults";
 chrome.storage.local.get(
 	["hlop", "tstop", "fukiop","colorop","evalop"],
 	function(value){
-		//op_hl = value.hlop;
-		//op_tst = value.tstop;
-		//op_fuki = value.fukiop;
-		//op_color = value.colorop;
-		op_eval = value.evalop;
+		if(value.hlop){
+			op_hl = value.hlop;
+		}else{
+			op_hl = "on";
+		}if(value.tstop){
+			op_tst = value.tstop;
+		}else{
+			op_tst = "on";
+		}if(value.fukiop){
+			op_fuki = value.fukiop;
+		}else{
+			op_fuki = "on";
+		}if(value.colorop){
+			op_color = value.colorop;
+		}else{
+			op_color = "yellow";
+		}if(value.evalop){
+			op_eval = value.evalop;
+		}else{
+			op_eval = "on";
+		}
 });
 
 /*****ページ更新時処理******/
