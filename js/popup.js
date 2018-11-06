@@ -134,7 +134,7 @@ chrome.storage.local.get(
     }if(value.tstop){
 			tstop = value.tstop;
 		}else{
-			tstop = "off";
+			tstop = "on";
 		}if(value.fukiop){
       fukiop = value.fukiop;
     }else{
