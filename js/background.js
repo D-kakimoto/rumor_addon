@@ -165,13 +165,19 @@ function set_icon(){
       if(value.evalop == "on"){
         chrome.browserAction.setIcon({
           path:{
-            "16": "../img/icon_green16.png",
-            "48": "../img/icon_green48.png",
+            "19": "../img/icon_green19.png",
+            "38": "../img/icon_green38.png",
             "128": "../img/icon_green128.png",
           }
         });
       }else{
-        chrome.browserAction.setIcon({path:"../img/icon128.png"})
+        chrome.browserAction.setIcon({
+          path:{
+            "19": "../img/icon19.png",
+            "38": "../img/icon38.png",
+            "128":"../img/icon128.png"
+          }
+        });
       }
   });
 }
