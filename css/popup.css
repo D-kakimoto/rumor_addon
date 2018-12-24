@@ -394,8 +394,8 @@ text-align: center;
 	float: right;
 	font-size: 15px;
 	margin: 8px;
-	color: white;
-  animation: fluffy1 1s ease infinite;
+	color: red;
+  animation: fluffy1 0.5s ease infinite;
 }
 
 @keyframes fluffy1 {

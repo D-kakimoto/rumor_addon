@@ -28,12 +28,14 @@ function questionnaire_set(){
     if(q_url){
       chrome.storage.local.get('questionnaire', function(items){
         document.getElementById("questionnaire").addEventListener("click",move_questionnaire,false);
-        if(items.questionnaire == "undefined"){
+        if(!items.questionnaire){
           $('#questionnaire').css({
           });
-        }else{
+        }
+        else{
           $('#questionnaire').css({
             "animation":"none",
+            "color":"white",
             "opacity":"0.3"
           });
         }
@@ -42,11 +44,10 @@ function questionnaire_set(){
   });
   //ポップアップにリンクを生成
   function move_questionnaire(){
-    //window.open(
-    //  q_url + q_user_id
-    //);
-    //set_op("questionnaire","done");
-
+    window.open(
+      q_url + q_user_id
+    );
+    set_op("questionnaire","done");
   }
 }
 

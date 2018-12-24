@@ -123,3 +123,36 @@ chrome.runtime.onMessage.addListener(function (message, sender, sendResponse) {
 			console.log("閉じます");
 		}
 });
+
+//アンケート回答お願い
+chrome.storage.local.get('questionnaire_toast', function(items){
+	if(!items.questionnaire_toast){
+		$(document).ready(function() {
+			toastr.options = {
+  			"closeButton": true,
+  			"debug": true,
+  			"newestOnTop": false,
+  			"progressBar": true,
+  			"positionClass": "toast-top-right",
+  			"preventDuplicates": true,
+  			"onclick": null,
+  			"showDuration": "300",
+  			"hideDuration": "1000",
+  			"timeOut": "10000",
+  			"extendedTimeOut": "5000",
+  			"showEasing": "swing",
+  			"hideEasing": "linear",
+  			"showMethod": "fadeIn",
+  			"hideMethod": "fadeOut"
+			}
+			Command:toastr["info"]("アンケートの回答にご協力ください(右上のアイコンをクリック)", "RumorFinder")
+	    $('#linkButton').click(function() {
+	      toastr.success('click');
+	    });
+			chrome.storage.local.set(
+				{"questionnaire_toast": "done"},
+					function (){}
+			);
+		});
+	}
+});
