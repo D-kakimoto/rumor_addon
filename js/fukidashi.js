@@ -1,5 +1,4 @@
-//ちらつき防止用
-var delete_flag = 0;
+var only_fuki_flag = 0;
 
 //詳細の取得
 function syousai(num,tnum){
@@ -7,7 +6,6 @@ function syousai(num,tnum){
 		{type: "syousaisend", text:num, text2:tnum}
 	);
 }
-
 //Google検索クエリの生成
 function query_build(queries){
 	var query = queries.split("/");
@@ -18,15 +16,25 @@ function query_build(queries){
 	return url;
 }
 
+//吹き出しの表示/非表示
+var fuki_on_flag = 0;
+
 //吹き出し関数
 function fukidashi(){
 	if(op_fuki == "off")return;
-	var fuki_on_flag = 0;
 	//ハイライト部分の上にカーソルが乗った
 	$('.rumorhighlight').on(
 		"mouseenter",
 		function () {
-			delete_flag = 0;
+			if(fuki_on_flag == 2){
+				fuki_on_flag = 1;
+				return;
+			}
+			if(fuki_on_flag == 3){
+				fuki_on_flag = 1;
+				return;
+			}
+			fuki_on_flag = 1;
 			//ウインドウサイズの取得
 			var window_width = $(window).width();
 			var window_height = $(window).height();
@@ -71,8 +79,12 @@ function fukidashi(){
 
 			var icon1 = chrome.extension.getURL('../img/rumortext_icon.png');
 			var icon2 = chrome.extension.getURL('../img/rumorteisei_icon.png');
+			var icon3 = chrome.extension.getURL('../img/status_good.png');
+			var icon4 = chrome.extension.getURL('../img/status_bad.png');
 			var img1 = '<img class="icon1" src="' + icon1 + '">';
 			var img2 = '<img class="icon2" src="' + icon2 + '">';
+			var img3 = '<img class="icon3" src="' + icon3 + '">';
+			var img4 = '<img class="icon4" src="' + icon4 + '">';
 			var rumortext = $(this).attr("data-rumortext");
 			var num = $(this).attr("data-rumornum");
 			var tnum = $(this).attr("data-teiseinum");
@@ -109,6 +121,22 @@ function fukidashi(){
 				+			'<a class="rumorcloud" href="'+syousailink+'" target="_blank" >'+'詳細リンク▼</a>'
 				+		'</div>'
 				+	'</div>'
+				+	'<div class="status_parent">'
+				+		'<div class ="rumorstatus">'
+				+     '<div class="status_area_icon" id="rumor_pos_select">'
+				+     img3
+				+     '</div>'
+				+			'<div class="rumor_positive"></div>'
+				+     '<div class="status_area_icon" id="rumor_neg_select">'
+				+     img4
+				+     '</div>'
+				+			'<div class="rumor_negative"></div>'
+				+ 	'</div>'
+				+		'<div class ="checked_rumor">'
+				+     '情報を確認したので今後は通知しない'
+				+ 	'</div>'
+				+	'</div>'
+
 				+'</div>'
 				,
 				position: fuki_position,
@@ -117,26 +145,57 @@ function fukidashi(){
 			});
 			$(this).removeClass('blink-highlight');
 			eval_post("hl_on",URL,rumortext);
-
+			console.log("hl_on");
 			//吹き出し上にカーソルがある
 			$('.fukidashicontents').on(
 				"mouseenter",
 				function(){
+					console.log(fuki_on_flag);
+					if(fuki_on_flag == 1 || fuki_on_flag == 2 || only_fuki_flag == 1){
+						fuki_on_flag = 1;
+						console.log("表示2");
+						return;
+					}
 					fuki_on_flag = 1;
+					only_fuki_flag = 1;
+					console.log("表示");
 					eval_post("fuki_on",URL,rumortext);
+					status_post(rumortext);
+					//goodが押された
+					$('#rumor_pos_select').on(
+						"click",
+						function(){
+							status_update(rumortext,"good");
+							var poscount = $('.rumorstatus>.rumor_positive').text();
+							poscount++;
+							$('.rumorstatus>.rumor_positive').text(poscount);
+						}
+					);
+					//badが押された
+					$('#rumor_neg_select').on(
+						"click",
+						function(){
+							status_update(rumortext,"bad");
+							var negcount = $('.rumorstatus>.rumor_negative').text();
+							negcount++;
+							$('.rumorstatus>.rumor_negative').text(negcount);
+						}
+					);
+					console.log("fuki_on");
 					//web検索が押された
 					$('a.web_search').on(
 						"click",
 						function(){
 							eval_post("search",URL,rumortext);
+							console.log("search");
 						}
 					);
 					//詳細リンクが押された
 					$('a.rumorcloud').on(
 						"click",
 						function(){
-							console.log("test");
 							eval_post("dlink",URL,rumortext);
+							console.log("dlink");
 						}
 					);
 				}
@@ -145,11 +204,16 @@ function fukidashi(){
 			$('.fukidashicontents').on(
 				"mouseleave",
 				function(){
-					fuki_on_flag = 0;
+					fuki_on_flag = 2;
 					setTimeout(
 						function(){
-							$('.rumorhighlight').hideBalloon();
-							eval_post("fuki_out",URL,rumortext);
+							if(fuki_on_flag == 2){
+								$('.rumorhighlight').hideBalloon();
+								eval_post("fuki_out",URL,rumortext);
+								console.log("fuki_out");
+								fuki_on_flag = 0;
+								only_fuki_flag = 0;
+							}
 						},1500
 					)
 				}
@@ -160,13 +224,15 @@ function fukidashi(){
 	$('.rumorhighlight').on(
 		"mouseleave",
 		function(){
+			fuki_on_flag = 3;
 			var rumortext = $(this).data('rumortext');
-			delete_flag = 1;
 			setTimeout(
 				function(){
-					if(fuki_on_flag == 0 && delete_flag == 1){
+					if(fuki_on_flag == 3){
 						$('.rumorhighlight').hideBalloon();
 						eval_post("hl_out",URL,rumortext);
+						console.log("hl_out");
+						fuki_on_flag = 0;
 					}
 				},1500
 			)

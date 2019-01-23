@@ -123,12 +123,70 @@
 	text-align: center;
 }
 
+.status_parent{
+	display: none;
+	margin-top: 5px;
+	border-top: 1px solid #808080;
+	padding-top: 5px;
+}
+
+.rumorstatus{
+	width: 33%;
+	text-align: left;
+}
+
+.status_area_icon{
+ display: inline-block;
+}
+
+.icon3{
+	margin-left: 10px;
+	width: 15px;
+	height: 15px;
+}
+
+.icon4{
+	margin-left: 10px;
+	width: 15px;
+	height: 15px;
+}
+
+.rumor_positive{
+	display: inline-block;
+	color:#111111;
+	font-weight: normal;
+	text-align: center;
+	font-size: 8px;
+	color: #1ccc0c;
+}
+
+.rumor_negative{
+	display: inline-block;
+	color:#111111;
+	font-weight: normal;
+	text-align: center;
+	font-size:8px;
+	color: #cc0404;
+}
+
+.checked_rumor{
+	width: 66%;
+	font-weight: normal;
+	text-align: right;
+	font-size:10px;
+}
+
 .fukidashicontents:hover > .teisei_parent{
 	display: flex;
 	animation: fukidashi_show .5s linear 0s;
 }
 
 .fukidashicontents:hover > .detail_parent{
+	display: flex;
+	animation: fukidashi_show .5s linear 0s;
+}
+
+.fukidashicontents:hover > .status_parent{
 	display: flex;
 	animation: fukidashi_show .5s linear 0s;
 }

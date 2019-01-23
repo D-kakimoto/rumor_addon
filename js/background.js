@@ -69,6 +69,46 @@ chrome.runtime.onMessage.addListener(
 							//console.log(data);
 						}
 			});
+		}if(request.type == "status_get"){
+      console.log("status_get");
+			var text = request.text;
+			//サーバへ情報を送信
+			$.ajax({
+					type:
+						'POST',
+					scriptCharset:
+					'utf-8',
+					url:
+						server+'rumor_status/status_dbconnect.php',
+					data:
+						{rumor:text},
+					success:
+						function(data){
+              status_send(data);
+						}
+			});
+		}if(request.type == "status_update"){
+      console.log("status_update");
+			var text = request.text;
+      var value = request.value;
+      console.log(text+":"+value);
+			//サーバへ情報を送信
+      /*
+			$.ajax({
+					type:
+						'POST',
+					scriptCharset:
+					'utf-8',
+					url:
+						server+'rumor_status/status_dbconnect.php',
+					data:
+						{rumor:text,posneg:value},
+					success:
+						function(data){
+              //status_send(data);
+						}
+			});
+      */
 		}if(request.type == "count_rumor"){
       var count = request.count;
       var datalist = {
@@ -102,7 +142,7 @@ function rumorget(name){
 			"utf-8",
     cache:false,
 		url:
-			server+'get_rumors/rumors.txt',
+			server+'get_rumors/rumors_20190122.txt',
 		success:
 			function(result){
 				rumorlist = result;
@@ -180,4 +220,12 @@ function set_icon(){
         });
       }
   });
+}
+
+//信頼度状況の送信関数
+function status_send(data){
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+  chrome.tabs.sendMessage(tabs[0].id, {type:"status_send",data:data}, function(response) {
+  });
+});
 }

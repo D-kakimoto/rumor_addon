@@ -35,7 +35,8 @@
 				"js/fukidashi.js",
 				"js/highlight.js",
 				"js/eval.js",
-				"js/toastr.min.js"
+				"js/toastr.min.js",
+				"js/status.js"
 			],
 			"css": [
 				"css/highlight.css",
