@@ -13,6 +13,10 @@ function status_update(rumortext,value){
 	chrome.runtime.sendMessage(
 		{type: "status_update",text:rumortext,value:value},
 		function (response){
+			chrome.storage.local.set(
+				{[rumortext]: "checked"},
+				function (){}
+			);
 		}
 	);
 }

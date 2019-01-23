@@ -165,23 +165,87 @@ function fukidashi(){
 					$('#rumor_pos_select').on(
 						"click",
 						function(){
-							status_update(rumortext,"good");
-							var poscount = $('.rumorstatus>.rumor_positive').text();
-							poscount++;
-							$('.rumorstatus>.rumor_positive').text(poscount);
+							var user_status;
+							chrome.storage.local.get(rumortext,
+								function (value) {
+									user_status = value[rumortext];
+									if(user_status != "checked" && user_status == "pos"){
+										console.log("もう選択されている");
+									}else if(user_status != "checked" && user_status == "neg"){
+										chrome.storage.local.set(
+											{[rumortext]: "pos"},
+											function (){
+												console.log("neg→pos");
+											}
+										);
+									}else if(user_status != "checked"){
+										chrome.storage.local.set(
+											{[rumortext]: "pos"},
+											function (){
+												console.log("null→pos");
+											}
+										);
+									}
+								}
+							);
 						}
 					);
 					//badが押された
 					$('#rumor_neg_select').on(
 						"click",
 						function(){
-							status_update(rumortext,"bad");
-							var negcount = $('.rumorstatus>.rumor_negative').text();
-							negcount++;
-							$('.rumorstatus>.rumor_negative').text(negcount);
+							var user_status;
+							chrome.storage.local.get(rumortext,
+								function (value) {
+									user_status = value[rumortext];
+									if(user_status != "checked" && user_status == "neg"){
+										console.log("もう選択されている");
+									}else if(user_status != "checked" && user_status == "pos"){
+										chrome.storage.local.set(
+											{[rumortext]: "neg"},
+											function (){
+												console.log("pos→neg");
+											}
+										);
+									}else if(user_status != "checked"){
+										chrome.storage.local.set(
+											{[rumortext]: "neg"},
+											function (){
+												console.log("null→neg");
+											}
+										);
+									}
+								}
+							);
 						}
 					);
-					console.log("fuki_on");
+					//checked_rumorが押された
+					$('.checked_rumor').on(
+						"click",
+						function(){
+							chrome.storage.local.get(rumortext,
+								function (value) {
+									user_status = value[rumortext];
+									if(user_status == "checked"){
+										console.log("もう評価した");
+										return;
+									}else if(user_status == "pos"){
+										var poscount = $('.rumorstatus>.rumor_positive').text();
+										poscount++;
+										$('.rumorstatus>.rumor_positive').text(poscount);
+										status_update(rumortext,user_status);
+										console.log("送った");
+									}else if(user_status == "neg"){
+										var negcount = $('.rumorstatus>.rumor_negative').text();
+										negcount++;
+										$('.rumorstatus>.rumor_negative').text(negcount);
+										status_update(rumortext,user_status);
+										console.log("送った");
+									}
+								}
+							);
+						}
+					);
 					//web検索が押された
 					$('a.web_search').on(
 						"click",

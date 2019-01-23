@@ -93,22 +93,19 @@ chrome.runtime.onMessage.addListener(
       var value = request.value;
       console.log(text+":"+value);
 			//サーバへ情報を送信
-      /*
 			$.ajax({
 					type:
 						'POST',
 					scriptCharset:
 					'utf-8',
 					url:
-						server+'rumor_status/status_dbconnect.php',
+						server+'rumor_status/update_dbconnect.php',
 					data:
-						{rumor:text,posneg:value},
+						{rumor:text,value:value},
 					success:
 						function(data){
-              //status_send(data);
 						}
 			});
-      */
 		}if(request.type == "count_rumor"){
       var count = request.count;
       var datalist = {
