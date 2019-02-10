@@ -12,9 +12,9 @@ Google Chromeのアドオンとして開発しています．
 (3)その他(訂正数，Web検索結果，詳細リンク)
 
 ## バージョンアップ
-2018-07-04, Chrome Web Stroreより公開
+2018-07-04, Chrome Web Stroreより公開  
 2018-12-24, アンケートを公開  
-2018-12-14, 誤検出に関する問題に一部対応    
+2018-12-14, 誤検出に関する問題に一部対応      
 
 ## 流言提供元(参考)
 [流言情報クラウド](http://mednlp.jp/~miyabe/rumorCloud/rumorlist.cgi)
