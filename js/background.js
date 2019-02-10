@@ -61,7 +61,7 @@ chrome.runtime.onMessage.addListener(
 					scriptCharset:
 					'utf-8',
 					url:
-						server+'addon_eval/dbconnect.php',
+						server+'page_eval/dbconnect.php',
 					data:
 						{userid:userid,time:time,URL:URL,type:type,text:text},
 					success:
@@ -139,7 +139,7 @@ function rumorget(name){
 			"utf-8",
     cache:false,
 		url:
-			server+'get_rumors/rumors_20190122.txt',
+			server+'get_rumors/rumors.txt',
 		success:
 			function(result){
 				rumorlist = result;

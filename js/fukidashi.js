@@ -170,18 +170,27 @@ function fukidashi(){
 								function (value) {
 									user_status = value[rumortext];
 									if(user_status != "checked" && user_status == "pos"){
+										$('#rumor_pos_select').addClass("blink-status");
+										$('#rumor_neg_select').removeClass("blink-status");
+										$('.checked_rumor').css({'color':'black'});
 										console.log("もう選択されている");
 									}else if(user_status != "checked" && user_status == "neg"){
 										chrome.storage.local.set(
 											{[rumortext]: "pos"},
 											function (){
 												console.log("neg→pos");
+												$('#rumor_pos_select').addClass("blink-status");
+												$('#rumor_neg_select').removeClass("blink-status");
+												$('.checked_rumor').css({'color':'black'});
 											}
 										);
 									}else if(user_status != "checked"){
 										chrome.storage.local.set(
 											{[rumortext]: "pos"},
 											function (){
+												$('#rumor_pos_select').addClass("blink-status");
+												$('#rumor_neg_select').removeClass("blink-status");
+												$('.checked_rumor').css({'color':'black'});
 												console.log("null→pos");
 											}
 										);
@@ -199,11 +208,17 @@ function fukidashi(){
 								function (value) {
 									user_status = value[rumortext];
 									if(user_status != "checked" && user_status == "neg"){
+										$('#rumor_neg_select').addClass("blink-status");
+										$('#rumor_pos_select').removeClass("blink-status");
+										$('.checked_rumor').css({'color':'black'});
 										console.log("もう選択されている");
 									}else if(user_status != "checked" && user_status == "pos"){
 										chrome.storage.local.set(
 											{[rumortext]: "neg"},
 											function (){
+												$('#rumor_neg_select').addClass("blink-status");
+												$('#rumor_pos_select').removeClass("blink-status");
+												$('.checked_rumor').css({'color':'black'});
 												console.log("pos→neg");
 											}
 										);
@@ -211,6 +226,9 @@ function fukidashi(){
 										chrome.storage.local.set(
 											{[rumortext]: "neg"},
 											function (){
+												$('#rumor_neg_select').addClass("blink-status");
+												$('#rumor_pos_select').removeClass("blink-status");
+												$('.checked_rumor').css({'color':'black'});
 												console.log("null→neg");
 											}
 										);
@@ -233,14 +251,22 @@ function fukidashi(){
 										var poscount = $('.rumorstatus>.rumor_positive').text();
 										poscount++;
 										$('.rumorstatus>.rumor_positive').text(poscount);
+										$('#rumor_pos_select').removeClass("blink-status");
+										$('#rumor_pos_select').addClass("checked_status");
+										$('.checked_rumor').css({'color':'#a9a9a9'});
 										status_update(rumortext,user_status);
+										eval_post("positive",URL,rumortext);
 										console.log("送った");
 									}else if(user_status == "neg"){
 										var negcount = $('.rumorstatus>.rumor_negative').text();
 										negcount++;
 										$('.rumorstatus>.rumor_negative').text(negcount);
+										$('#rumor_neg_select').removeClass("blink-status");
+										$('#rumor_neg_select').addClass("checked_status");
+										$('.checked_rumor').css({'color':'#a9a9a9'});
 										status_update(rumortext,user_status);
 										console.log("送った");
+										eval_post("negative",URL,rumortext);
 									}
 								}
 							);
